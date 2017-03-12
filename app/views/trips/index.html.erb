@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <% @trips.each do |trip| %>
+    <div class=".col s6 offset-s6">
+      <%= trip.name %>
+      <%= trip.destination %>
+    </div>
+    <% end %>
+  </div>
+</div>
