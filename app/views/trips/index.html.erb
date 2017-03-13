@@ -1,9 +1,11 @@
 <div class="container">
   <div class="row">
     <% @trips.each do |trip| %>
-    <div class=".col s6 offset-s6">
-      <%= trip.name %>
-      <%= trip.destination %>
+    <div class="col s6 offset-s3 card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title"><%= trip.name %></span>
+        <%= trip.destination %>
+      </div>
     </div>
     <% end %>
   </div>
