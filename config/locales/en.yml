@@ -21,3 +21,5 @@
 
 en:
   hello: "Hello world"
+  back: "Back"
+  create_trip: "Create Trip"
