@@ -1,0 +1,59 @@
+
+fr:
+  devise:
+    confirmations:
+      confirmed: "Votre addresse email a été confirmée avec succès."
+      send_instructions: "Vous recevrez un email avec les instructions à suivre pour confirmer votre adresse email."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+    failure:
+      already_authenticated: "Vous êtes déjà connecté"
+      inactive: "Votre compte n'est pas encore actif."
+      invalid: "%{authentication_keys} ou mot de passe invalides."
+      locked: "Votre compte est bloqué."
+      last_attempt: "Vous n'avez plus qu'une seule tentative avant blocage de votre compte."
+      not_found_in_database: "%{authentication_keys} ou mot de passe invalides."
+      timeout: "Votre session a expiré. Connectez vous pour continuer."
+      unauthenticated: "Vous devez vous connecter avant de continuer."
+      unconfirmed: "Vous devez confirmer votre adresse email avant de continuer."
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmation du compte"
+      reset_password_instructions:
+        subject: "Changement de mot de passe"
+      unlock_instructions:
+        subject: "Déblocage de votre compte"
+    omniauth_callbacks:
+      failure: "Impossible de vous identifier %{kind} car \"%{reason}\"."
+      success: "Identification réussie %{kind} "
+    passwords:
+      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+      send_instructions: "Vous allez recevoir un email d'instructions afin de changer de mot de passe."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Votre mot de passe a été modifié avec succès. Vous êtes maintenant connecté."
+      updated_not_active: "Votre mot de passe a été modifié avec succès."
+    registrations:
+      destroyed: "A bientôt! Votre compte a été supprimé avec succès. Nous espérons vous revoir rapidement."
+      signed_up: "Welcome! Vous êtes maintenant connecté."
+      signed_up_but_inactive: "Votre compte a bien été créée. Cependant, vous devez confirmer votre compte avant de pouvoir vous connecter."
+      signed_up_but_locked: "Votre compte a bien été créée. Cependant, vous n'avez pu vous connecter car votre compt est bloqué."
+      signed_up_but_unconfirmed: "Un messagde de confirmation avec un lien a été envoyé à votre adresse email. Veuillez suivre le lien pour activer votre compte."
+      update_needs_confirmation: "Les modifications de votre compte ont été enregistrées. Veuillez confirmer votre adresse email en cliquant sur le lien qui vient de vous être envoyé."
+      updated: "Votre compte a été modifié avec succès."
+    sessions:
+      signed_in: "Vous êtes maintenant connecté"
+      signed_out: "Vous êtes maintenant déconnecté."
+      already_signed_out: "Vous êtes déjà déconnecté."
+    unlocks:
+      send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  errors:
+    messages:
+      already_confirmed: "était déjà vérifié, veuillez vous connecter."
+      confirmation_period_expired: "a besoinde votre confirmation dans %{period}"
+      expired: "a expiré, veuillez en créer un nouveau."
+      not_found: "non trouvé"
+      not_locked: "n'a pas été bloqué"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"

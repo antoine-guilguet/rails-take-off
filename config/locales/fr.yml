@@ -2,3 +2,7 @@ fr:
   hello: "Bonjour world"
   back: "Retour"
   create_trip: "Créer un Voyage"
+  trips: "Voyages"
+  log_in: "Connexion"
+  log_out: "Déconnexion"
+  sign_in: "Créer un compte"

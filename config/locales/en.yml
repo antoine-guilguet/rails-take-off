@@ -23,3 +23,7 @@ en:
   hello: "Hello world"
   back: "Back"
   create_trip: "Create Trip"
+  trips: "Trips"
+  log_in: "Log In"
+  log_out: "Log Out"
+  sign_in: "Sign In"
