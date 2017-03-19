@@ -1,16 +1,12 @@
+user_1 = User.create(first_name: "Antoine", last_name: "Guilguet", email:"guilguet.antoine@gmail.com", password: "brausadent1")
+user_2 = User.create(first_name: "Antoine", last_name: "2", email:"antoine.guilguet@hec.edu", password: "allezlom")
 
 dam = Trip.create(name: "Dam with Bros", destination: "Amsterdam", created: false )
-user_1 = TripParticipant.create(trip: dam, user: User.first) 
-user_1 = TripParticipant.create(trip: dam, user: User.last)
+participant_1 = TripParticipant.create(trip_id: dam.id, user_id: user_1.id)
+participant_2 = TripParticipant.create(trip_id: dam.id, user_id: user_2.id)
 rome = Trip.create(name: "Rome with Love", destination: "Rome",created: false )
-user_1 = TripParticipant.create(trip: rome, user: User.last)
-date_1 = DateTime.new(2017, 06, 13, 10)
-date_2 = DateTime.new(2017, 06, 16, 10)
-date_3 = DateTime.new(2017, 07, 11, 10)
-date_4 = DateTime.new(2017, 06, 23, 10)
-date_5 = DateTime.new(2017, 06, 28, 10)
-TripDate.create(start_date: date_1, end_date: date_2, trip: dam)
-TripDate.create(start_date: date_4, end_date: date_5, trip: dam)
+particpant_3 = TripParticipant.create(trip_id: rome.id, user_id: user_1.id)
+
 
 
 
