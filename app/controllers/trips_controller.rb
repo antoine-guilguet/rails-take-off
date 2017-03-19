@@ -21,13 +21,5 @@ class TripsController < ApplicationController
   def trip_params
     params.require(:trip).permit(:name, :destination)
   end
-
-  def find_user_trips
-    trip_participants = TripParticipant.where(trip_id: current_user.id)
-    user_trips = []
-    trip_participants.each do |trip_participant|
-      user_trips << trip_participant.trip
-    end
-    user_trips
-  end
+  
 end
