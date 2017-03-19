@@ -7,4 +7,13 @@ class User < ActiveRecord::Base
   validates :email, presence: true
 
   has_many :trips, through: :trip_participants
+
+  after_create :send_welcome_email
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
+  end
+
 end
