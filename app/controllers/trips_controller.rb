@@ -11,7 +11,8 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     if @trip.save
-      redirect_to trip_path
+      TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
+      redirect_to trips_path
     else
       render :new
     end
@@ -23,7 +24,7 @@ class TripsController < ApplicationController
   end
 
   def find_user_trips
-    trip_participants = TripParticipant.where(trip_id: current_user.id)
+    trip_participants = TripParticipant.where(user_id: current_user.id)
     user_trips = []
     trip_participants.each do |trip_participant|
       user_trips << trip_participant.trip
