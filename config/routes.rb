@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#homepage'
 
-  resources :trips
+  resources :trips do
+    resources :invites, only:[:new, :create]
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+  before_action :find_trip, only:[:show]
+
 
   def index
     @trips = find_user_trips
@@ -18,9 +20,17 @@ class TripsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
+
   def trip_params
     params.require(:trip).permit(:name, :destination)
+  end
+
+  def find_trip
+    @trip = Trip.find(params[:id])
   end
 
   def find_user_trips
