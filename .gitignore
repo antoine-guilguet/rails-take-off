@@ -11,8 +11,5 @@
 # Ignore .idea
 .idea
 
-# Ignore secrets
-/config/environment_secret*
-
 # Ignore application configuration
 /config/application.yml
