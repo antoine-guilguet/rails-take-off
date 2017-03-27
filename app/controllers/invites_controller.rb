@@ -8,8 +8,8 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
     @invite.host_id = current_user.id
-    @invite.token = SecureRandom.base64(24)
-    raise 'good'
+    @invite.token = SecureRandom.base64(32)
+    @invite.trip_id = @trip.id
     if @invite.save
       redirect_to trip_path(@trip)
     else
