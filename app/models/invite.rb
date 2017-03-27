@@ -1,11 +1,8 @@
 class Invite < ActiveRecord::Base
   belongs_to :trip
 
-  after_create :send_invite_mailer
-
-  private
-
-  def send_invite_mailer
-    InviteMailer.join(self).deliver_now
+  def generate_token
+    self.token = Digest::SHA1.hexdigest([self.trip_id, Time.now, rand].join)
   end
+
 end

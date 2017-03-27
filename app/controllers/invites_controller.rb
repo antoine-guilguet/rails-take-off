@@ -8,9 +8,10 @@ class InvitesController < ApplicationController
   def create
     @invite = Invite.new(invite_params)
     @invite.host_id = current_user.id
-    @invite.token = SecureRandom.base64(32)
     @invite.trip_id = @trip.id
+    @invite.generate_token
     if @invite.save
+      InviteMailer.new_user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
       redirect_to trip_path(@trip)
     else
       render :new
