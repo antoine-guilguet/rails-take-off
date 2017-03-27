@@ -11,3 +11,5 @@ fr:
   no_account: "Vous n'avez pas encore de compte?"
   already_account: "Vous avez déjà un compte?"
   password_forgotten: "Mot de passe oublié?"
+  invite_user: "Invitez un ami!"
+  send_invite: "Envoyer l'invitation"

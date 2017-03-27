@@ -12,6 +12,9 @@
             <%= f.input :email, required: true, autofocus: true %>
             <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable) %>
             <%= f.input :password_confirmation, required: true %>
+            <% if @token != nil %>
+                <%= hidden_field_tag :invite_token, @token %>
+            <% end %>
           </div>
 
           <div class="form-actions">

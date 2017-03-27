@@ -1,0 +1,9 @@
+<h3><%= @trip.name %></h3>
+
+<br>
+
+<h6><%= @trip.destination %></h6>
+
+<br>
+
+<%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>

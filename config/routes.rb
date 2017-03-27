@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+  }
+
   root 'pages#homepage'
 
-  resources :trips
+  resources :trips do
+    resources :invites, only:[:new, :create]
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

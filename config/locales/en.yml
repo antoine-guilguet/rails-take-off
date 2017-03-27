@@ -32,3 +32,5 @@ en:
   no_account: "You don't have an account yet?"
   already_account: "Do you already have an account?"
   password_forgotten: "Password Forgotten"
+  invite_user: "Invite a Friend!"
+  send_invite: "Send Invite"
