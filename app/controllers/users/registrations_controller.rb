@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
+
+  before_filter :configure_sign_up_params
+  before_filter :configure_update_params
 
   def new
     @token = params[:invite_token]
@@ -16,10 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def destroy
-    super
-  end
-
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
   # in to be expired now. This is useful if the user wants to
@@ -31,18 +28,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def users_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+  def configure_sign_up_params
+    devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name
   end
 
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.for(:sign_up) << :first_name
-  # end
-
-  # You can put the params you want to permit in the empty array.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.for(:account_update) << :attribute
-  # end
+  def configure_update_params
+    devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

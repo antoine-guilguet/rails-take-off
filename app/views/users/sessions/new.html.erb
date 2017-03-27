@@ -16,6 +16,9 @@
             <%= f.button :submit, "Log in" %>
             <%= link_to t('back'), root_path, class: "btn" %>
           </div>
+          <% if @token != nil %>
+              <%= hidden_field_tag :invite_token, @token %>
+          <% end %>
       <% end %>
       <hr/>
       <%= render "devise/shared/links" %>

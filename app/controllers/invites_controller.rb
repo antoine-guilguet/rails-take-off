@@ -1,4 +1,5 @@
 class InvitesController < ApplicationController
+
   before_action :find_trip, only: [:new, :create]
 
   def new
@@ -9,9 +10,13 @@ class InvitesController < ApplicationController
     @invite = Invite.new(invite_params)
     @invite.host_id = current_user.id
     @invite.trip_id = @trip.id
+    @invite.recipient_id = User.find_by(email: @invite.email).id if User.find_by(email: @invite.email)
     @invite.generate_token
-    if @invite.save
-      InviteMailer.new_user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
+    if @invite.save && @invite.recipient_id
+      InviteMailer.user_invite(@invite, new_user_session_path(:invite_token => @invite.token)).deliver
+      redirect_to trip_path(@trip)
+    elsif @invite.save
+      InviteMailer.user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
       redirect_to trip_path(@trip)
     else
       render :new

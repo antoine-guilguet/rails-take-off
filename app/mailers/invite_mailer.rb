@@ -1,6 +1,6 @@
 class InviteMailer < ApplicationMailer
 
-  def new_user_invite(invite, new_user_registration_path)
+  def user_invite(invite, new_user_registration_path)
     @email = invite.email
     @trip= Trip.find(invite.trip_id)
     @host = User.find(invite.host_id)
@@ -8,4 +8,5 @@ class InviteMailer < ApplicationMailer
 
     mail(to: @email, subject: "Join the Trip")
   end
+
 end
