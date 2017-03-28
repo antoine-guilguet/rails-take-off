@@ -13,3 +13,4 @@ fr:
   password_forgotten: "Mot de passe oublié?"
   invite_user: "Invitez un ami!"
   send_invite: "Envoyer l'invitation"
+  confirm_invite: "Confirmer l'invitation"

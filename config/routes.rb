@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :invites, only:[:new, :create]
   end
 
+  get 'validate' => 'invite#validate', as: :validate
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
