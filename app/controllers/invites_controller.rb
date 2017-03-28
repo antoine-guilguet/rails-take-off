@@ -12,10 +12,13 @@ class InvitesController < ApplicationController
     @invite.trip_id = @trip.id
     @invite.recipient_id = User.find_by(email: @invite.email).id if User.find_by(email: @invite.email)
     @invite.generate_token
+
     if @invite.save && @invite.recipient_id
+      # Send invitation to an existing user
       InviteMailer.user_invite(@invite, new_user_session_path(:invite_token => @invite.token)).deliver
       redirect_to trip_path(@trip)
     elsif @invite.save
+      # Send invitation to a new user
       InviteMailer.user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
       redirect_to trip_path(@trip)
     else

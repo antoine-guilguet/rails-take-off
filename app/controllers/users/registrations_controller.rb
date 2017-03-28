@@ -12,8 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @token = params[:invite_token]
     super
     if @token
-      @trip = Invite.find_by_token(@token).trip
-      TripParticipant.create(user_id: @user.id, trip_id: @trip.id)
+      @invite = Invite.find_by_token(@token)
+      TripParticipant.create(user_id: @user.id, trip_id: @invite.trip.id) if @user.email == @invite.email
     end
   end
 
