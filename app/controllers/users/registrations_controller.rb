@@ -11,9 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     @token = params[:invite_token]
     super
-    if @token
-      redirect_to validate_path(:invite_token => @token)
-    end
   end
 
   # GET /resource/cancel
@@ -35,10 +32,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name
   end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    @token = params[:invite_token]
+    if resource.is_a?(User) && @token
+      redirect_to validate_path(:invite_token => @token)
+    else
+      super(resource)
+    end
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
