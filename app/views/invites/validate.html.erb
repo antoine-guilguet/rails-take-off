@@ -1,0 +1,20 @@
+<div class="container form-container">
+  <div class="row">
+    <div class="col s8 offset-s2">
+      <div class="form-title">
+        <h4><%= t('confirm_invite') %></h4>
+      </div>
+      <%= simple_form_for @invite do |f| %>
+          <%= f.input :accepted %>
+          <%= f.input :destination %>
+          <div class="form-actions">
+            <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
+            <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+

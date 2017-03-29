@@ -10,11 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @token = params[:invite_token]
+    @invite = Invite.find_by_token(@token)
     super
-    if @token
-      @trip = Invite.find_by_token(@token).trip
-      TripParticipant.create(user_id: @user.id, trip_id: @trip.id)
-    end
+    # TO be removed and create after confirmation with notification
+    TripParticipant.create(trip_id: @invite.trip.id, user_id: current_user.id) if current_user.email == @invite.email
   end
 
   # GET /resource/cancel
@@ -36,10 +35,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:account_update) << :first_name << :last_name
   end
 
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    trips_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

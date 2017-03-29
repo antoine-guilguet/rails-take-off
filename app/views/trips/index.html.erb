@@ -1,11 +1,44 @@
 <div class="container">
   <div class="row">
-    <% @trips.each do |trip| %>
-    <div class="col s6 offset-s3 card blue-grey darken-1">
-        <%= link_to trip.name, trip_path(trip), class: "card-title" %>
-        <%= trip.destination %>
-      </div>
+    <div class="col s8">
+      <% @trips.each do |trip| %>
+        <div class="col s12 card">
+          <div class="card-title">
+            <%= link_to trip.name, trip_path(trip), class: "card-title" %>
+          </div>
+          <div class="card-destination">
+            <%= trip.destination %>
+          </div>
+          <div class="card-participants">
+            <% trip_participants = trip.trip_participants %>
+            <% trip_participants.each do |trip_participant| %>
+              <div class="avatar avatar-bordered">
+                <%= trip_participant.render_initials %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <% end %>
+    <div class="col s4">
+      <% @invitations.each do |invitation| %>
+          <div class="col s12 card">
+            <div class="card-title">
+              <%= invitation.name %>
+            </div>
+            <div class="card-destination">
+              <%= invitation.destination %>
+            </div>
+            <div class="card-participants">
+              <% trip_participants = invitation.trip_participants %>
+              <% trip_participants.each do |trip_participant| %>
+                  <div class="avatar avatar-bordered">
+                    <%= trip_participant.render_initials %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+    </div>
   </div>
 </div>
