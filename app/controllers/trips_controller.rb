@@ -4,6 +4,8 @@ class TripsController < ApplicationController
 
   def index
     @trips = find_user_trips
+    @invitations = Invite.where(recipient_id: current_user.id).map{ |invitation| invitation.trip }
+    # @invitations = @invitations.map{ |invitation| invitation.trip } if @invitations.length > 0
   end
 
   def new

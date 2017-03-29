@@ -10,7 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @token = params[:invite_token]
+    @invite = Invite.find_by_token(@token)
     super
+    # TO be removed and create after confirmation with notification
+    TripParticipant.create(trip_id: @invite.trip.id, user_id: current_user.id) if current_user.email == @invite.email
   end
 
   # GET /resource/cancel
@@ -33,12 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    @token = params[:invite_token]
-    if resource.is_a?(User) && @token
-      redirect_to validate_path(:invite_token => @token)
-    else
-      super(resource)
-    end
+    trips_path
   end
 
   # The path used after sign up for inactive accounts.
