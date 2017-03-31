@@ -2,25 +2,29 @@
   <div class="row">
     <div class="col s8">
       <% @trips.each do |trip| %>
-        <div class="col s12 card">
+        <div class="col s12 card" id="trip-id-<%= trip.id %>">
           <div class="card-title">
             <%= link_to trip.name, trip_path(trip), class: "card-title" %>
-          </div>
-          <div class="card-destination">
-            <%= trip.destination %>
           </div>
           <div class="card-participants">
             <% trip_participants = trip.trip_participants %>
             <% trip_participants.each do |trip_participant| %>
-              <div class="avatar avatar-bordered">
-                <%= trip_participant.render_initials %>
-              </div>
-            <% end %>
+                <div class="avatar avatar-bordered">
+                  <%= trip_participant.render_initials %>
+                </div>
+          <% end %>
+          </div>
+          <div class="card-destination">
+            <%= trip.destination %>
+            <p><%= t('number_of_participants') %>: <%= trip_participants.count %></p>
           </div>
           <div class="card-buttons">
-            <%= link_to t('delete'), trip, method: delete do %>
-                <i class="material-icons">delete</i>
+            <%= link_to edit_trip_path(trip) do %>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
             <% end %>
+            <%= link_to trip_path(trip), method: :delete, remote: true do %>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <% end %>
           </div>
         </div>
       <% end %>

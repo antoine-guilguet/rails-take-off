@@ -36,3 +36,5 @@ en:
   send_invite: "Send Invite"
   confirm_invite: "Confirm Invitation"
   delete: "Delete"
+  update: "Update"
+  number_of_participants: "Number of Participants"
