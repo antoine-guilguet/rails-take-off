@@ -17,6 +17,11 @@
               </div>
             <% end %>
           </div>
+          <div class="card-buttons">
+            <%= link_to t('delete'), trip, method: delete do %>
+                <i class="material-icons">delete</i>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
