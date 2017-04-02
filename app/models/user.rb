@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
+  def render_initials
+    !self.first_name.nil? ? self.first_name.first + self.last_name.first : ""
+  end
+
   private
 
   def send_welcome_email

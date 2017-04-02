@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170328142035) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "recipient_id"
-    t.boolean  "accepted",     default: false
+    t.boolean  "confirmed",    default: false
   end
 
   add_index "invites", ["trip_id"], name: "index_invites_on_trip_id", using: :btree

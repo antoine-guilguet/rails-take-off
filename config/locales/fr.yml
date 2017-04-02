@@ -14,6 +14,8 @@ fr:
   invite_user: "Invitez un ami!"
   send_invite: "Envoyer l'invitation"
   confirm_invite: "Confirmer l'invitation"
+  decline: "Décliner"
+  confirm: "Confirmer"
   delete: "Supprimer"
   update: "Modifier"
   number_of_participants: "Nombre de Participants"

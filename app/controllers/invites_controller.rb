@@ -1,6 +1,7 @@
 class InvitesController < ApplicationController
 
-  before_action :find_trip, only: [:new, :create]
+  before_action :find_trip, only: [:new, :create, :validate]
+  before_action :find_invite, only: [:validate]
 
   def new
     @invite = Invite.new
@@ -27,11 +28,23 @@ class InvitesController < ApplicationController
   end
 
   def validate
+    @response = params[:response]
+    @invite.confirmed = true
+    @invite.save
+    if @response == true
+      TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip.id)
+      redirect_to trips_path
+    else
+      redirect_to trips_path
+    end
+  end
+
+  def validate_email
     @token = params[:invite_token]
     @invite = Invite.find_by_token(@token)
     TripParticipant.create(user_id: @user.id, trip_id: @invite.trip.id) if @user.email == @invite.email
+    TripParticipant.create(trip_id: @invite.trip.id, user_id: current_user.id) if current_user.email == @invite.email
   end
-
   private
 
   def find_trip
