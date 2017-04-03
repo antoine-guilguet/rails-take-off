@@ -40,3 +40,4 @@ en:
   delete: "Delete"
   update: "Update"
   number_of_participants: "Number of Participants"
+  email_invitation: "Send an invite to your friends via email!"

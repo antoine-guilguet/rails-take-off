@@ -8,30 +8,55 @@ class InvitesController < ApplicationController
   end
 
   def create
-    @invite = Invite.new(invite_params)
-    @invite.host_id = current_user.id
-    @invite.trip_id = @trip.id
-    @invite.recipient_id = User.find_by(email: @invite.email).id if User.find_by(email: @invite.email)
-    @invite.generate_token
+    @params = params[:invite][:email]
+    if @params.count > 1
+      @params.each do |invitee|
+        @invite = Invite.new(email: invitee)
+        @invite.host_id = current_user.id
+        @invite.trip_id = @trip.id
+        @invite.generate_token
+        @invite.recipient_id = User.find_by(email: @invite.email).id if User.find_by(email: @invite.email)
 
-    if @invite.save && @invite.recipient_id
-      # Send invitation to an existing user
-      InviteMailer.user_invite(@invite, new_user_session_path(:invite_token => @invite.token)).deliver
-      redirect_to trip_path(@trip)
-    elsif @invite.save
-      # Send invitation to a new user
-      InviteMailer.user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
-      redirect_to trip_path(@trip)
+        if @invite.save && @invite.recipient_id
+          # Send invitation to an existing user
+          InviteMailer.user_invite(@invite, new_user_session_path(:invite_token => @invite.token)).deliver
+          redirect_to trip_path(@trip)
+        elsif @invite.save
+          # Send invitation to a new user
+          InviteMailer.user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
+          redirect_to trip_path(@trip)
+        else
+          render :new
+        end
+      end
     else
-      render :new
+      @invite = Invite.new(invite_params)
+      @invite.host_id = current_user.id
+      @invite.trip_id = @trip.id
+      @invite.generate_token
+      @invite.recipient_id = User.find_by(email: @invite.email).id if User.find_by(email: @invite.email)
+
+      if @invite.save && @invite.recipient_id
+        # Send invitation to an existing user
+        InviteMailer.user_invite(@invite, new_user_session_path(:invite_token => @invite.token)).deliver
+        redirect_to trip_path(@trip)
+      elsif @invite.save
+        # Send invitation to a new user
+        InviteMailer.user_invite(@invite, new_user_registration_path(:invite_token => @invite.token)).deliver
+        redirect_to trip_path(@trip)
+      else
+        render :new
+      end
     end
+
+
   end
 
   def validate
     @response = params[:response]
     @invite.confirmed = true
     @invite.save
-    if @response == true
+    if @response == true && @invite.mail == current_user.email
       TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip.id)
       redirect_to trips_path
     else
