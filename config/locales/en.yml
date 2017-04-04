@@ -21,30 +21,40 @@
 
 en:
   activerecord:
-      attributes:
-        email: "Adresse email"
-      errors:
-        models:
-          invite:
-            attributes:
-              email:
-                invalid: "L'email n'est pas valide"
-              trip_id:
-                blank: "L'invitation doit être liée à un voyage"
-          trip:
-            attributes:
-              name:
-                blank: "Donnez un nom frais à votre voyage"
-          user:
-            attributes:
-              first_name:
-                blank: "Le prénom de l'utilisateur est manquant"
-              last_name:
-                blank: "Le nom de l'utilisateur est manquant"
-              email:
-                invalid: "L'email entré n'est pas valide"
-              password_confirmation:
-                confirmation: "Les mots de passes ne sont pas identiques"
+    attributes:
+      email: "Mail address"
+    errors:
+      models:
+        invite:
+          attributes:
+            email:
+              invalid: "Mail address is not valid"
+            trip_id:
+              not_a_number: "The invite must link to a trip"
+              taken: "You cannot send several invitations at the same mail address"
+            host_id:
+              not_a_number: "host_id missing"
+            token:
+              blank: "token missing"
+        trip:
+          attributes:
+            name:
+              blank: "Donnez un nom frais à votre voyage"
+            destination:
+              blank: "Entrez une destination pour votre voyage"
+        user:
+          attributes:
+            first_name:
+              blank: "First name missing"
+            last_name:
+              blank: "Last name missing"
+            email:
+              invalid: "Mail address is not valid"
+              taken: "This mail address is already taken. Did you forget your password?"
+            password:
+              blank: "You must type a password to protect your account"
+            password_confirmation:
+              confirmation: "Passwords are not identical"
   hello: "Hello world"
   back: "Back"
   create_trip: "Create Trip"

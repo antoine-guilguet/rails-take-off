@@ -10,6 +10,7 @@ fr:
               invalid: "L'email n'est pas valide"
             trip_id:
               not_a_number: "L'invitation doit être liée à un voyage"
+              taken: "Vous ne pouvez pas envoyer plusieurs invitations à la même adresse"
             host_id:
               not_a_number: "L'invitation doit être envoyée par quelqu'un"
             token:
