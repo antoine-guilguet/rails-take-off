@@ -20,6 +20,31 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+      attributes:
+        email: "Adresse email"
+      errors:
+        models:
+          invite:
+            attributes:
+              email:
+                invalid: "L'email n'est pas valide"
+              trip_id:
+                blank: "L'invitation doit être liée à un voyage"
+          trip:
+            attributes:
+              name:
+                blank: "Donnez un nom frais à votre voyage"
+          user:
+            attributes:
+              first_name:
+                blank: "Le prénom de l'utilisateur est manquant"
+              last_name:
+                blank: "Le nom de l'utilisateur est manquant"
+              email:
+                invalid: "L'email entré n'est pas valide"
+              password_confirmation:
+                confirmation: "Les mots de passes ne sont pas identiques"
   hello: "Hello world"
   back: "Back"
   create_trip: "Create Trip"

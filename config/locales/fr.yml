@@ -1,4 +1,38 @@
 fr:
+  activerecord:
+    attributes:
+      email: "Adresse email"
+    errors:
+      models:
+        invite:
+          attributes:
+            email:
+              invalid: "L'email n'est pas valide"
+            trip_id:
+              not_a_number: "L'invitation doit être liée à un voyage"
+            host_id:
+              not_a_number: "L'invitation doit être envoyée par quelqu'un"
+            token:
+              blank: "L'invitation doit avoir un token"
+        trip:
+          attributes:
+            name:
+              blank: "Donnez un nom frais à votre voyage"
+            destination:
+              blank: "Entrez une destination pour votre voyage"
+        user:
+          attributes:
+            first_name:
+              blank: "Le prénom de l'utilisateur est manquant"
+            last_name:
+              blank: "Le nom de l'utilisateur est manquant"
+            email:
+              invalid: "L'adresse email n'est pas valide"
+              taken: "L'adresse mail mentionnée est déjà prise. Avez-vous oublié votre mot de passe?"
+            password:
+              blank: "Vous devez entrer un mot de passe pour protéger votre compte"
+            password_confirmation:
+              confirmation: "Les mots de passes ne sont pas identiques"
   hello: "Bonjour world"
   back: "Retour"
   create_trip: "Créer un Voyage"
