@@ -20,6 +20,41 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    attributes:
+      email: "Mail address"
+    errors:
+      models:
+        invite:
+          attributes:
+            email:
+              invalid: "Mail address is not valid"
+            trip_id:
+              not_a_number: "The invite must link to a trip"
+              taken: "You cannot send several invitations at the same mail address"
+            host_id:
+              not_a_number: "host_id missing"
+            token:
+              blank: "token missing"
+        trip:
+          attributes:
+            name:
+              blank: "Donnez un nom frais à votre voyage"
+            destination:
+              blank: "Entrez une destination pour votre voyage"
+        user:
+          attributes:
+            first_name:
+              blank: "First name missing"
+            last_name:
+              blank: "Last name missing"
+            email:
+              invalid: "Mail address is not valid"
+              taken: "This mail address is already taken. Did you forget your password?"
+            password:
+              blank: "You must type a password to protect your account"
+            password_confirmation:
+              confirmation: "Passwords are not identical"
   hello: "Hello world"
   back: "Back"
   create_trip: "Create Trip"
@@ -35,3 +70,9 @@ en:
   invite_user: "Invite a Friend!"
   send_invite: "Send Invite"
   confirm_invite: "Confirm Invitation"
+  decline: "Decline"
+  confirm: "Confirm"
+  delete: "Delete"
+  update: "Update"
+  number_of_participants: "Number of Participants"
+  email_invitation: "Send an invite to your friends via email!"

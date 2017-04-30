@@ -10,7 +10,7 @@
 .card-title {
   color: $primary-color-light;
   position: absolute;
-  width: 200px;
+  width: 70%;
 }
 
 .card-destination {
@@ -23,5 +23,20 @@
   top: 5px;
   right: 5px;
   display: inline-flex;
+}
+
+.card-buttons {
+  position: absolute;
+  right: 15px;
+  bottom: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50px;
+}
+
+.card-invite-buttons {
+  position: absolute;
+  bottom: 10px;
 }
 

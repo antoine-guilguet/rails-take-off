@@ -1,11 +1,10 @@
 class TripsController < ApplicationController
-  before_action :find_trip, only:[:show]
+  before_action :find_trip, only:[:show, :edit, :update, :destroy]
 
 
   def index
     @trips = find_user_trips
-    @invitations = Invite.where(recipient_id: current_user.id).map{ |invitation| invitation.trip }
-    # @invitations = @invitations.map{ |invitation| invitation.trip } if @invitations.length > 0
+    @invitations = Invite.where(recipient_id: current_user.id, confirmed: false)
   end
 
   def new
@@ -23,6 +22,25 @@ class TripsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @trip.update(trip_params)
+      redirect_to trips_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @trip.destroy
+    respond_to do |format|
+      format.html { redirect_to trips_path }
+      format.js
+    end
   end
 
   private

@@ -10,10 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @token = params[:invite_token]
-    @invite = Invite.find_by_token(@token)
-    super
-    # TO be removed and create after confirmation with notification
-    TripParticipant.create(trip_id: @invite.trip.id, user_id: current_user.id) if current_user.email == @invite.email
+    if @token
+      @invite = Invite.find_by_token(@token)
+      super
+      TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip_id)
+      @invite.confirmed = true
+    else
+      super
+    end
   end
 
   # GET /resource/cancel
