@@ -10,8 +10,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @token = params[:invite_token]
-    @invite = Invite.find_by_token(@token)
-    super
+    if @token
+      @invite = Invite.find_by_token(@token)
+      super
+      TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip_id)
+      @invite.confirmed = true
+    else
+      super
+    end
   end
 
   # GET /resource/cancel

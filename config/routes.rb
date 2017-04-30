@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   resources :trips do
     resources :invites, only:[:new, :create] do
-      get 'validate', on: :member
+      get 'confirm', on: :member
+      get 'decline', on: :member
     end
 
   end
