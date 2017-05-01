@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :find_trip, only:[:show, :edit, :update, :destroy]
+  before_action :find_trip, only:[:show, :edit, :update, :destroy, :leave]
 
 
   def index
@@ -41,6 +41,11 @@ class TripsController < ApplicationController
       format.html { redirect_to trips_path }
       format.js
     end
+  end
+
+  def leave
+    TripParticipant.find_by(user_id: current_user.id, trip_id: @trip.id).destroy
+    redirect_to trips_path
   end
 
   private

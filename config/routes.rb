@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'pages#homepage'
 
   resources :trips do
+    get 'leave', on: :member
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
