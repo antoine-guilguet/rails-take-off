@@ -2,6 +2,15 @@
   <div class="row">
     <div class="col s8 offset-s2">
       <%= simple_form_for [@trip, @invite] do |f| %>
+          <% if @invite.errors.any? %>
+              <div id="error_explanation">
+                <ul>
+                  <% @invite.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
           <label for="email"><%= t('email_invitation') %></label>
           <div id="invitations-<%= @trip.id %>">
             <div class="invitation-row">

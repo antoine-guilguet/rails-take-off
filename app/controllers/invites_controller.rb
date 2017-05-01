@@ -12,17 +12,21 @@ class InvitesController < ApplicationController
     if @params.count > 1
       # multi-invitation
       @params.each do |invitee|
-        invitation = Invite.new(email: invitee)
-        build_invitation(invitation)
-        send_invitation(invitation)
+        @invite = Invite.new(email: invitee)
+        build_invitation(@invite)
+        send_invitation(@invite)
       end
-      redirect_to trip_path(@trip)
+      redirect_to trips_path
     else
       # single invitation
-      invitation = Invite.new(email: params[:invite][:email].first)
-      build_invitation(invitation)
-      send_invitation(invitation)
-      redirect_to trip_path(@trip)
+      @invite = Invite.new(email: params[:invite][:email].first)
+      build_invitation(@invite)
+      send_invitation(@invite)
+      if @invite.valid?
+        redirect_to trips_path
+      else
+        render :new
+      end
     end
   end
 
@@ -51,16 +55,16 @@ class InvitesController < ApplicationController
     params.require(:invite).permit(:email)
   end
 
+  def confirm_invitation(invite)
+    invite.confirmed = true
+    invite.save
+  end
+
   def build_invitation(invite)
     invite.host_id = current_user.id
     invite.trip_id = @trip.id
     invite.generate_token
     invite.recipient_id = User.find_by(email: invite.email).id if User.find_by(email: invite.email)
-  end
-
-  def confirm_invitation(invite)
-    invite.confirmed = true
-    invite.save
   end
 
   def send_invitation(invite)
@@ -70,8 +74,6 @@ class InvitesController < ApplicationController
     elsif invite.save
       # Send invitation to a new user
       InviteMailer.user_invite(invite, new_user_registration_path(:invite_token => invite.token)).deliver
-    else
-      render :new
     end
   end
 end
