@@ -14,6 +14,7 @@ class Users::SessionsController < Devise::SessionsController
       super
       TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip_id)
       @invite.confirmed = true
+      @invite.save
     else
       super
     end
