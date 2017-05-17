@@ -12,6 +12,7 @@ class TripsController < ApplicationController
   end
 
   def create
+    raise
     @trip = Trip.new(trip_params)
     if @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
