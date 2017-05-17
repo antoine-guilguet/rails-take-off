@@ -4,6 +4,10 @@
       <%= simple_form_for @trip do |f| %>
           <%= f.input :name %>
           <%= f.input :destination %>
+          <%= f.label :start_date, required: true %>
+          <%= f.text_field :start_date, as: :date, class: "datepicker" %>
+          <%= f.label :end_date, required: true, class: "input-field label" %>
+          <%= f.text_field :end_date, class: "datepicker" %>
           <div class="form-actions">
             <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
             <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
@@ -12,3 +16,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+</script>
