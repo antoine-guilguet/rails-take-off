@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  time:
+    formats:
+      short: "%b %d, %Y"
+      default: "%m/%d/%Y"
   activerecord:
     attributes:
       email: "Mail address"

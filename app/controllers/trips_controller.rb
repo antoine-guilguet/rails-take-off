@@ -12,7 +12,6 @@ class TripsController < ApplicationController
   end
 
   def create
-    raise
     @trip = Trip.new(trip_params)
     if @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
@@ -52,7 +51,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :destination)
+    params.require(:trip).permit(:name, :destination, :start_date, :end_date)
   end
 
   def find_trip

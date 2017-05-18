@@ -1,4 +1,8 @@
 fr:
+  time:
+    formats:
+      short: "%A, %b %d"
+      default: "%d/%m/%Y"
   activerecord:
     attributes:
       email: "Adresse email"

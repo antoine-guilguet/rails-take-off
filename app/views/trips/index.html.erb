@@ -18,6 +18,11 @@
             <%= trip.destination %>
             <p><%= t('number_of_participants') %>: <%= trip_participants.count %></p>
           </div>
+          <% if !trip.start_date.nil? %>
+            <div class="card-dates">
+              <%= l trip.start_date, formats: :short %> - <%= l trip.end_date, formats: :short %>
+            </div>
+          <% end %>
           <div class="card-buttons">
             <%= link_to edit_trip_path(trip) do %>
               <i class="fa fa-pencil" aria-hidden="true"></i>
