@@ -6,8 +6,7 @@
     <!--CSS Files-->
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
-    <!--JS Files-->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tags %>
@@ -18,6 +17,10 @@
     <%= render 'shared/flashes' %>
 
     <%= yield %>
+
+    <!--Javascript files-->
+    <%= javascript_include_tag 'application' %>
+    <%= yield(:js) %>
 
     <!--Import JQuery before Materialize-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

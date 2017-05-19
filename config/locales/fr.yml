@@ -1,8 +1,12 @@
 fr:
   time:
     formats:
-      short: "%A, %b %d"
+      short: "%d/%m/%Y"
       default: "%d/%m/%Y"
+  date:
+    formats:
+      short:
+      long:
   activerecord:
     attributes:
       email: "Adresse email"
@@ -60,3 +64,4 @@ fr:
   number_of_participants: "Nombre de Participants"
   email_invitation: "Envoyer une invitation à vos amis par email!"
   leave_trip: "Quitter le voyage"
+  create_survey: "Créer un sondage"
