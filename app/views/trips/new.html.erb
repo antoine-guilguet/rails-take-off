@@ -4,19 +4,20 @@
       <%= simple_form_for @trip do |f| %>
           <%= f.input :name %>
           <%= f.input :destination %>
-          <div class="form-dates">
+          <div id="trip-dates">
             <div class="input-field label">
               <%= f.label :start_date, required: true %>
-              <%= f.text_field :start_date, class: "datepicker" %>
+              <%= f.text_field :start_date, multiple: true, class: "datepicker" %>
             </div>
             <div class="input-field label">
               <%= f.label :end_date, required: true %>
-              <%= f.text_field :end_date, class: "datepicker" %>
+              <%= f.text_field :end_date, multiple: true, class: "datepicker" %>
             </div>
             <div class="waves-effect waves-light btn" id="survey_button">
               <%= t('create_survey') %>
             </div>
           </div>
+
 
           <div class="form-actions">
             <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
@@ -29,13 +30,23 @@
 
 <%= content_for :js do %>
   <%= javascript_tag do %>
-      $('.datepicker').pickadate({
-          selectMonths: true, // Creates a dropdown to control month
-          selectYears: 15 // Creates a dropdown of 15 years to control year
-      });
+        $(document).ready(function(){
+            activateDatePicker();
+        })
 
-      $('#survey_button').on('click', function(){
+        function activateDatePicker(){
+            $('.datepicker').pickadate({
+              selectMonths: true, // Creates a dropdown to control month
+              selectYears: 15 // Creates a dropdown of 15 years to control year
+            });
+        }
 
-      })
+        var formDate = $('#trip-dates').html();
+
+        $('#survey_button').on('click', function(){
+            $('#trip-dates').append(formDate);
+            activateDatePicker();
+        });
+
   <% end %>
 <% end %>

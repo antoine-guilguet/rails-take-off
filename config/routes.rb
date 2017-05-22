@@ -1,22 +1,26 @@
 Rails.application.routes.draw do
 
-  get 'survey/create'
+
 
   devise_for :users, controllers: {
-      sessions: 'users/sessions',
-      registrations: 'users/registrations'
+  sessions: 'users/sessions',
+  registrations: 'users/registrations'
   }
 
   root 'pages#homepage'
 
   resources :trips do
     get 'leave', on: :member
+
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
     end
 
   end
+
+  get 'surveys/create'
+  get 'surveydates/create'
 
 
   # Example of regular route:
