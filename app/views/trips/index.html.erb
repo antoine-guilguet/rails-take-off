@@ -18,11 +18,15 @@
             <%= trip.destination %>
             <p><%= t('number_of_participants') %>: <%= trip_participants.count %></p>
           </div>
+          <div class="card-dates">
           <% if !trip.start_date.nil? %>
-            <div class="card-dates">
-              <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
-            </div>
-          <% end %>
+            <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
+          <% elsif trip.survey %>
+            <%= link_to t('show_survey'), survey_path(trip.survey) %>
+         <% end %>
+
+
+          </div>
           <div class="card-buttons">
             <%= link_to edit_trip_path(trip) do %>
               <i class="fa fa-pencil" aria-hidden="true"></i>

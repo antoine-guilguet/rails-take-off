@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
 
-
-
   devise_for :users, controllers: {
-  sessions: 'users/sessions',
-  registrations: 'users/registrations'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 
   root 'pages#homepage'
 
   resources :trips do
     get 'leave', on: :member
-
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
@@ -19,7 +16,7 @@ Rails.application.routes.draw do
 
   end
 
-  get 'surveys/create'
+  resources :surveys, only:[:show]
   get 'surveydates/create'
 
 

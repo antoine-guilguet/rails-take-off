@@ -1,0 +1,22 @@
+<h1><%= @trip.name %>'s survey</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Number of votes</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @survey_dates.each do |survey_date| %>
+      <tr>
+        <th>
+          <%= l(survey_date.start_date, format: :short) %>
+        </th>
+        <th>
+          <%= l(survey_date.end_date, format: :short) %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
