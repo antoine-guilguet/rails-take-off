@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   end
 
-  resources :surveys, only:[:show]
+  resources :surveys, only:[:show] do
+    get 'vote', on: :member
+  end
   get 'surveydates/create'
 
 

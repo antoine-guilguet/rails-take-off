@@ -2,6 +2,7 @@
 <table>
   <thead>
     <tr>
+      <th>Vote</th>
       <th>Number of votes</th>
       <th>Start Date</th>
       <th>End Date</th>
@@ -10,6 +11,12 @@
   <tbody>
     <% @survey_dates.each do |survey_date| %>
       <tr>
+        <th>
+          <button class="vote_button" value="<%= survey_date.id %>">Vote</button>
+        </th>
+        <th>
+          <%= survey_date.votes_for.size %>
+        </th>
         <th>
           <%= l(survey_date.start_date, format: :short) %>
         </th>
@@ -20,3 +27,18 @@
     <% end %>
   </tbody>
 </table>
+
+
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+        $('.vote_button').click(function(){
+            console.log(this.value);
+            $.ajax({
+                url: "<%= vote_survey_path(@survey) %>",
+                type: "GET",
+                data: this.value
+            })
+        });
+    <% end %>
+<% end %>
