@@ -12,18 +12,19 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
-    if params[:trip][:start_date].count > 1
+    if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
       end_dates = params[:trip][:end_date]
       start_dates.each_with_index do |date, index|
         SurveyDate.create(start_date: start_dates[index], end_date: end_dates[index], survey_id: @survey.id)
       end
-    end
-    if @trip.save
-      TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
       @survey.trip_id = @trip.id
       @survey.save
+      TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
+      redirect_to trips_path
+    elsif @trip.save
+      TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
       redirect_to trips_path
     else
       render :new
