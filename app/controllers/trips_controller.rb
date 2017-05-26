@@ -1,7 +1,6 @@
 class TripsController < ApplicationController
   before_action :find_trip, only:[:show, :edit, :update, :destroy, :leave]
 
-
   def index
     @trips = find_user_trips
     @invitations = Invite.where(recipient_id: current_user.id, confirmed: false)
@@ -13,8 +12,18 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    if params[:trip][:start_date].count > 1
+      @survey = Survey.create
+      start_dates = params[:trip][:start_date]
+      end_dates = params[:trip][:end_date]
+      start_dates.each_with_index do |date, index|
+        SurveyDate.create(start_date: start_dates[index], end_date: end_dates[index], survey_id: @survey.id)
+      end
+    end
     if @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
+      @survey.trip_id = @trip.id
+      @survey.save
       redirect_to trips_path
     else
       render :new
@@ -51,7 +60,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, :destination)
+    params.require(:trip).permit(:name, :destination, :start_date, :end_date)
   end
 
   def find_trip

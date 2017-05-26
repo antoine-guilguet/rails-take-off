@@ -15,7 +15,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :input
     b.use :label
-    b.use :error, wrap_with: { tag: 'small', class: 'error-block txt-salmon text-darken-1' }
+    b.use :error, wrap_with: { tag: 'small', class: 'alert alert-danger' }
     b.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
   end
 

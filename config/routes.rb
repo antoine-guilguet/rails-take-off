@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: {
-      sessions: 'users/sessions',
-      registrations: 'users/registrations'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 
   root 'pages#homepage'
@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     end
 
   end
+
+  resources :surveys, only:[:show] do
+    get 'vote', on: :member
+  end
+  get 'surveydates/create'
 
 
   # Example of regular route:

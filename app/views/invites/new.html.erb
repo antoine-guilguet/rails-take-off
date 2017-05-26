@@ -29,10 +29,14 @@
   </div>
 </div>
 
-<script>
+<%= content_for :js do %>
+  <%= javascript_tag do %>
+
     var emailRow = $('#invitations-<%= @trip.id %>').html();
 
     $('#new_invitation_button').click(function(){
       $('#invitations-<%= @trip.id %>').append(emailRow);
     });
-</script>
+
+  <% end %>
+<% end %>
