@@ -3,7 +3,7 @@ class TripsController < ApplicationController
 
   def index
     @trips = find_user_trips
-    @invitations = Invite.where(recipient_id: current_user.id, confirmed: false)
+    @invitations = Invite.where(email: current_user.email, confirmed: false)
   end
 
   def new
