@@ -25,6 +25,9 @@ class TripsController < ApplicationController
       redirect_to trips_path
     elsif @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
+      @trip.start_date = params[:trip][:start_date][0]
+      @trip.end_date = params[:trip][:end_date][0]
+      @trip.save
       redirect_to trips_path
     else
       render :new
@@ -38,7 +41,20 @@ class TripsController < ApplicationController
   end
 
   def update
-    if @trip.update(trip_params)
+    if @trip.update(trip_params) && params[:trip][:start_date].count > 1
+      @survey = Survey.create
+      start_dates = params[:trip][:start_date]
+      end_dates = params[:trip][:end_date]
+      start_dates.each_with_index do |date, index|
+        SurveyDate.create(start_date: start_dates[index], end_date: end_dates[index], survey_id: @survey.id)
+      end
+      @survey.trip_id = @trip.id
+      @survey.save
+      redirect_to trips_path
+    elsif @trip.update(trip_params)
+      @trip.start_date = params[:trip][:start_date][0]
+      @trip.end_date = params[:trip][:end_date][0]
+      @trip.save
       redirect_to trips_path
     else
       render :edit
