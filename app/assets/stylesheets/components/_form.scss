@@ -19,3 +19,15 @@
   justify-content: space-between;
 }
 
+.form-survey {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+}
+
+.form-survey-question {
+  font-size: smaller;
+  font-weight: 300;
+  font-style: oblique;
+}
+

@@ -15,11 +15,15 @@
                 <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker" %>
               </div>
             </div>
-
-            <div class="waves-effect waves-light btn" id="survey_button">
-              <%= t('create_survey') %>
+            <div class="form-survey">
+              <i class="material-icons">insert_invitation</i>
+              <p class="form-survey-question"><%= t('survey_question') %></p>
+              <div class="waves-effect waves-light btn" id="survey_button">
+                <%= t('create_survey') %>
+              </div>
             </div>
           </div>
+
           <div id="survey" class="hide">
             <h5>Survey</h5>
             <div class="input-field label">
@@ -39,7 +43,6 @@
               <%= f.text_field :end_date, multiple: true, class: "datepicker" %>
             </div>
           </div>
-
 
           <div class="form-actions">
             <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
@@ -86,11 +89,10 @@
 
         activateDatePicker();
 
-        // $('#survey_button').on('click', function(){
-        //   var newDiv = document.createElement('div')
-        //   newDiv.innerHTML = ("<label class="datetime required" for="trip_start_date"></label>");
-        //   console.log(newDiv);
-        // });
+        $('#survey_button').on('click', function(){
+            console.log('yes')
+          $('#survey').removeClass('hide');
+        });
 
   <% end %>
 <% end %>
