@@ -1,7 +1,7 @@
 // External libraries
 @import "materialize/components/color";
-$primary-color: color("orange", "darken-3") !default;
-$secondary-color: #31393C !default;
+$primary-color: color("red", "lighten-2")!default;
+$secondary-color: #31393C!default;
 $third-color: #7BC2FC  !default;
 @import "materialize";
 @import "font-awesome-sprockets";
@@ -13,3 +13,7 @@ $third-color: #7BC2FC  !default;
 @import "pages/index";
 @import "vendor/index";
 @import "invites";
+
+body {
+  background: whitesmoke;
+}

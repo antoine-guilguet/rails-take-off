@@ -1,9 +1,40 @@
 .form-container {
-  margin-top: 20px;
-  padding: 15px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 30px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.form-header {
+  background-color: #ee6e73;
+  border-radius: 4px;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  h3 {
+    font-size: 1.92rem;
+    line-height: 100%;
+    margin: 1.46rem 0 1.168rem 0;
+  }
+}
+
+.form-sub-header {
+  display: flex;
+  justify-content: center;
+}
+
+.form-body {
+  padding: 25px;
+  padding-top: 15px;
+  padding-bottom: 0px;
 }
 
 .form-title {
+  position: absolute;
   text-align: center;
 }
 
@@ -17,12 +48,22 @@
 .form-dates {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.form-survey {
+#form-survey {
   display: flex;
-  align-items: baseline;
-  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#survey_button {
+  margin-left: 15px;
+}
+
+#cancel-survey-button {
+  padding-left: 152px;
+  padding-top: 4px;
 }
 
 .form-survey-question {

@@ -1,54 +1,74 @@
-<div class="container form-container">
+<div class="container">
   <div class="row">
-    <div class="col s8 offset-s2">
-      <%= simple_form_for @trip do |f| %>
-          <%= f.input :name %>
-          <%= f.input :destination %>
-          <div id="trip-dates">
-            <div class="form-dates">
-              <div class="input-field label">
-                <%= f.label :start_date, required: true %>
-                <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker" %>
+    <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+      <div class="form-container">
+        <div class="form-header">
+          <h3><%= t('create_trip') %></h3>
+        </div>
+        <div class="form-body">
+          <%= simple_form_for @trip do |f| %>
+              <%= f.input :name %>
+              <%= f.input :destination %>
+              <div id="trip-dates">
+                <div class="form-sub-header" id="survey-title">
+                  <div class="form-title">
+                    <h6><%= t('create_survey') %></h6>
+                  </div>
+                  <div class="waves-effect waves-light btn-float" id="cancel-survey-button">
+                    <i class="material-icons">cancel</i>
+                  </div>
+                </div>
+                <div class="form-dates">
+                  <div class="input-field label">
+                    <%= f.label :start_date, required: true %>
+                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_1" %>
+                  </div>
+                  <i class="material-icons">trending_flat</i>
+                  <div class="input-field label">
+                    <%= f.label :end_date, required: true %>
+                    <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker_2" %>
+                  </div>
+                </div>
+                <div id="form-survey">
+                  <p class="form-survey-question"><%= t('survey_question') %></p>
+                  <div class="waves-effect waves-light btn-floating btn" id="survey_button">
+                    <i class="material-icons left">insert_invitation</i><%= t('survey') %>
+                  </div>
+                </div>
               </div>
-              <div class="input-field label">
-                <%= f.label :end_date, required: true %>
-                <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker" %>
-              </div>
-            </div>
-            <div class="form-survey">
-              <i class="material-icons">insert_invitation</i>
-              <p class="form-survey-question"><%= t('survey_question') %></p>
-              <div class="waves-effect waves-light btn" id="survey_button">
-                <%= t('create_survey') %>
-              </div>
-            </div>
-          </div>
 
-          <div id="survey" class="hide">
-            <h5>Survey</h5>
-            <div class="input-field label">
-              <%= f.label :start_date, required: true %>
-              <%= f.text_field :start_date, multiple: true, class: "datepicker" %>
-            </div>
-            <div class="input-field label">
-              <%= f.label :end_date, required: true %>
-              <%= f.text_field :end_date, multiple: true, class: "datepicker" %>
-            </div>
-            <div class="input-field label">
-              <%= f.label :start_date, required: true %>
-              <%= f.text_field :start_date, multiple: true, class: "datepicker" %>
-            </div>
-            <div class="input-field label">
-              <%= f.label :end_date, required: true %>
-              <%= f.text_field :end_date, multiple: true, class: "datepicker" %>
-            </div>
-          </div>
+              <div id="survey">
+                <div class="form-dates">
+                  <div class="input-field label">
+                    <%= f.label :start_date, required: true %>
+                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_2" %>
+                  </div>
+                  <i class="material-icons">trending_flat</i>
+                  <div class="input-field label">
+                    <%= f.label :end_date, required: true %>
+                    <%= f.text_field :end_date, multiple: true, class: "datepicker", id: "end_date_picker_2" %>
+                  </div>
+                </div>
+                <div class="form-dates">
+                  <div class="input-field label">
+                    <%= f.label :start_date, required: true %>
+                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_3" %>
+                  </div>
+                  <i class="material-icons">trending_flat</i>
+                  <div class="input-field label">
+                    <%= f.label :end_date, required: true %>
+                    <%= f.text_field :end_date, multiple: true, class: "datepicker", id: "end_date_picker_3" %>
+                  </div>
+                </div>
+              </div>
 
-          <div class="form-actions">
-            <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
-            <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
-          </div>
-    <% end %>
+              <div class="form-actions">
+                <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
+                <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
+              </div>
+        <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -57,20 +77,28 @@
   <%= javascript_tag do %>
         $(document).ready(function(){
             activateDatePicker();
+            $('#survey-title').hide();
+            $('#survey').hide();
         });
 
         function activateDatePicker(){
             $('.datepicker').pickadate({
-              selectMonths: true, // Creates a dropdown to control month
-              selectYears: 15, // Creates a dropdown of 15 years to control year
-              firstDay: 1, // Weeks starts on Monday
-              input: new Date()
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15, // Creates a dropdown of 15 years to control year
+                firstDay: 1, // Weeks starts on Monday
+                closeOnClear: true,
+                onSet: function( arg ){
+                  if ( 'select' in arg ){ //prevent closing on selecting month/year
+                  this.close();
+                  }
+                }
             });
+
             var start_date = nextWeekEndDate(new Date());
             var end_date = addDaysToDate(start_date, 2);
-            var start_date_picker = $('#start_date_picker').pickadate('picker');
+            var start_date_picker = $('#start_date_picker_1').pickadate('picker');
             start_date_picker.set ('select', start_date);
-            var end_date_picker = $('#end_date_picker').pickadate('picker');
+            var end_date_picker = $('#end_date_picker_2').pickadate('picker');
             end_date_picker.set ('select', end_date);
         };
 
@@ -90,9 +118,15 @@
         activateDatePicker();
 
         $('#survey_button').on('click', function(){
-            console.log('yes')
-          $('#survey').removeClass('hide');
+          $('#survey').slideDown();
+          $('#survey-title').slideDown();
+          $('#form-survey').slideUp();
         });
 
+        $('#cancel-survey-button').on("click", function(){
+          $('#survey').slideUp();
+          $('#survey-title').slideUp();
+          $('#form-survey').slideDown();
+        });
   <% end %>
 <% end %>
