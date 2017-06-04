@@ -74,6 +74,7 @@
 </div>
 
 <%= content_for :js do %>
+  <%= javascript_include_tag "autocomplete-rails.js" %>
   <%= javascript_tag do %>
         $(document).ready(function(){
             activateDatePicker();
