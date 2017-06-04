@@ -26,6 +26,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'devise'
 gem 'figaro'
 gem 'rails4-autocomplete'
+gem 'city-state'
 gem "letter_opener", group: :development
 
 # Use ActiveModel has_secure_password
