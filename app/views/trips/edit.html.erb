@@ -1,10 +1,21 @@
-<div class="container form-container">
+<div class="container">
   <div class="row">
-    <div class="col s8 offset-s2">
-      <%= simple_form_for @trip do |f| %>
-          <%= f.input :name %>
-          <%= f.input :destination %>
-      <% end %>
+    <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+      <div class="form-container">
+        <div class="form-header">
+          <h3><%= t('edit_trip') %></h3>
+        </div>
+          <div class="form-body">
+            <%= simple_form_for @trip do |f| %>
+                <%= f.input :name %>
+                <%= f.input :destination %>
+                <div class="form-actions">
+                  <%= f.submit t('edit_trip'), class: "waves-effect waves-light btn" %>
+                  <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
+                </div>
+            </div>
+          <% end %>
+      </div>
     </div>
   </div>
 </div>
