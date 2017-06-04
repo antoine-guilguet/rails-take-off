@@ -1,0 +1,37 @@
+<div class="col s12 card" id="trip-id-<%= trip.id %>">
+
+  <div class="card-title">
+    <%= link_to trip.name, trip_path(trip), class: "card-title" %>
+  </div>
+
+  <div class="card-participants">
+    <% trip_participants = trip.trip_participants %>
+    <% trip_participants.each do |trip_participant| %>
+        <div class="avatar avatar-bordered">
+          <%= trip_participant.user.render_initials %>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="card-destination">
+    <%= trip.destination %>
+    <p><%= t('number_of_participants') %>: <%= trip_participants.count %></p>
+  </div>
+
+  <div class="card-dates">
+    <% if !trip.start_date.nil? %>
+        <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
+    <% elsif trip.survey %>
+        <%= link_to t('show_survey'), survey_path(trip.survey) %>
+    <% end %>
+  </div>
+
+  <div class="card-buttons">
+    <%= link_to edit_trip_path(trip) do %>
+        <i class="material-icons card-icon">mode_edit</i>
+    <% end %>
+    <%= link_to trip, method: :delete, remote: true do %>
+        <i class="material-icons card-icon">delete</i>
+    <% end %>
+  </div>
+</div>
