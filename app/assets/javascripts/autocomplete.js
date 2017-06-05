@@ -11,6 +11,3 @@ function onPlaceChanged() {
     // console.log(place);  // Uncomment this line to view the full object returned by Google API.
 }
 
-google.maps.event.addDomListener(window, 'load', function() {
-    initializeAutocomplete('trip_destination');
-});
