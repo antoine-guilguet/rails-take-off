@@ -7,4 +7,7 @@ class Trip < ActiveRecord::Base
   has_many :users, through: :trip_participants
   has_many :invites, dependent: :destroy
   has_one :survey, dependent: :destroy
+
+  geocoded_by :destination
+  after_validation :geocode, if: :destination_changed?
 end
