@@ -9,7 +9,11 @@ class SurveysController < ApplicationController
   def vote
     @survey_date = SurveyDate.find(params[:survey_date_id])
     @survey_date.vote_by :voter => current_user
-    redirect_to survey_path(@survey)
+    respond_to do |format|
+      format.html { redirect_to survey_path(@survey) }
+      format.js { render "vote", :locals => {:survey_date_id => params[:survey_date_id]} }
+    end
+
   end
 
   private

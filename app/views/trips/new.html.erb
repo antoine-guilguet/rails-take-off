@@ -13,7 +13,7 @@
                 <div class="form-dates">
                   <div class="input-field label">
                     <%= f.label :start_date, required: true %>
-                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_1" %>
+                    <%= f.text_field :start_date, multiple: true, class: "datepicker start_date", id: "start_date_picker_1" %>
                   </div>
                   <i class="material-icons">trending_flat</i>
                   <div class="input-field label">
@@ -90,7 +90,7 @@
             var newDateField = '<div class="form-dates">' + formDates + '</div>';
             $('#survey').append(newDateField).show('slow');
             $('.add-date-button').last().text("remove_circle_outline").removeClass('add-date-button').addClass('remove-date-button');
-
+            activateDatePicker();
             $('.remove-date-button').on("click", function(){
                 if ($('#survey .form-dates').length > 1) {
                     $('#survey .form-dates').last().remove();
