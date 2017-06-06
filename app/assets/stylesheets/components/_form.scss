@@ -5,7 +5,7 @@
   padding-bottom: 30px;
   border-radius: 4px;
   box-sizing: border-box;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .form-header {
@@ -42,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .form-dates {
@@ -59,26 +59,8 @@
   margin-bottom: 20px;
 }
 
-#survey_button {
-  margin-left: 15px;
-}
-
-#cancel-survey-button {
-  padding-left: 152px;
-  padding-top: 4px;
-}
-
-.form-survey-question {
-  font-size: smaller;
-  font-weight: 300;
-  font-style: oblique;
-}
-
 .input-field label {
   cursor: default;
 }
 
-.datepicker:hover {
-  cursor: pointer;
-}
 

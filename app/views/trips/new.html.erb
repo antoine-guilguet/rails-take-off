@@ -20,7 +20,7 @@
                     <%= f.label :end_date, required: true %>
                     <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker_2" %>
                   </div>
-                  <i class="material-icons add-date-button">add_circle_outline</i>
+                  <i class="material-icons add-date-button clickable tooltipped" data-position="top" data-delay="100" data-tooltip="<%= t('survey_question') %>">add_circle_outline</i>
                 </div>
                 <div id="survey">
                 </div>
@@ -45,6 +45,7 @@
     <%= javascript_tag do %>
         $(document).ready(function(){
           activateDatePicker();
+          $('#survey').hide();
         });
 
 
@@ -84,13 +85,20 @@
 
 
         $('.add-date-button').on("click", function(){
+
             var formDates = $('.form-dates').html();
             var newDateField = '<div class="form-dates">' + formDates + '</div>';
-            $('#survey').append(newDateField);
+            $('#survey').append(newDateField).show('slow');
             $('.add-date-button').last().text("remove_circle_outline").removeClass('add-date-button').addClass('remove-date-button');
-          $('.remove-date-button').on("click", function(){
-            $('.form-dates').last().remove();
-          });
+
+            $('.remove-date-button').on("click", function(){
+                if ($('#survey .form-dates').length > 1) {
+                    $('#survey .form-dates').last().remove();
+                } else {
+                    $('#survey').slideUp();
+                    $('#survey .form-dates').last().remove();
+                }
+            });
         });
 
 
