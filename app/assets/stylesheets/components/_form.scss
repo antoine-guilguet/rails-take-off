@@ -28,7 +28,7 @@
 }
 
 .form-body {
-  padding: 25px;
+  padding: 40px;
   padding-top: 15px;
   padding-bottom: 0px;
 }
@@ -49,6 +49,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: -4px;
+  margin-top: -4px;
 }
 
 #form-survey {
@@ -70,5 +72,13 @@
   font-size: smaller;
   font-weight: 300;
   font-style: oblique;
+}
+
+.input-field label {
+  cursor: default;
+}
+
+.datepicker:hover {
+  cursor: pointer;
 }
 

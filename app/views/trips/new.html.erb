@@ -10,14 +10,6 @@
               <%= f.input :name %>
               <%= f.input :destination %>
               <div id="trip-dates">
-                <div class="form-sub-header" id="survey-title">
-                  <div class="form-title">
-                    <h6><%= t('create_survey') %></h6>
-                  </div>
-                  <div class="waves-effect waves-light btn-float" id="cancel-survey-button">
-                    <i class="material-icons">cancel</i>
-                  </div>
-                </div>
                 <div class="form-dates">
                   <div class="input-field label">
                     <%= f.label :start_date, required: true %>
@@ -28,37 +20,9 @@
                     <%= f.label :end_date, required: true %>
                     <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker_2" %>
                   </div>
+                  <i class="material-icons add-date-button">add_circle_outline</i>
                 </div>
-                <div id="form-survey">
-                  <p class="form-survey-question"><%= t('survey_question') %></p>
-                  <div class="waves-effect waves-light btn-floating btn" id="survey_button">
-                    <i class="material-icons left">insert_invitation</i><%= t('survey') %>
-                  </div>
-                </div>
-              </div>
-
-              <div id="survey">
-                <div class="form-dates">
-                  <div class="input-field label">
-                    <%= f.label :start_date, required: true %>
-                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_2" %>
-                  </div>
-                  <i class="material-icons">trending_flat</i>
-                  <div class="input-field label">
-                    <%= f.label :end_date, required: true %>
-                    <%= f.text_field :end_date, multiple: true, class: "datepicker", id: "end_date_picker_2" %>
-                  </div>
-                </div>
-                <div class="form-dates">
-                  <div class="input-field label">
-                    <%= f.label :start_date, required: true %>
-                    <%= f.text_field :start_date, multiple: true, class: "datepicker", id: "start_date_picker_3" %>
-                  </div>
-                  <i class="material-icons">trending_flat</i>
-                  <div class="input-field label">
-                    <%= f.label :end_date, required: true %>
-                    <%= f.text_field :end_date, multiple: true, class: "datepicker", id: "end_date_picker_3" %>
-                  </div>
+                <div id="survey">
                 </div>
               </div>
 
@@ -73,63 +37,64 @@
   </div>
 </div>
 
+<!--Google autocomplete-->
+
+<%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+<%= javascript_include_tag "autocomplete.js" %>
 <%= content_for :js do %>
-    <%= javascript_include_tag "autocomplete.js" %>
-    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
     <%= javascript_tag do %>
         $(document).ready(function(){
-            activateDatePicker();
-            $('#survey-title').hide();
-            $('#survey').hide();
-            google.maps.event.addDomListener(window, 'load', function() {
-                initializeAutocomplete('trip_destination');
-            });
+          activateDatePicker();
         });
 
-        function activateDatePicker(){
-            $('.datepicker').pickadate({
-                selectMonths: true, // Creates a dropdown to control month
-                selectYears: 15, // Creates a dropdown of 15 years to control year
-                firstDay: 1, // Weeks starts on Monday
-                closeOnClear: true,
-                onSet: function( arg ){
-                  if ( 'select' in arg ){ //prevent closing on selecting month/year
-                  this.close();
-                  }
-                }
-            });
 
-            var start_date = nextWeekEndDate(new Date());
-            var end_date = addDaysToDate(start_date, 2);
-            var start_date_picker = $('#start_date_picker_1').pickadate('picker');
-            start_date_picker.set ('select', start_date);
-            var end_date_picker = $('#end_date_picker_2').pickadate('picker');
-            end_date_picker.set ('select', end_date);
+        function activateDatePicker(){
+          $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year
+            firstDay: 1, // Weeks starts on Monday
+            closeOnClear: true,
+            onSet: function( arg ){
+            if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+            }
+          }
+        });
+
+        var start_date = nextWeekEndDate(new Date());
+        var end_date = addDaysToDate(start_date, 2);
+        var start_date_picker = $('#start_date_picker_1').pickadate('picker');
+        start_date_picker.set ('select', start_date);
+        var end_date_picker = $('#end_date_picker_2').pickadate('picker');
+        end_date_picker.set ('select', end_date);
         };
 
         function nextWeekEndDate(date) {
-            if (date.getDay() == 6){
-              return date;
-            } else {
-              diff = Math.abs( 6 - date.getDay() );
-              return new Date(Date.parse(date) + diff*24*60*60*1000);
-            };
+          if (date.getDay() == 6){
+            return date;
+          } else {
+            diff = Math.abs( 6 - date.getDay() );
+            return new Date(Date.parse(date) + diff*24*60*60*1000);
+          };
         }
 
         function addDaysToDate(date, days){
-          return new Date(Date.parse(date.toString()) + days*24*60*60*1000);
+            return new Date(Date.parse(date.toString()) + days*24*60*60*1000);
         };
 
-        $('#survey_button').on('click', function(){
-          $('#survey').slideDown();
-          $('#survey-title').slideDown();
-          $('#form-survey').slideUp();
+
+        $('.add-date-button').on("click", function(){
+            var formDates = $('.form-dates').html();
+            var newDateField = '<div class="form-dates">' + formDates + '</div>';
+            $('#survey').append(newDateField);
+            $('.add-date-button').last().text("remove_circle_outline").removeClass('add-date-button').addClass('remove-date-button');
+          $('.remove-date-button').on("click", function(){
+            $('.form-dates').last().remove();
+          });
         });
 
-        $('#cancel-survey-button').on("click", function(){
-          $('#survey').slideUp();
-          $('#survey-title').slideUp();
-          $('#form-survey').slideDown();
-        });
-  <% end %>
+
+
+    <% end %>
 <% end %>
+

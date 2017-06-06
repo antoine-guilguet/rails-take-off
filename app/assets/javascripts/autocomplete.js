@@ -8,6 +8,15 @@ function initializeAutocomplete(id) {
 
 function onPlaceChanged() {
     var place = this.getPlace();
-    // console.log(place);  // Uncomment this line to view the full object returned by Google API.
 }
 
+google.maps.event.addDomListener(window, 'load', function(event) {
+    initializeAutocomplete('trip_destination')
+});
+
+var element = document.getElementById('trip_destination')
+google.maps.event.addDomListener(element, 'keydown', function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+    }
+});
