@@ -3,7 +3,7 @@ class SurveyDate < ActiveRecord::Base
 
   acts_as_votable
 
-  def to_date
-    self
+  def voted_by?(user)
+    user.voted_for? self
   end
 end

@@ -19,7 +19,7 @@
               <% @survey_dates.each do |survey_date| %>
                 <tr>
                   <th>
-                    <input name="group1" class="vote-button" type="checkbox" id="<%= survey_date.id %>" />
+                    <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
                     <label for="<%= survey_date.id %>"></label>
                   </th>
                   <th id="votes-for-survey-date-<%= survey_date.id %>">
@@ -66,5 +66,6 @@
               }
           });
         });
+        
     <% end %>
 <% end %>
