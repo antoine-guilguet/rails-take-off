@@ -6,13 +6,13 @@
           <h3><%= @trip.name %>'s survey</h3>
         </div>
         <div class="survey-body">
-          <table>
+          <table class="survey-table">
             <thead>
               <tr>
-                <th>Vote</th>
-                <th>Number of votes</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th></th>
+                <th><%= t('survey.number_of_votes') %></th>
+                <th><%= t('date.start_date') %></th>
+                <th><%= t('date.end_date') %></th>
               </tr>
             </thead>
             <tbody>

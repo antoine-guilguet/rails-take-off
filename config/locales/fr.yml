@@ -7,6 +7,8 @@ fr:
     formats:
       short:
       long:
+    start_date: "Date de Départ"
+    end_date: "Date de Retour"
   activerecord:
     attributes:
       email: "Adresse email"
@@ -67,8 +69,9 @@ fr:
   my_invitations: "Mes invitations"
   leave_trip: "Quitter le voyage"
   edit_trip: "Modifier le Voyage"
-  survey: "Sondage"
-  create_survey: "Créer un sondage"
-  show_survey: "Voir le Sondage"
-  survey_question: "Pas sûr de tes dates? Créer un sondage!"
-  cancel_survey: "Annuler le sondage"
+  survey:
+    survey: "Sondage"
+    create_survey: "Créer un sondage"
+    show_survey: "Voir le Sondage"
+    survey_question: "Pas sûr de tes dates? Créer un sondage!"
+    number_of_votes: "Nombre de votes"
