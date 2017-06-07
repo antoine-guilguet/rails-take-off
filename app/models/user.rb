@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 
   after_create :send_welcome_email
 
+  acts_as_voter
+
   def render_initials
     !self.first_name.nil? ? self.first_name.first + self.last_name.first : ""
   end
