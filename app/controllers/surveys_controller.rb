@@ -3,7 +3,7 @@ class SurveysController < ApplicationController
 
   def show
     @trip = @survey.trip
-    @survey_dates = @survey.survey_dates
+    @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
   end
 
   def vote
