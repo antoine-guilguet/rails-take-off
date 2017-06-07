@@ -19,7 +19,8 @@
               <% @survey_dates.each do |survey_date| %>
                 <tr>
                   <th>
-                    <button class="vote-button" id="<%= survey_date.id %>">Vote</button>
+                    <input name="group1" class="vote-button" type="checkbox" id="<%= survey_date.id %>" />
+                    <label for="<%= survey_date.id %>"></label>
                   </th>
                   <th id="votes-for-survey-date-<%= survey_date.id %>">
                     <%= survey_date.votes_for.size %>
@@ -34,11 +35,15 @@
               <% end %>
             </tbody>
           </table>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
 <%= link_to t('back'), trips_path, class: "btn" %>
 
 
@@ -52,7 +57,6 @@
               url: "<%= vote_survey_path(@survey) %>",
               data: { survey_date_id: $(this).attr('id') },
               success: function(data){
-                  var status = data.message;
                   var id = data.survey_date.id;
                   var numberOfVotes = data.number_of_votes;
                   $('#votes-for-survey-date-' + id).text(numberOfVotes);
