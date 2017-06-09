@@ -28,6 +28,7 @@ en:
     formats:
       short: "%b %d, %Y"
       default: "%m/%d/%Y"
+      long: "%B %e %Y"
     start_date: "Start Date"
     end_date: "End Date"
   activerecord:

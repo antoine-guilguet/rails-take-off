@@ -1,41 +1,31 @@
 <div class="container">
   <div class="row">
-    <div class="col l10 offset-l1 s12 ">
+    <div class="col l6 offset-l3 s12 ">
       <div class="survey-container">
         <div class="survey-header">
           <h3><%= @trip.name %>'s survey</h3>
         </div>
         <div class="survey-body">
-          <table class="survey-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th><%= t('survey.number_of_votes') %></th>
-                <th><%= t('date.start_date') %></th>
-                <th><%= t('date.end_date') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @survey_dates.each do |survey_date| %>
-                <tr>
-                  <th>
-                    <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
-                    <label for="<%= survey_date.id %>"></label>
-                  </th>
-                  <th id="votes-for-survey-date-<%= survey_date.id %>">
-                    <%= survey_date.votes_for.size %>
-                  </th>
-                  <th>
-                    <%= l(survey_date.start_date, format: :short) %>
-                  </th>
-                  <th>
-                    <%= l(survey_date.end_date, format: :short) %>
-                  </th>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-
+          <div class="survey-table">
+            <div class="survey-line">
+              <div class="survey-dates">
+                <%= t('date.start_date') %>
+                <%= t('date.end_date') %>
+              </div>
+            </div>
+            <% @survey_dates.each do |survey_date| %>
+            <div class="survey-line">
+              <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
+              <label for="<%= survey_date.id %>"></label>
+              <%= survey_date.votes_for.size %>
+              <div class="survey-dates">
+                <%= l(survey_date.start_date, format: :long) %>
+                <i class="material-icons">trending_flat</i>
+                <%= l(survey_date.end_date, format: :long) %>
+              </div>
+            </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -61,6 +51,5 @@
               }
           });
         });
-
     <% end %>
 <% end %>

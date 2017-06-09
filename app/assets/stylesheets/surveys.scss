@@ -22,11 +22,27 @@
 }
 
 .survey-body {
-  padding: 40px;
-  padding-top: 15px;
+  padding: 20px;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.survey-table th {
-  text-align: center;
+.survey-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  border: solid 0.1px #d4c6c6;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  border-radius: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.survey-dates {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 205px;
 }

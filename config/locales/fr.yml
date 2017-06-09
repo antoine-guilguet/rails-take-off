@@ -3,12 +3,12 @@ fr:
     formats:
       short: "%d/%m/%Y"
       default: "%d/%m/%Y"
-  date:
+      long: "%A %b %d"
+  dates:
     formats:
       short:
-      long:
-    start_date: "Date de Départ"
-    end_date: "Date de Retour"
+    start_date: "Départ"
+    end_date: "Retour"
   activerecord:
     attributes:
       email: "Adresse email"
