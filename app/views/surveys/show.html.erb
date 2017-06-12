@@ -38,13 +38,17 @@
             </div>
             <% end %>
           </div>
+
+          <div class="survey-action">
+            <%= link_to t('back'), trips_path, class: "btn" %>
+            <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<%= link_to t('back'), trips_path, class: "btn" %>
 
 <%= content_for :js do %>
     <%= javascript_tag do %>

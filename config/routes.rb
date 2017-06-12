@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   end
 
-  resources :surveys, only:[:show] do
+  resources :surveys, only:[:show, :destroy] do
     get 'vote', on: :member
     get 'get_voters', on: :member
   end

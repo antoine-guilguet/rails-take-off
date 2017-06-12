@@ -1,9 +1,19 @@
 class SurveysController < ApplicationController
-  before_action :find_survey, only:[:show, :vote]
+  before_action :find_survey, only:[:show, :vote, :destroy]
 
   def show
     @trip = @survey.trip
     @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
+  end
+
+  def destroy
+    @trip = @survey.trip
+    @survey_date = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!.first
+    @trip.start_date = @survey_date.start_date
+    @trip.end_date = @survey_date.end_date
+    @trip.save
+    @survey.destroy
+    redirect_to trips_path
   end
 
   def vote
@@ -27,6 +37,7 @@ class SurveysController < ApplicationController
     end
   end
 
+  # to be re-worked with ajax request to update list voters in real time
   def get_voters
     @survey_date = SurveyDate.find(params[:survey_date_id])
     render json: {
