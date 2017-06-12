@@ -22,8 +22,9 @@
 en:
   time:
     formats:
-      short: "%b %d, %Y"
       default: "%m/%d/%Y"
+      short: "%b %e"
+      long: "%B %e %Y"
   date:
     formats:
       default: "%m/%d/%Y"
@@ -95,5 +96,5 @@ en:
     survey: "Survey"
     create_survey: "Create a Survey"
     survey_question: "Not sure about your dates? Create a survey!"
-    number_of_votes: "Nunber of votes"
+    number_of_votes: "Votes"
 

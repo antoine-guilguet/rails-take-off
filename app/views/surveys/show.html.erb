@@ -7,17 +7,29 @@
         </div>
         <div class="survey-body">
           <div class="survey-table">
-            <div class="survey-line">
+            <div class="survey-line survey-line-header">
+              <div>
+              </div>
+              <div>
+                <%= t('survey.number_of_votes') %>
+              </div>
               <div class="survey-dates">
-                <%= t('date.start_date') %>
-                <%= t('date.end_date') %>
+                <div>
+                  <%= t('date.start_date') %>
+                </div>
+                <div>
+                  <%= t('date.end_date') %>
+                </div>
               </div>
             </div>
             <% @survey_dates.each do |survey_date| %>
             <div class="survey-line">
               <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
               <label for="<%= survey_date.id %>"></label>
-              <%= survey_date.votes_for.size %>
+              <div id="survey-number-votes-<%= survey_date.id %>" class="btn-floating vote-button">
+                <%= survey_date.votes_for.size %>
+              </div>
+
               <div class="survey-dates">
                 <%= l(survey_date.start_date, format: :short) %>
                 <i class="material-icons">trending_flat</i>
@@ -44,7 +56,7 @@
               success: function(data){
                   var id = data.survey_date.id;
                   var numberOfVotes = data.number_of_votes;
-                  $('#votes-for-survey-date-' + id).text(numberOfVotes);
+                  $('#survey-number-votes-' + id).text(numberOfVotes);
               },
               error: function(jqXHR) {
                   console.error(jqXHR.responseText);

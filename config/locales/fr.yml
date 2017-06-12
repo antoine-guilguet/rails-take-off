@@ -5,11 +5,13 @@ fr:
   time:
     formats:
       default: "%d/%m/%Y"
-      short: "%B %d %Y"
-      long: "%A %b %d"
-  dates:
+      short: "%d %B"
+      long: "%B %d %Y"
+  date:
     formats:
-      short:
+      default: "%d/%m/%Y"
+      short: "%B %d"
+      long: "%B %d %Y"
     start_date: "Départ"
     end_date: "Retour"
   activerecord:
@@ -83,4 +85,4 @@ fr:
     create_survey: "Créer un sondage"
     show_survey: "Voir le Sondage"
     survey_question: "Pas sûr de tes dates? Créer un sondage!"
-    number_of_votes: "Nombre de votes"
+    number_of_votes: "Votes"
