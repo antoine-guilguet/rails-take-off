@@ -26,8 +26,8 @@ en:
       default: "%m/%d/%Y"
   date:
     formats:
-      short: "%b %d, %Y"
       default: "%m/%d/%Y"
+      short: "%b %e"
       long: "%B %e %Y"
     start_date: "Start Date"
     end_date: "End Date"

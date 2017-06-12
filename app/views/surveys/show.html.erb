@@ -19,9 +19,9 @@
               <label for="<%= survey_date.id %>"></label>
               <%= survey_date.votes_for.size %>
               <div class="survey-dates">
-                <%= l(survey_date.start_date, format: :long) %>
+                <%= l(survey_date.start_date, format: :short) %>
                 <i class="material-icons">trending_flat</i>
-                <%= l(survey_date.end_date, format: :long) %>
+                <%= l(survey_date.end_date, format: :short) %>
               </div>
             </div>
             <% end %>
