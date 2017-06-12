@@ -5,17 +5,17 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
           <% if I18n.locale == I18n.default_locale %>
-            <%= link_to locale: 'en' do %>
-              <div class="image-flag">
-                <%= image_tag "uk_flag.png" %>
-              </div>
-            <% end %>
+              <%= link_to locale: 'fr' do %>
+                  <div class="image-flag">
+                    <%= image_tag "french_flag.png" %>
+                  </div>
+              <% end %>
           <% else %>
-            <%= link_to locale: 'fr' do %>
-              <div class="image-flag">
-                <%= image_tag "french_flag.png" %>
-              </div>
-            <% end %>
+              <%= link_to locale: 'en' do %>
+                  <div class="image-flag">
+                    <%= image_tag "uk_flag.png" %>
+                  </div>
+              <% end %>
           <%end%>
         </li>
         <li><%= link_to t('create_trip'), new_trip_path, 'data-no-turbolink' => true %></li>

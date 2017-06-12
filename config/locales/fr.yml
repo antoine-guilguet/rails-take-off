@@ -14,7 +14,13 @@ fr:
     end_date: "Retour"
   activerecord:
     attributes:
-      email: "Adresse email"
+      invite:
+        email: "Adresse email"
+      trip:
+        name: "Nom"
+        destination: "Destination"
+        start_date: "Date de Départ"
+        end_date: "Date de Retour"
     errors:
       models:
         invite:
