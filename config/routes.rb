@@ -18,8 +18,11 @@ Rails.application.routes.draw do
 
   resources :surveys, only:[:show] do
     get 'vote', on: :member
+    get 'get_voters', on: :member
   end
-  get 'surveydates/create'
+
+
+
 
 
   # Example of regular route:

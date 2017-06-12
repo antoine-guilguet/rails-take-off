@@ -7,7 +7,7 @@
         </div>
         <div class="survey-body">
           <div class="survey-table">
-            <div class="survey-line survey-line-header">
+            <div class="survey-line-header">
               <div>
               </div>
               <div>
@@ -26,7 +26,7 @@
             <div class="survey-line">
               <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
               <label for="<%= survey_date.id %>"></label>
-              <div id="survey-number-votes-<%= survey_date.id %>" class="btn-floating vote-button">
+              <div class="btn-floating vote-button tooltipped" survey_date_id="<%= survey_date.id %>" data-position="right" data-delay="50" data-tooltip="<%= survey_date.get_html_list_of_voters %>">
                 <%= survey_date.votes_for.size %>
               </div>
 
@@ -48,6 +48,10 @@
 
 <%= content_for :js do %>
     <%= javascript_tag do %>
+        $(document).ready(function(){
+            $('.tooltipped').tooltip({html: true});
+        });
+
         $('.vote-button').on("click", function(){
           $.ajax({
               type: "GET",
@@ -56,12 +60,31 @@
               success: function(data){
                   var id = data.survey_date.id;
                   var numberOfVotes = data.number_of_votes;
-                  $('#survey-number-votes-' + id).text(numberOfVotes);
+                  var selector = '[survey_date_id =' + id + ']'
+                  $(selector).text(numberOfVotes);
               },
               error: function(jqXHR) {
                   console.error(jqXHR.responseText);
               }
           });
         });
+
+        <!--$('.vote-button').mouseenter(function(){-->
+            <!--$.ajax({-->
+                <!--type: "GET",-->
+                <!--url: "<%= get_voters_survey_path(@survey) %>",-->
+                <!--data: { survey_date_id: $(this).attr('survey_date_id') },-->
+                <!--success: function(data){-->
+                    <!--var surveyDateId = data.survey_date_id;-->
+                    <!--var htmlListOfVoters = data.html_list_of_voters;-->
+                    <!--var selector = '[survey_date_id =' + surveyDateId + ']';-->
+                    <!--$(selector).attr('data-tooltip', htmlListOfVoters);-->
+                <!--},-->
+                <!--error: function(jqXHR) {-->
+                    <!--console.error(jqXHR.responseText);-->
+                <!--}-->
+            <!--})-->
+
+        <!--});-->
     <% end %>
 <% end %>

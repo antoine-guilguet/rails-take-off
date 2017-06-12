@@ -27,6 +27,15 @@ class SurveysController < ApplicationController
     end
   end
 
+  def get_voters
+    @survey_date = SurveyDate.find(params[:survey_date_id])
+    render json: {
+        survey_date_id: @survey_date.id,
+        html_list_of_voters: @survey_date.get_html_list_of_voters,
+        message: "GOOD"
+    }
+  end
+
   private
 
   def find_survey
