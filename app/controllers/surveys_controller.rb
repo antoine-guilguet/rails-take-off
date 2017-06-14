@@ -24,6 +24,7 @@ class SurveysController < ApplicationController
       render json: {
           survey_date: @survey_date,
           number_of_votes: @survey_date.votes_for.size,
+          html_list_of_voters: @survey_date.get_html_list_of_voters,
           message: "downvote"
       }
     else
@@ -32,19 +33,10 @@ class SurveysController < ApplicationController
       render json: {
           survey_date: @survey_date,
           number_of_votes: @survey_date.votes_for.size,
+          html_list_of_voters: @survey_date.get_html_list_of_voters,
           message: "vote"
       }
     end
-  end
-
-  # to be re-worked with ajax request to update list voters in real time
-  def get_voters
-    @survey_date = SurveyDate.find(params[:survey_date_id])
-    render json: {
-        survey_date_id: @survey_date.id,
-        html_list_of_voters: @survey_date.get_html_list_of_voters,
-        message: "GOOD"
-    }
   end
 
   private
