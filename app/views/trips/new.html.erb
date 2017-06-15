@@ -45,32 +45,14 @@
     <%= javascript_tag do %>
         $(document).ready(function(){
           activateDatePicker();
+          var start_date = nextWeekEndDate(new Date());
+          var end_date = addDaysToDate(start_date, 2);
+          var start_date_picker = $('#start_date_picker_1').pickadate('picker');
+          start_date_picker.set ('select', start_date);
+          var end_date_picker = $('#end_date_picker_2').pickadate('picker');
+          end_date_picker.set ('select', end_date);
           $('#survey').hide();
         });
-
-
-
-
-        var start_date = nextWeekEndDate(new Date());
-        var end_date = addDaysToDate(start_date, 2);
-        var start_date_picker = $('#start_date_picker_1').pickadate('picker');
-        start_date_picker.set ('select', start_date);
-        var end_date_picker = $('#end_date_picker_2').pickadate('picker');
-        end_date_picker.set ('select', end_date);
-        };
-
-        function nextWeekEndDate(date) {
-          if (date.getDay() == 6){
-            return date;
-          } else {
-            diff = Math.abs( 6 - date.getDay() );
-            return new Date(Date.parse(date) + diff*24*60*60*1000);
-          };
-        }
-
-        function addDaysToDate(date, days){
-            return new Date(Date.parse(date.toString()) + days*24*60*60*1000);
-        };
 
 
         $('.add-date-button').on("click", function(){
@@ -89,8 +71,6 @@
                 }
             });
         });
-
-
 
     <% end %>
 <% end %>

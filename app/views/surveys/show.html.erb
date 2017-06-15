@@ -46,6 +46,7 @@
 
           <div class="survey-action">
             <%= link_to t('back'), trips_path, class: "btn" %>
+            <%= link_to t('survey.set_deadline'), set_deadline_survey_path(@survey), class: "btn" %>
             <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
           </div>
         </div>

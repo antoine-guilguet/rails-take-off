@@ -43,6 +43,10 @@ class SurveysController < ApplicationController
 
   end
 
+  def send_deadline
+
+  end
+
   private
 
   def find_survey

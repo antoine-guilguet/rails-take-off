@@ -10,3 +10,18 @@ function activateDatePicker(){
             }
         }
     });
+};
+
+function nextWeekEndDate(date) {
+    if (date.getDay() == 6){
+        return date;
+    } else {
+        diff = Math.abs( 6 - date.getDay() );
+        return new Date(Date.parse(date) + diff*24*60*60*1000);
+    };
+}
+
+function addDaysToDate(date, days){
+    return new Date(Date.parse(date.toString()) + days*24*60*60*1000);
+};
+
