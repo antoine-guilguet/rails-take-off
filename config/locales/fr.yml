@@ -88,3 +88,4 @@ fr:
     number_of_votes: "Votes"
     close_survey: "Clôturer le Sondage"
     set_deadline: "Set a Deadline"
+    deadline: "Vous avez jusqu'au %{deadline} pour répondre au sondage"

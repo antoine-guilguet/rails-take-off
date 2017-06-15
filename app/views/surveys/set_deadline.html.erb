@@ -3,15 +3,15 @@
     <div class="col l6 offset-l3 m8 offset-m2 s12 ">
       <div class="form-container">
         <div class="form-header">
-          <h3><%= t('edit_trip') %></h3>
+          <h3><%= t('survey.set_deadline') %></h3>
         </div>
         <div class="form-body">
-          <%= simple_form_for @survey do |f| %>
+          <%= simple_form_for @survey, url: send_deadline_survey_path(@survey), method: :post do |f| %>
               <%= f.label :deadline, required: true %>
-              <%= f.text_field :deadline, class: "datepicker" %>
+              <%= f.text_field :deadline, class: "datepicker", id: "deadline-datepicker"%>
 
               <div class="form-actions">
-                <%= f.submit t('edit_trip'), class: "waves-effect waves-light btn" %>
+                <%= f.submit t('survey.set_deadline'), class: "waves-effect waves-light btn" %>
                 <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
               </div>
               </div>
@@ -20,3 +20,16 @@
     </div>
   </div>
 </div>
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+
+        $(document).ready(function(){
+        activateDatePicker();
+        var deadline = addDaysToDate(new Date(), 3);
+        var deadline_picker = $('#deadline-datepicker').pickadate('picker');
+        deadline_picker.set ('select', deadline);
+        });
+
+    <% end %>
+<% end %>

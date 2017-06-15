@@ -40,16 +40,23 @@ class SurveysController < ApplicationController
   end
 
   def set_deadline
-
   end
 
   def send_deadline
-
+    if @survey.update(set_deadline_params)
+      redirect_to survey_path(@survey)
+    else
+      render :'set_deadline'
+    end
   end
 
   private
 
   def find_survey
     @survey = Survey.find(params[:id])
+  end
+
+  def set_deadline_params
+    params.require(:survey).permit(:deadline)
   end
 end

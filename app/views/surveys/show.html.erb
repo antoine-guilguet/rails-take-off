@@ -6,6 +6,10 @@
           <h3><%= @trip.name %>'s survey</h3>
         </div>
         <div class="survey-body">
+          <% if @survey.deadline %>
+              <% deadline = l(@survey.deadline, format: :long) %>
+              <p><%= t('survey.deadline', deadline: deadline) %></p>
+          <% end %>
           <div class="survey-table">
             <div class="survey-line-header">
               <div>
@@ -46,7 +50,9 @@
 
           <div class="survey-action">
             <%= link_to t('back'), trips_path, class: "btn" %>
-            <%= link_to t('survey.set_deadline'), set_deadline_survey_path(@survey), class: "btn" %>
+            <% if !@survey.deadline %>
+              <%= link_to t('survey.set_deadline'), set_deadline_survey_path(@survey), class: "btn" %>
+            <% end %>
             <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
           </div>
         </div>
