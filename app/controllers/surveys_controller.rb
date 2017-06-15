@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  before_action :find_survey, only:[:show, :vote, :destroy]
+  before_action :find_survey
 
   def show
     @trip = @survey.trip
@@ -37,6 +37,10 @@ class SurveysController < ApplicationController
           message: "vote"
       }
     end
+  end
+
+  def set_deadline
+
   end
 
   private

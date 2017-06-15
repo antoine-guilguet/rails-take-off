@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :surveys, only:[:show, :destroy] do
     get 'vote', on: :member
     get 'get_voters', on: :member
+    get 'set_dealine', on: :member
+    post 'send_deadline', on: :member
   end
 
 
