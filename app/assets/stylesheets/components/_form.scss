@@ -5,11 +5,11 @@
   padding-bottom: 30px;
   border-radius: 4px;
   box-sizing: border-box;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .form-header {
-  background-color: #ee6e73;
+  background-color: $red;
   border-radius: 4px;
   color: white;
   padding-top: 10px;
@@ -28,7 +28,7 @@
 }
 
 .form-body {
-  padding: 25px;
+  padding: 40px;
   padding-top: 15px;
   padding-bottom: 0px;
 }
@@ -42,13 +42,15 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .form-dates {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: -4px;
+  margin-top: -4px;
 }
 
 #form-survey {
@@ -57,18 +59,8 @@
   margin-bottom: 20px;
 }
 
-#survey_button {
-  margin-left: 15px;
+.input-field label {
+  cursor: default;
 }
 
-#cancel-survey-button {
-  padding-left: 152px;
-  padding-top: 4px;
-}
-
-.form-survey-question {
-  font-size: smaller;
-  font-weight: 300;
-  font-style: oblique;
-}
 

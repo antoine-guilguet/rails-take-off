@@ -1,15 +1,28 @@
 fr:
+  defaults:
+    month_names:
+      ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
   time:
     formats:
-      short: "%d/%m/%Y"
       default: "%d/%m/%Y"
+      short: "%d %B"
+      long: "%B %d %Y"
   date:
     formats:
-      short:
-      long:
+      default: "%d/%m/%Y"
+      short: "%B %d"
+      long: "%B %d %Y"
+    start_date: "Départ"
+    end_date: "Retour"
   activerecord:
     attributes:
-      email: "Adresse email"
+      invite:
+        email: "Adresse email"
+      trip:
+        name: "Nom"
+        destination: "Destination"
+        start_date: "Date de Départ"
+        end_date: "Date de Retour"
     errors:
       models:
         invite:
@@ -67,8 +80,12 @@ fr:
   my_invitations: "Mes invitations"
   leave_trip: "Quitter le voyage"
   edit_trip: "Modifier le Voyage"
-  survey: "Sondage"
-  create_survey: "Créer un sondage"
-  show_survey: "Voir le Sondage"
-  survey_question: "Pas sûr de tes dates? Créer un sondage!"
-  cancel_survey: "Annuler le sondage"
+  survey:
+    survey: "Sondage"
+    create_survey: "Créer un sondage"
+    show_survey: "Voir le Sondage"
+    survey_question: "Pas sûr de tes dates? Créer un sondage!"
+    number_of_votes: "Votes"
+    close_survey: "Clôturer le Sondage"
+    set_deadline: "Set a Deadline"
+    deadline: "Vous avez jusqu'au %{deadline} pour répondre au sondage"

@@ -1,10 +1,24 @@
 <nav>
   <div class="nav-wrapper">
     <%= link_to 'Take Off', root_path, class:"brand-logo" %>
-
     <% if user_signed_in? %>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><%= link_to t('create_trip'), new_trip_path %></li>
+        <li>
+          <% if I18n.locale == I18n.default_locale %>
+              <%= link_to locale: 'fr' do %>
+                  <div class="image-flag">
+                    <%= image_tag "french_flag.png" %>
+                  </div>
+              <% end %>
+          <% else %>
+              <%= link_to locale: 'en' do %>
+                  <div class="image-flag">
+                    <%= image_tag "uk_flag.png" %>
+                  </div>
+              <% end %>
+          <%end%>
+        </li>
+        <li><%= link_to t('create_trip'), new_trip_path, 'data-no-turbolink' => true %></li>
         <li><%= link_to t('trips'), trips_path %></li>
         <li><%= link_to t('log_out'), destroy_user_session_path, method: :delete %></li>
       </ul>
