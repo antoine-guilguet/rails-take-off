@@ -2,16 +2,20 @@ class TripsController < ApplicationController
   before_action :find_trip, only:[:show, :edit, :update, :destroy, :leave]
 
   def index
-    @trips = find_user_trips
+    @trips = current_user.trips.where.not(user_id: current_user.id)
+    @mytrips = policy_scope(Trip)
     @invitations = Invite.where(email: current_user.email, confirmed: false)
   end
 
   def new
     @trip = Trip.new
+    authorize @trip
   end
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.host = current_user
+    authorize @trip
     if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
@@ -38,9 +42,11 @@ class TripsController < ApplicationController
   end
 
   def edit
+    authorize @trip
   end
 
   def update
+    authorize @trip
     if @trip.update(trip_params) && params[:trip][:start_date].count > 1
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
@@ -71,6 +77,10 @@ class TripsController < ApplicationController
 
   def leave
     TripParticipant.find_by(user_id: current_user.id, trip_id: @trip.id).destroy
+    if @trip.host == current_user
+      @trip.host = TripParticipant.where(trip_id: @trip.id).first.user
+      @trip.save
+    end
     redirect_to trips_path
   end
 
@@ -82,6 +92,7 @@ class TripsController < ApplicationController
 
   def find_trip
     @trip = Trip.find(params[:id])
+    authorize @trip
   end
 
   def find_user_trips

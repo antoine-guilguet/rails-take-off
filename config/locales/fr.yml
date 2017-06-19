@@ -78,6 +78,7 @@ fr:
   email_invitation: "Envoyer une invitation à vos amis par email!"
   my_trips: "Mes Voyages"
   my_invitations: "Mes invitations"
+  my_invitation_trips: "Chez les Potes"
   leave_trip: "Quitter le voyage"
   edit_trip: "Modifier le Voyage"
   survey:

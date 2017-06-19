@@ -4,7 +4,8 @@ class Trip < ActiveRecord::Base
   validates :destination, presence: true
 
   has_many :trip_participants, dependent: :destroy
-  has_many :users, through: :trip_participants
+  has_many :users, through: :trip_participants, dependent: :destroy
+  belongs_to :host, class_name: 'User', foreign_key: 'user_id'
   has_many :invites, dependent: :destroy
   has_one :survey, dependent: :destroy
 

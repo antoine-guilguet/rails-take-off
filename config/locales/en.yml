@@ -92,6 +92,7 @@ en:
   leave_trip: "Leave the Trip"
   edit_trip: "Edit a Trip"
   my_trips: "My Trips"
+  my_invitation_trips: "Trips Invitation"
   survey:
     survey: "Survey"
     create_survey: "Create a Survey"

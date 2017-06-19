@@ -45,6 +45,7 @@ class InvitesController < ApplicationController
 
   def find_trip
     @trip = Trip.find(params[:trip_id])
+    authorize @trip
   end
 
   def find_invite

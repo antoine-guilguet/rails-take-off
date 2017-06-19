@@ -3,7 +3,7 @@
     <div class="col l6 offset-l3 s12 ">
       <div class="survey-container">
         <div class="survey-header">
-          <h3><%= @trip.name %>'s survey</h3>
+          <h3><%= @survey.trip.name %>'s survey</h3>
         </div>
         <div class="survey-body">
           <% if @survey.deadline %>
@@ -50,10 +50,12 @@
 
           <div class="survey-action">
             <%= link_to t('back'), trips_path, class: "btn" %>
-            <% if !@survey.deadline %>
+            <% if !@survey.deadline && policy(@survey).set_deadline? %>
               <%= link_to t('survey.set_deadline'), set_deadline_survey_path(@survey), class: "btn" %>
             <% end %>
-            <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
+            <% if policy(@survey).destroy? %>
+              <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -64,7 +66,7 @@
 
 <%= content_for :js do %>
     <%= javascript_tag do %>
-        $('.vote-button-popover').hide()
+        $('.vote-button-popover').hide();
 
         $('.vote-button').on("click", function(){
           $.ajax({

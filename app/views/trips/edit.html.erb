@@ -9,13 +9,65 @@
             <%= simple_form_for @trip do |f| %>
                 <%= f.input :name %>
                 <%= f.input :destination %>
+                <div id="trip-dates">
+                  <div class="form-dates">
+                    <div class="input-field label">
+                      <%= f.label :start_date, required: true %>
+                      <%= f.text_field :start_date, multiple: true, class: "datepicker start_date", id: "start_date_picker_1" %>
+                    </div>
+                    <i class="material-icons">trending_flat</i>
+                    <div class="input-field label">
+                      <%= f.label :end_date, required: true %>
+                      <%= f.text_field :end_date, multiple: true, class: "datepicker", id:"end_date_picker_2" %>
+                    </div>
+                    <i class="material-icons add-date-button clickable tooltipped" data-position="top" data-delay="100" data-tooltip="<%= t('survey.survey_question') %>">add_circle_outline</i>
+                  </div>
+                  <div id="survey">
+                  </div>
+                </div>
+
                 <div class="form-actions">
-                  <%= f.submit t('edit_trip'), class: "waves-effect waves-light btn" %>
+                  <%= f.submit t('create_trip'), class: "waves-effect waves-light btn" %>
                   <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
                 </div>
-            </div>
-          <% end %>
+            <% end %>
       </div>
     </div>
   </div>
 </div>
+
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
+  <%= javascript_include_tag "autocomplete.js" %>
+  <%= content_for :js do %>
+      <%= javascript_tag do %>
+          $(document).ready(function(){
+            activateDatePicker();
+            var start_date = nextWeekEndDate(new Date());
+            var end_date = addDaysToDate(start_date, 2);
+            var start_date_picker = $('#start_date_picker_1').pickadate('picker');
+            start_date_picker.set ('select', start_date);
+            var end_date_picker = $('#end_date_picker_2').pickadate('picker');
+            end_date_picker.set ('select', end_date);
+            $('#survey').hide();
+          });
+
+
+          $('.add-date-button').on("click", function(){
+
+            var formDates = $('.form-dates').html();
+            var newDateField = '<div class="form-dates">' + formDates + '</div>';
+            $('#survey').append(newDateField).show('slow');
+            $('.add-date-button').last().text("remove_circle_outline").removeClass('add-date-button').addClass('remove-date-button');
+            activateDatePicker();
+            $('.remove-date-button').on("click", function(){
+            if ($('#survey .form-dates').length > 1) {
+                $('#survey .form-dates').last().remove();
+            } else {
+                $('#survey').slideUp();
+                $('#survey .form-dates').last().remove();
+            }
+            });
+          });
+
+      <% end %>
+  <% end %>

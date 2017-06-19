@@ -27,11 +27,15 @@
   </div>
 
   <div class="card-buttons">
-    <%= link_to edit_trip_path(trip) do %>
-        <i class="material-icons card-icon">mode_edit</i>
+    <% if policy(trip).edit? %>
+      <%= link_to edit_trip_path(trip) do %>
+          <i class="material-icons card-icon">mode_edit</i>
+      <% end %>
     <% end %>
-    <%= link_to trip, method: :delete, remote: true do %>
-        <i class="material-icons card-icon">delete</i>
+    <% if policy(trip).destroy? %>
+      <%= link_to trip, method: :delete, remote: true do %>
+          <i class="material-icons card-icon">delete</i>
+      <% end %>
     <% end %>
   </div>
 </div>
