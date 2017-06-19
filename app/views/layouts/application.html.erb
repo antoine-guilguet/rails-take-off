@@ -14,13 +14,13 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
 
     <%= yield %>
 
     <!--Javascript files-->
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= yield(:js) %>
+    <%= render 'shared/flashes' %>
     <!--Import JQuery before Materialize-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Compiled and minified JavaScript for Materialize -->
