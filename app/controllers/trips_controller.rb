@@ -8,10 +8,12 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    authorize @trip
   end
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
@@ -38,9 +40,11 @@ class TripsController < ApplicationController
   end
 
   def edit
+    authorize @trip
   end
 
   def update
+    authorize @trip
     if @trip.update(trip_params) && params[:trip][:start_date].count > 1
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
@@ -62,6 +66,7 @@ class TripsController < ApplicationController
   end
 
   def destroy
+    authorize @trip
     @trip.destroy
     respond_to do |format|
       format.html { redirect_to trips_path }
@@ -82,6 +87,7 @@ class TripsController < ApplicationController
 
   def find_trip
     @trip = Trip.find(params[:id])
+    authorize @trip
   end
 
   def find_user_trips

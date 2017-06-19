@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true
 
   has_many :trips, through: :trip_participants
+  has_many :trip_participants
+  has_many :my_trips, class_name: "Trip"
 
   after_create :send_welcome_email
 

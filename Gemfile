@@ -27,6 +27,7 @@ gem 'devise'
 gem 'figaro'
 gem "geocoder"
 gem 'rails-i18n'
+gem "pundit"
 gem "letter_opener", group: :development
 
 # Use ActiveModel has_secure_password
