@@ -14,7 +14,11 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def destroy?
-    raise
+    record.trip.host == user
+  end
+
+  def set_deadline?
+    record.trip.host == user
   end
 
   def set_deadline?

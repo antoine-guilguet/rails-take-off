@@ -30,7 +30,7 @@ class TripPolicy < ApplicationPolicy
   end
 
   def leave?
-    raise
+    return true
   end
 
   def decline?
