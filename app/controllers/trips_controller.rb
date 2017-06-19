@@ -2,7 +2,8 @@ class TripsController < ApplicationController
   before_action :find_trip, only:[:show, :edit, :update, :destroy, :leave]
 
   def index
-    @trips = find_user_trips
+    @trips = current_user.trips.where.not(user_id: current_user.id)
+    @mytrips = policy_scope(Trip)
     @invitations = Invite.where(email: current_user.email, confirmed: false)
   end
 
@@ -13,6 +14,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.host = current_user
     authorize @trip
     if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create

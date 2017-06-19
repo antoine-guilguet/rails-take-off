@@ -2,8 +2,12 @@
   <div class="row">
     <div class="col l8 s12">
       <h5><%= t('my_trips') %></h5>
-      <% @trips.each do |trip| %>
+      <% @mytrips.each do |trip| %>
         <%= render 'trip_card', trip: trip %>
+      <% end %>
+      <h5><%= t('my_invitation_trips') %></h5>
+      <% @trips.each do |trip| %>
+          <%= render 'trip_card', trip: trip %>
       <% end %>
     </div>
     <div class="col l4 s12">

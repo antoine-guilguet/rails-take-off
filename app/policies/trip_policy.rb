@@ -9,7 +9,7 @@ class TripPolicy < ApplicationPolicy
     end
 
     def resolve
-      scope.all
+      scope.where(user_id: @user)
     end
   end
 
@@ -18,14 +18,26 @@ class TripPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user
+    record.host == user
   end
 
   def update?
-    record.user == user
+    record.host == user
   end
 
   def destroy?
-    record.user == user
+    record.host == user
+  end
+
+  def leave?
+    raise
+  end
+
+  def decline?
+    return true
+  end
+
+  def confirm?
+    return true
   end
 end

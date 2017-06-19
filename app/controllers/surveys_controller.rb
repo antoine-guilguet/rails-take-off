@@ -1,13 +1,14 @@
 class SurveysController < ApplicationController
   before_action :find_survey
+  skip_after_action :verify_authorized, except: [:destroy, :set_deadline]
 
   def show
-    @trip = @survey.trip
     @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
   end
 
   def destroy
     @trip = @survey.trip
+    authorize @trip
     @survey_date = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!.first
     @trip.start_date = @survey_date.start_date
     @trip.end_date = @survey_date.end_date
@@ -54,6 +55,7 @@ class SurveysController < ApplicationController
 
   def find_survey
     @survey = Survey.find(params[:id])
+    authorize @survey
   end
 
   def set_deadline_params
