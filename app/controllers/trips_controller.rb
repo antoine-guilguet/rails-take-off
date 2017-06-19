@@ -68,7 +68,6 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    authorize @trip
     @trip.destroy
     respond_to do |format|
       format.html { redirect_to trips_path }
@@ -78,6 +77,10 @@ class TripsController < ApplicationController
 
   def leave
     TripParticipant.find_by(user_id: current_user.id, trip_id: @trip.id).destroy
+    if @trip.host == current_user
+      @trip.host = TripParticipant.where(trip_id: @trip.id).first.user
+      @trip.save
+    end
     redirect_to trips_path
   end
 
