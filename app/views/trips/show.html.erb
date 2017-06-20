@@ -13,24 +13,50 @@
             <div class="trip-details">
               <div class="row">
                 <div class="col s12 m6">
-                  <div class="trip-details-colum">
-                    <div class="trip-detail-title">
-                      <h4><%= @trip.name %></h4>
-                      <h6><%= @trip.destination %></h6>
-                      <%= t('number_of_participants')%>: <%= @trip.trip_participants.length %>
+                  <div class="trip-detail-title">
+                    <h4><%= @trip.name %></h4>
+                    <h6><%= @trip.destination %></h6>
+                    <div class="trip-detail-participant">
+                      <% @trip.trip_participants.each do |trip_participant| %>
+                          <div class="avatar avatar-bordered">
+                            <%= trip_participant.user.render_initials %>
+                          </div>
+                      <% end %>
                     </div>
-                    <% if @trip.start_date %>
-                      <div class="trip-detail-dates">
-                        <i class="material-icons">flight_takeoff</i><%= l(@trip.start_date, format: :long) %><i class="material-icons">flight_land</i><%= l(@trip.end_date, format: :long) %>
-                      </div>
-                    <% end %>
+
+
                   </div>
                 </div>
 
                 <div class="col s12 m6">
-                  <div class="trip-details-colum">
-                    <%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>
-                    <%= link_to t('leave_trip'), leave_trip_path(@trip), class: "waves-effect waves-light btn" %>
+                  <div class="trip-detail-actions">
+                    <h5><%= t('trip_actions') %></h5>
+                    <div class="trip-detail-buttons">
+                      <% if policy(@trip).edit? %>
+                          <%= link_to edit_trip_path(@trip) do %>
+                              <i class="material-icons card-icon">mode_edit</i>
+                          <% end %>
+                      <% end %>
+                      <% if policy(@trip).destroy? %>
+                          <%= link_to @trip, method: :delete, remote: true do %>
+                              <i class="material-icons card-icon">delete</i>
+                          <% end %>
+                      <% end %>
+                      <% if policy(@trip).invite? %>
+                        <%= link_to new_trip_invite_path(@trip) do %>
+                              <i class="material-icons">insert_invitation</i>
+                        <% end %>
+                      <% end %>
+                      <% if policy(@trip).leave? %>
+                          <%= link_to leave_trip_path(@trip) do %>
+                              <i class="material-icons">exit_to_app</i>
+                          <% end %>
+                      <% end %>
+                    </div>
+                    <hr>
+                    <div class="trip-detail-invitation">
+                      
+                    </div>
                   </div>
                 </div>
               </div>
@@ -42,7 +68,11 @@
           <div class="col s12 m6">
             <div class="trip-show-container">
               <% if @trip.survey %>
-                <%= render 'surveys/survey', survey: @trip.survey, survey_dates: @trip.survey.survey_dates %>
+                <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
+              <% else %>
+                <div class="trip-detail-dates">
+                  <i class="material-icons">flight_takeoff</i><%= l(@trip.start_date, format: :long) %><i class="material-icons">flight_land</i><%= l(@trip.end_date, format: :long) %>
+                </div>
               <% end %>
             </div>
           </div>
