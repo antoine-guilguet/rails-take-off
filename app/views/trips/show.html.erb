@@ -12,18 +12,26 @@
           <div class="col s12">
             <div class="trip-details">
               <div class="row">
-                <div class="col s6">
-                  <h4><%= @trip.name %></h4>
-                  <h6><%= @trip.destination %></h6>
-                  <% if @trip.start_date %>
-                    <div class="trip-detail-dates">
-                      <i class="material-icons">flight_takeoff</i><%= l(@trip.start_date, format: :long) %><i class="material-icons">flight_land</i><%= l(@trip.end_date, format: :long) %>
+                <div class="col s12 m6">
+                  <div class="trip-details-colum">
+                    <div class="trip-detail-title">
+                      <h4><%= @trip.name %></h4>
+                      <h6><%= @trip.destination %></h6>
+                      <%= t('number_of_participants')%>: <%= @trip.trip_participants.length %>
                     </div>
-                  <% end %>
+                    <% if @trip.start_date %>
+                      <div class="trip-detail-dates">
+                        <i class="material-icons">flight_takeoff</i><%= l(@trip.start_date, format: :long) %><i class="material-icons">flight_land</i><%= l(@trip.end_date, format: :long) %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
-                <div class="col s6">
-                  <%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>
-                  <%= link_to t('leave_trip'), leave_trip_path(@trip), class: "waves-effect waves-light btn" %>
+
+                <div class="col s12 m6">
+                  <div class="trip-details-colum">
+                    <%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>
+                    <%= link_to t('leave_trip'), leave_trip_path(@trip), class: "waves-effect waves-light btn" %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -33,7 +41,9 @@
         <div class="row">
           <div class="col s12 m6">
             <div class="trip-show-container">
-              <%= render 'surveys/survey', survey: @trip.survey, survey_dates: @trip.survey.survey_dates %>
+              <% if @trip.survey %>
+                <%= render 'surveys/survey', survey: @trip.survey, survey_dates: @trip.survey.survey_dates %>
+              <% end %>
             </div>
           </div>
           <div class="col s12 m6">
