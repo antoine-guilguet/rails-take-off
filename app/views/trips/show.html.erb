@@ -1,27 +1,64 @@
 <div class="container">
   <div class="row">
-    <div class="col l12">
-      <h3><%= @trip.name %></h3>
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s6"><a class="active" href="#details"><%= t('trip.details') %></a></li>
+        <li class="tab col s6"><a href="#organization"><%= t('trip.organization') %></a></li>
+      </ul>
+    </div>
+    <div id="details" class="col s12">
+      <div class="detail-container">
+        <div class="row">
+          <div class="col s12">
+            <div class="trip-details">
+              <div class="row">
+                <div class="col s6">
+                  <h4><%= @trip.name %></h4>
+                  <h6><%= @trip.destination %></h6>
+                  <% if @trip.start_date %>
+                    <div class="trip-detail-dates">
+                      <i class="material-icons">flight_takeoff</i><%= l(@trip.start_date, format: :long) %><i class="material-icons">flight_land</i><%= l(@trip.end_date, format: :long) %>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="col s6">
+                  <%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>
+                  <%= link_to t('leave_trip'), leave_trip_path(@trip), class: "waves-effect waves-light btn" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <br>
+        <div class="row">
+          <div class="col s6">
+            <%= render 'surveys/survey', survey: @trip.survey, survey_dates: @trip.survey.survey_dates %>
+          </div>
+          <div class="col s6">
+            <div id="trip-map">
 
-      <h6><%= @trip.destination %></h6>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <br>
+    </div>
 
-      <h6><%= @trip.start_date%></h6>
-
-      <br>
-
-      <h6><%= @trip.end_date %></h6>
-
-      <%= link_to t('invite_user'), new_trip_invite_path(@trip), class: "waves-effect waves-light btn" %>
-
-      <br>
-
-      <%= link_to t('leave_trip'), leave_trip_path(@trip), class: "waves-effect waves-light btn" %>
+    <div id="organization" class="col s12">
+      <h4>Organization</h4>
     </div>
   </div>
+
 </div>
 
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+
+        $(document).ready(function(){
+            $('ul.tabs').tabs();
+            $('ul.tabs').tabs('select_tab', 'tab_id');
+        });
+
+    <% end %>
+<% end %>
 

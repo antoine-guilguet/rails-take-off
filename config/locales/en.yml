@@ -105,4 +105,7 @@ en:
     close_survey: "Close survey"
     set_deadline: "Set a Deadline"
     deadline: "You have until %{deadline} to answer the survey"
+  trip:
+    details: "Details"
+    organization: "Organization"
 
