@@ -35,9 +35,7 @@
             <%= render 'surveys/survey', survey: @trip.survey, survey_dates: @trip.survey.survey_dates %>
           </div>
           <div class="col s6">
-            <div id="trip-map">
-
-            </div>
+            <div id="map" style="width: 100%; height: 388px;"></div>
           </div>
         </div>
       </div>
@@ -57,8 +55,19 @@
         $(document).ready(function(){
             $('ul.tabs').tabs();
             $('ul.tabs').tabs('select_tab', 'tab_id');
-        });
 
+            var handler = Gmaps.build('Google');
+            handler.buildMap({ internal: { id: 'map' } }, function() {
+            markers = handler.addMarkers(<%= raw @hash.to_json %>);
+            handler.bounds.extendWith(markers);
+            handler.fitMapToBounds();
+            if (markers.length == 0) {
+              handler.getMap().setZoom(2);
+            } else if (markers.length == 1) {
+              handler.getMap().setZoom(14);
+            }
+            });
+        });
     <% end %>
 <% end %>
 

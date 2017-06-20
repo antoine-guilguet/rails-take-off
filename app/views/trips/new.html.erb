@@ -39,8 +39,6 @@
 
 <!--Google autocomplete-->
 
-<%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
-<%= javascript_include_tag "autocomplete.js" %>
 <%= content_for :js do %>
     <%= javascript_tag do %>
         $(document).ready(function(){
