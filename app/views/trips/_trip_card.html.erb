@@ -5,8 +5,7 @@
   </div>
 
   <div class="card-participants">
-    <% trip_participants = trip.trip_participants %>
-    <% trip_participants.each do |trip_participant| %>
+    <% trip.trip_participants.each do |trip_participant| %>
         <div class="avatar avatar-bordered">
           <%= trip_participant.user.render_initials %>
         </div>
@@ -15,7 +14,7 @@
 
   <div class="card-destination">
     <%= trip.destination %>
-    <p><%= t('number_of_participants') %>: <%= trip_participants.count %></p>
+    <p><%= t('number_of_participants') %>: <%= trip.trip_participants.count %></p>
   </div>
 
   <div class="card-dates">

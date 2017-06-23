@@ -22,12 +22,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'acts_as_votable', '~> 0.10.0'
-
 gem 'devise'
 gem 'figaro'
 gem "geocoder"
 gem 'rails-i18n'
 gem "pundit"
+
+gem "gmaps4rails"
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
+
 gem "letter_opener", group: :development
 
 # Use ActiveModel has_secure_password

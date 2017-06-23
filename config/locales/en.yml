@@ -91,7 +91,8 @@ en:
   confirm: "Confirm"
   delete: "Delete"
   update: "Update"
-  number_of_participants: "Number of Participants"
+  participants: "Participants"
+  trip_actions: "Trip Actions"
   email_invitation: "Send an invite to your friends via email!"
   leave_trip: "Leave the Trip"
   edit_trip: "Edit a Trip"
@@ -105,4 +106,7 @@ en:
     close_survey: "Close survey"
     set_deadline: "Set a Deadline"
     deadline: "You have until %{deadline} to answer the survey"
+  trip:
+    details: "Details"
+    organization: "Organization"
 

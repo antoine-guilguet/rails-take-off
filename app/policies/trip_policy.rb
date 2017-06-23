@@ -17,6 +17,10 @@ class TripPolicy < ApplicationPolicy
     return true
   end
 
+  def show?
+    record.trip_participants.map(&:user_id).include?(user.id)
+  end
+
   def edit?
     record.host == user
   end
@@ -30,14 +34,18 @@ class TripPolicy < ApplicationPolicy
   end
 
   def leave?
-    return true
+    record.trip_participants.map(&:user_id).include?(user.id)
+  end
+
+  def invite?
+    record.host == user
   end
 
   def decline?
-    return true
+    record.trip_participants.map(&:user_id).include?(user.id)
   end
 
   def confirm?
-    return true
+    record.trip_participants.map(&:user_id).include?(user.id)
   end
 end

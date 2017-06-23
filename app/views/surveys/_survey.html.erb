@@ -1,0 +1,95 @@
+<div class="survey-body">
+  <% if survey.deadline %>
+      <% deadline = l(survey.deadline, format: :long) %>
+      <p><%= t('survey.deadline', deadline: deadline) %></p>
+  <% end %>
+  <div class="survey-table">
+    <div class="survey-line-header">
+      <div>
+      </div>
+      <div>
+        <%= t('survey.number_of_votes') %>
+      </div>
+      <div class="survey-dates">
+        <div>
+          <%= t('date.start_date') %>
+        </div>
+        <div>
+          <%= t('date.end_date') %>
+        </div>
+      </div>
+    </div>
+    <% survey_dates.each do |survey_date| %>
+        <div class="survey-line">
+          <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
+          <label for="<%= survey_date.id %>"></label>
+
+          <div class="btn-floating survey-number-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
+            <%= survey_date.votes_for.size %>
+          </div>
+          <div class="vote-button-popover" id="survey-popover-<%= survey_date.id %>">
+            <%= survey_date.get_html_list_of_voters.html_safe %>
+          </div>
+
+
+          <div class="survey-dates">
+            <%= l(survey_date.start_date, format: :short) %>
+            <i class="material-icons">trending_flat</i>
+            <%= l(survey_date.end_date, format: :short) %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="survey-action">
+    <%= link_to t('back'), trips_path, class: "btn" %>
+    <% if !survey.deadline && policy(survey).set_deadline? %>
+        <%= link_to t('survey.set_deadline'), set_deadline_survey_path(survey), class: "btn" %>
+    <% end %>
+    <% if policy(survey).destroy? %>
+        <%= link_to t('survey.close_survey'), survey, method: :delete, class: "btn" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+        $('.vote-button-popover').hide();
+
+        $('.vote-button').on("click", function(){
+            $.ajax({
+              type: "GET",
+              url: "<%= vote_survey_path(survey) %>",
+              data: { survey_date_id: $(this).attr('id') },
+              success: function(data){
+                var id = data.survey_date.id;
+                var numberOfVotes = data.number_of_votes;
+                var htmlListOfVoters = data.html_list_of_voters;
+                var selector = '[survey_date_id =' + id + ']'
+                $(selector).text(numberOfVotes);
+                var popoverSelector = '#survey-popover-' + id;
+                $(popoverSelector).html("");
+                $(popoverSelector).append(htmlListOfVoters);
+              },
+              error: function(jqXHR) {
+                console.error(jqXHR.responseText);
+              }
+            });
+        });
+
+        $('.survey-number-button').mouseenter(function(){
+          var id = $(this).attr('survey_date_id');
+          var selector = '#survey-popover-' + id;
+          $(selector).show();
+        });
+
+        $('.survey-number-button').mouseleave(function(){
+          var id = $(this).attr('survey_date_id');
+          var selector = '#survey-popover-' + id;
+          $(selector).hide();
+        });
+
+    <% end %>
+<% end %>

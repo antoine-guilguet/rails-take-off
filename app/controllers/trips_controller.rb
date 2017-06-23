@@ -39,6 +39,17 @@ class TripsController < ApplicationController
   end
 
   def show
+    authorize @trip
+    if @trip.survey
+      @survey = @trip.survey
+      @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
+    end
+    @trips = [@trip]
+    @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
+      marker.lat trip.latitude
+      marker.lng trip.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
   end
 
   def edit

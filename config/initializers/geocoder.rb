@@ -1,9 +1,9 @@
 Geocoder.configure(
   # Geocoding options
   # timeout: 3,                 # geocoding service timeout (secs)
-  # lookup: :google,            # name of geocoding service (symbol)
+  lookup: :google,            # name of geocoding service (symbol)
   # language: :en,              # ISO-639 language code
-  # use_https: false,           # use HTTPS for lookup requests? (if supported)
+  use_https: true,           # use HTTPS for lookup requests? (if supported)
   # http_proxy: nil,            # HTTP proxy server (user:pass@host:port)
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
   # api_key: nil,               # API key for geocoding service
@@ -17,5 +17,8 @@ Geocoder.configure(
 
   # Calculation options
   units: :km,                 # :km for kilometers or :mi for miles
+
+  api_key: ENV['GOOGLE_API_SERVER_KEY'],
+
   # distances: :linear          # :spherical or :linear
 )

@@ -78,7 +78,8 @@ fr:
   confirm: "Confirmer"
   delete: "Supprimer"
   update: "Modifier"
-  number_of_participants: "Nombre de Participants"
+  participants: "Participants"
+  trip_actions: "Actions"
   email_invitation: "Envoyer une invitation à vos amis par email!"
   my_trips: "Mes Voyages"
   my_invitations: "Mes invitations"
@@ -94,3 +95,6 @@ fr:
     close_survey: "Clôturer le Sondage"
     set_deadline: "Set a Deadline"
     deadline: "Vous avez jusqu'au %{deadline} pour répondre au sondage"
+  trip:
+    details: "Détails"
+    organization: "Organisation"
