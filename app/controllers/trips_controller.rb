@@ -40,10 +40,11 @@ class TripsController < ApplicationController
 
   def show
     authorize @trip
-    @survey = @trip.survey
-    @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
-    @trips = []
-    @trips << @trip
+    if @trip.survey
+      @survey = @trip.survey
+      @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
+    end
+    @trips = [@trip]
     @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
       marker.lat trip.latitude
       marker.lng trip.longitude
