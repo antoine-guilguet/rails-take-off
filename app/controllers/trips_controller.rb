@@ -15,7 +15,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.host = current_user
-    authorize @trip
+
     if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
@@ -39,16 +39,17 @@ class TripsController < ApplicationController
   end
 
   def show
-    authorize @trip
     if @trip.survey
       @survey = @trip.survey
       @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
     end
+
+    @topics = @trip.topics
+
     @trips = [@trip]
     @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
       marker.lat trip.latitude
       marker.lng trip.longitude
-      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
   end
 
@@ -106,12 +107,4 @@ class TripsController < ApplicationController
     authorize @trip
   end
 
-  def find_user_trips
-    trip_participants = TripParticipant.where(user_id: current_user.id)
-    user_trips = []
-    trip_participants.each do |trip_participant|
-      user_trips << trip_participant.trip
-    end
-    user_trips
-  end
 end

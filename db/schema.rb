@@ -33,13 +33,13 @@ ActiveRecord::Schema.define(version: 20170623150223) do
     t.string   "name"
     t.string   "description"
     t.float    "price"
-    t.integer  "trip_id"
+    t.integer  "topic_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "suggestions", ["trip_id"], name: "index_suggestions_on_trip_id", using: :btree
+  add_index "suggestions", ["topic_id"], name: "index_suggestions_on_topic_id", using: :btree
   add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
   create_table "survey_dates", force: :cascade do |t|
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170623150223) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   add_foreign_key "invites", "trips"
-  add_foreign_key "suggestions", "trips"
+  add_foreign_key "suggestions", "topics"
   add_foreign_key "suggestions", "users"
   add_foreign_key "survey_dates", "surveys"
   add_foreign_key "surveys", "trips"

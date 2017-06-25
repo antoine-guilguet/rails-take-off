@@ -1,0 +1,14 @@
+<div class="topic-card">
+  <div class="topic-card-title">
+    <%= topic.title %>
+  </div>
+  <div class="suggestions">
+    <% topic.suggestions.each do |suggestion| %>
+      <% render "suggestions/show", suggestion: suggestion %>
+    <% end %>
+  </div>
+  <div class="topic-card-actions">
+    <%= link_to t('topics.close_topic'), class: "waves-effect waves-light btn" %>
+    <%= link_to t('topics.add_suggestion'), new_topic_suggestion_path(topic, Suggestion.new), class: "waves-effect waves-light btn" %>
+  </div>
+</div>

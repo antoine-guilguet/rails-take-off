@@ -1,4 +1,4 @@
 class Suggestion < ActiveRecord::Base
-  belongs_to :trip
+  belongs_to :topic
   belongs_to :user
 end

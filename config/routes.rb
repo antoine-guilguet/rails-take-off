@@ -8,23 +8,26 @@ Rails.application.routes.draw do
   root 'pages#homepage'
 
   resources :trips do
+    resources :topics, only:[:new, :create]
     get 'leave', on: :member
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
     end
-
   end
 
   resources :surveys, only:[:show, :destroy] do
-    get 'vote', on: :member
-    get 'get_voters', on: :member
-    get 'set_deadline', on: :member
-    post 'send_deadline', on: :member
+    member do
+      get 'vote'
+      get 'get_voters'
+      get 'set_deadline'
+      post 'send_deadline'
+    end
   end
 
-
-
+  resources :topics, only:[:edit, :update, :destroy] do
+    resources :suggestions, only:[:new, :create, :destroy, :edit, :update]
+  end
 
 
   # Example of regular route:

@@ -109,4 +109,11 @@ en:
   trip:
     details: "Details"
     organization: "Organization"
+  topics:
+    topics: "Topics"
+    create_topic: "Create a Topic"
+    close_topic: "Close Topic"
+    add_suggestion: "Add a Suggestion"
+  suggestions:
+    create_suggestion: "Create a suggestion"
 

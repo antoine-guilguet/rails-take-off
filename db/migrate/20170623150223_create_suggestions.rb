@@ -4,7 +4,7 @@ class CreateSuggestions < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.float :price
-      t.references :trip, index: true, foreign_key: true
+      t.references :topic, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false
