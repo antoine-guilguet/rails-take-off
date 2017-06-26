@@ -2,6 +2,8 @@
   background-color: white;
   border-radius: 4px;
   margin-top: 20px;
+  height: 77vh;
+  overflow: scroll;
 }
 
 .trip-organization-title{
@@ -17,7 +19,7 @@
 
 .fixed-action-btn {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 15px;
 }
 
