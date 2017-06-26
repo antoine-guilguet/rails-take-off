@@ -1,0 +1,19 @@
+.topic-card{
+  border: solid 1px indianred;
+  padding: 20px;
+  border-radius: 4px;
+  color: indianred;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.topic-card-title {
+
+}
+
+
+.topic-card-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}

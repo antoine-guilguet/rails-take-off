@@ -13,6 +13,10 @@ class SurveyPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    return true
+  end
+
   def destroy?
     record.trip.host == user
   end

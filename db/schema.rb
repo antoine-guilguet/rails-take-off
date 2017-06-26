@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619143747) do
+ActiveRecord::Schema.define(version: 20170623150223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,19 @@ ActiveRecord::Schema.define(version: 20170619143747) do
   end
 
   add_index "invites", ["trip_id"], name: "index_invites_on_trip_id", using: :btree
+
+  create_table "suggestions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.float    "price"
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "suggestions", ["topic_id"], name: "index_suggestions_on_topic_id", using: :btree
+  add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
   create_table "survey_dates", force: :cascade do |t|
     t.datetime "start_date"
@@ -48,6 +61,23 @@ ActiveRecord::Schema.define(version: 20170619143747) do
   end
 
   add_index "surveys", ["trip_id"], name: "index_surveys_on_trip_id", using: :btree
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "status"
+    t.float    "expense"
+    t.datetime "deadline"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "trip_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "topics", ["trip_id"], name: "index_topics_on_trip_id", using: :btree
+  add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
   create_table "trip_participants", force: :cascade do |t|
     t.integer  "trip_id"
@@ -111,8 +141,12 @@ ActiveRecord::Schema.define(version: 20170619143747) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   add_foreign_key "invites", "trips"
+  add_foreign_key "suggestions", "topics"
+  add_foreign_key "suggestions", "users"
   add_foreign_key "survey_dates", "surveys"
   add_foreign_key "surveys", "trips"
+  add_foreign_key "topics", "trips"
+  add_foreign_key "topics", "users"
   add_foreign_key "trip_participants", "trips"
   add_foreign_key "trip_participants", "users"
   add_foreign_key "trips", "users"

@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+    <div class="form-container">
+      <div class="form-header">
+        <h3><%= t('suggestions.create_suggestion') %></h3>
+      </div>
+      <div class="form-body">
+        <%= simple_form_for [@topic, @suggestion] do |f| %>
+            <%= f.input :name %>
+            <%= f.input :description %>
+            <%= f.input :price %>
+
+            <div class="form-actions">
+              <%= f.submit t('suggestions.create_suggestion'), class: "waves-effect waves-light btn" %>
+              <%= link_to t('back'), trip_path(@topic.trip), class: "waves-effect waves-light btn" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

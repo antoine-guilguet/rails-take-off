@@ -98,3 +98,10 @@ fr:
   trip:
     details: "Détails"
     organization: "Organisation"
+  topics:
+    topics: "Tâches"
+    create_topic: "Créer une tâche"
+    close_topic: "Finir"
+    add_suggestion: "Ajouter une Suggestion"
+  suggestions:
+    create_suggestion: "Créer une Suggestion"
