@@ -18,6 +18,7 @@ class TripsController < ApplicationController
 
     if params[:trip][:start_date].count > 1 && @trip.save
       @survey = Survey.create
+      authorize @survey
       start_dates = params[:trip][:start_date]
       end_dates = params[:trip][:end_date]
       start_dates.each_with_index do |date, index|

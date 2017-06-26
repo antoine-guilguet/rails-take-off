@@ -1,12 +1,44 @@
 <div class="suggestion-line">
-  <div class="suggestion-vote">
-    <input name="group1" class="vote-button" type="checkbox"/>
-    <label for=""></label>
+
+  <input name="suggestion_line" class="vote-button" type="checkbox" <%= suggestion.voted_by?(current_user) ? 'checked' : "" %> id="suggestion-button" suggestion_id="<%= suggestion.id %>" />
+  <label for="suggestion-button"></label>
+
+  <div class="btn-floating suggestion-number-button" id="suggestion_id_<%= suggestion.id %>">
+    <div class="suggestion-number-button-text">
+      <%= suggestion.votes_for.size %>
+    </div>
   </div>
+
   <div class="suggestion-name">
     <%= suggestion.name %>
   </div>
+
   <div class="suggestion-price">
     <%= suggestion.price %>
   </div>
 </div>
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+      $('.suggestion-vote-button').on("click", function(){
+        $.ajax({
+          type: "GET",
+          url: "<%= vote_topic_path(suggestion.topic) %>",
+          data: { suggestion_id: $(this).attr('suggestion_id') },
+          success: function(data){
+            var suggestionId = data.suggestion.id;
+            var numberOfVotes = data.number_of_votes;
+            var htmlListOfVoters = data.html_list_of_voters;
+            var selector = '#suggestion_id_' + suggestionId
+            $(selector).text(numberOfVotes);
+            // var popoverSelector = '#survey-popover-' + id;
+            // $(popoverSelector).html("");
+            // $(popoverSelector).append(htmlListOfVoters);
+            },
+          error: function(jqXHR) {
+            console.error(jqXHR.responseText);
+            }
+        });
+      });
+  <% end %>
+<% end %>

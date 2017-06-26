@@ -19,13 +19,15 @@ Rails.application.routes.draw do
   resources :surveys, only:[:show, :destroy] do
     member do
       get 'vote'
-      get 'get_voters'
       get 'set_deadline'
       post 'send_deadline'
     end
   end
 
   resources :topics, only:[:edit, :update, :destroy] do
+    member do
+      get 'vote'
+    end
     resources :suggestions, only:[:new, :create, :destroy, :edit, :update]
   end
 

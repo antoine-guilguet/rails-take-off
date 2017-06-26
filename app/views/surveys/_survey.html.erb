@@ -24,9 +24,10 @@
           <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
           <label for="<%= survey_date.id %>"></label>
 
-          <div class="btn-floating survey-number-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
+          <div class="btn-floating survey-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
             <%= survey_date.votes_for.size %>
           </div>
+
           <div class="vote-button-popover" id="survey-popover-<%= survey_date.id %>">
             <%= survey_date.get_html_list_of_voters.html_safe %>
           </div>
