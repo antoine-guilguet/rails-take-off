@@ -40,6 +40,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @invite = Invite.new
     if @trip.survey
       @survey = @trip.survey
       @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
