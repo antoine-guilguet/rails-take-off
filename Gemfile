@@ -29,6 +29,8 @@ gem 'rails-i18n'
 gem "pundit"
 
 gem "gmaps4rails"
+gem 'omniauth-facebook'
+
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
