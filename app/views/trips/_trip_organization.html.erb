@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="trip-topics">
-        <% @topics.each do |topic| %>
+        <% @trip.topics.each do |topic| %>
           <%= render 'topics/topic_card', topic: topic %>
         <% end %>
       </div>

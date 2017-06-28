@@ -8,7 +8,7 @@ class Trip < ActiveRecord::Base
   belongs_to :host, class_name: 'User', foreign_key: 'user_id'
   has_many :invites, dependent: :destroy
   has_one :survey, dependent: :destroy
-  has_many :topics
+  has_many :topics, dependent: :destroy
 
   geocoded_by :destination
   after_validation :geocode, if: :destination_changed?
