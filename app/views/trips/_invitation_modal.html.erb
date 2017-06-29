@@ -6,20 +6,20 @@
     <%= simple_form_for [trip, invite] do |f| %>
     <label for="email"><%= t('email_invitation') %></label>
     <div class="form-address">
-      <div class="mail-address-row">
-        <div class="input-field" style="width:300px;">
+      <div class="form-address-first">
+        <div class="mail-address-row">
+          <div class="input-field" style="width: 100%;">
+            <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
+          </div>
 
-          <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
-        </div>
-
-        <div class="new-invitation-button">
-          <i class="fa fa-plus-circle small" aria-hidden="true"></i>
+          <div class="new-invitation-button">
+            <i class="material-icons add-invitation-button clickable tooltipped" data-position="top" data-delay="100" data-tooltip="<%= t('email_invitation') %>">add_circle_outline</i>
+          </div>
         </div>
       </div>
+      <div id="mail-addresses" class="form-address"></div>
     </div>
-    <div id="mail-addresses">
 
-    </div>
 
   </div>
 
@@ -36,25 +36,21 @@
 <%= content_for :js do %>
     <%= javascript_tag do %>
         $(document).ready(function(){
+          $('.new-invitation-button').on("click", function(){
+            var newInvitation = $('.form-address-first').html();
 
-        });
+            $('#mail-addresses').append(newInvitation).show('slow');
+            $('.add-invitation-button').last().text("remove_circle_outline").removeClass('new-invitation-button').addClass('remove-invitation-button');
+            $('.remove-invitation-button').one("click", function(){
 
-
-        $('.new-invitation-button').on("click", function(){
-            console.log('yes')
-          var mailAddress = $('.form-address').html();
-          var newInvitation = '<div class="mail-address-row">' + mailAddress + '</div>';
-
-          $('#mail-addresses').append(newInvitation).show('slow');
-          $('.new-invitation-button').last().text("remove_circle_outline").removeClass('new-invitation-button').addClass('remove-invitation-button');
-
-          $('.remove-invitation-button').on("click", function(){
             if ($('#mail-addresses .mail-address-row').length > 1) {
                 $('#mail-addresses .mail-address-row').last().remove();
             } else {
               $('#mail-addresses').slideUp();
               $('#mail-addresses .mail-address-row').last().remove();
-            }
+            };
+            });
+            
           });
         });
 
