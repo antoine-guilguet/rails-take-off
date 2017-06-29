@@ -1,0 +1,46 @@
+<div class="trip-details">
+  <div class="row">
+    <div class="col s12 m6">
+      <div class="trip-detail-title">
+        <h4><%= @trip.name %></h4>
+        <h6><%= @trip.destination %></h6>
+        <hr>
+        <div class="trip-detail-buttons">
+          <% if policy(@trip).edit? %>
+              <a href="<%= edit_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('edit_trip') %>">
+                <i class="material-icons card-icon">mode_edit</i>
+              </a>
+          <% end %>
+          <% if policy(@trip).leave? %>
+              <a href="<%= leave_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('leave_trip') %>">
+                <i class="material-icons">exit_to_app</i>
+              </a>
+          <% end %>
+          <% if policy(@trip).invite? %>
+              <div class="invitation-button tooltipped" data-target="invitation-modal" data-position="top" data-delay="50" data-tooltip="<%= t('invite_user') %>">
+                <i class="material-icons">insert_invitation</i>
+              </div>
+          <% end %>
+          <% if policy(@trip).destroy? %>
+              <%= link_to @trip, method: :delete, remote: true do %>
+                  <i class="material-icons card-icon">delete</i>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m6">
+      <div class="trip-detail-actions">
+        <h5><%= t('participants') %></h5>
+        <div class="trip-detail-participant">
+          <% @trip.trip_participants.each do |trip_participant| %>
+              <div class="avatar avatar-bordered">
+                <%= trip_participant.user.render_initials %>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

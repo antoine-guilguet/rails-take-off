@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :topics, only:[:edit, :update, :destroy] do
     member do
       get 'vote'
+      get 'close'
     end
     resources :suggestions, only:[:new, :create, :destroy, :edit, :update]
   end

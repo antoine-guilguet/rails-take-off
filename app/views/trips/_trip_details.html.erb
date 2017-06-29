@@ -1,108 +1,14 @@
-<div class="trip-details">
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="trip-detail-title">
-        <h4><%= @trip.name %></h4>
-        <h6><%= @trip.destination %></h6>
-        <hr>
-        <div class="trip-detail-buttons">
-          <% if policy(@trip).edit? %>
-              <a href="<%= edit_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('edit_trip') %>">
-                  <i class="material-icons card-icon">mode_edit</i>
-              </a>
-          <% end %>
-          <% if policy(@trip).leave? %>
-              <a href="<%= leave_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('leave_trip') %>">
-                <i class="material-icons">exit_to_app</i>
-              </a>
-          <% end %>
-          <% if policy(@trip).invite? %>
-              <div class="invitation-button tooltipped" data-target="invitation-modal" data-position="top" data-delay="50" data-tooltip="<%= t('invite_user') %>">
-                <i class="material-icons">insert_invitation</i>
-              </div>
-          <% end %>
-          <% if policy(@trip).destroy? %>
-              <%= link_to @trip, method: :delete, remote: true do %>
-                  <i class="material-icons card-icon">delete</i>
-              <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<!--Trip Detail Header-->
 
-    <div class="col s12 m6">
-      <div class="trip-detail-actions">
-        <h5><%= t('participants') %></h5>
-        <div class="trip-detail-participant">
-          <% @trip.trip_participants.each do |trip_participant| %>
-              <div class="avatar avatar-bordered">
-                <%= trip_participant.user.render_initials %>
-              </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
+<%= render 'trip_detail_header' %>
 
-  </div>
-</div>
+<!--Trip Date Survey and Summary-->
 
-<!--Trip Date Survey-->
-<div class="row">
-  <div class="col s12 m6">
-    <div class="trip-dates-container">
-      <% if @trip.survey %>
-          <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
-      <% elsif @trip.start_date %>
-          <div class="trip-dates">
-            <div class="trip-date">
-              <i class="material-icons">date_range</i>
-              <div class="date-vertical"></div>
-              <%= l(@trip.start_date, format: :long) %>
-            </div>
-            <div class="trip-date-line"></div>
-            <div class="trip-date">
-              <i class="material-icons">date_range</i><%= l(@trip.end_date, format: :long) %>
-            </div>
-          </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="col s12 m6">
-    <div id="map" style="width: 100%; height: 325px;"></div>
-  </div>
-</div>
-</div>
+<%= render 'trip_detail_body' %>
 
-<div id="invitation-modal" class="modal modal-fixed-footer">
-<div class="modal-content">
-  <h4>Modal Header</h4>
-  <%= simple_form_for [@trip, @invite] do |f| %>
-      <% if @invite.errors.any? %>
-          <div id="error_explanation">
-            <ul>
-              <% @invite.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
-      <label for="email"><%= t('email_invitation') %></label>
-      <div id="invitations-<%= @trip.id %>">
-        <div class="invitation-row">
-          <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
-        </div>
-      </div>
-      <div id="new_invitation_button">
-        <i class="fa fa-plus-circle small" aria-hidden="true"></i>
-      </div>
-  </div>
-  <div class="modal-footer">
-    <div class="form-actions">
-      <%= f.submit t('send_invite'), class: "waves-effect waves-light btn" %>
-      <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
-    </div>
-    <% end %>
-</div>
+<!--Invitation Modal-->
+
+<%= render 'invitation_modal', trip: @trip, invite: @invite  %>
 
 <%= content_for :js do %>
     <%= javascript_tag do %>
@@ -112,16 +18,16 @@
           $('ul.tabs').tabs('select_tab', 'tab_id');
           $('.modal').modal();
 
-          var handler = Gmaps.build('Google');
-          handler.buildMap({ internal: { id: 'map' } }, function() {
-            markers = handler.addMarkers(<%= raw @hash.to_json %>);
-            handler.bounds.extendWith(markers);
-            handler.fitMapToBounds();
-            if (markers.length == 0) {
-                handler.getMap().setZoom(2);
-            } else if (markers.length == 1) {
-                handler.getMap().setZoom(14);
-            }
+        var handler = Gmaps.build('Google');
+        handler.buildMap({ internal: { id: 'map' } }, function() {
+          markers = handler.addMarkers(<%= raw @hash.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+          if (markers.length == 0) {
+              handler.getMap().setZoom(2);
+          } else if (markers.length == 1) {
+              handler.getMap().setZoom(14);
+          }
           });
         });
     <% end %>
