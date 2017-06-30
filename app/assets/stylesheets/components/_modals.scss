@@ -19,6 +19,7 @@
   margin: 0 auto;
   width: 50%;
   padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .mail-address-row {
@@ -32,4 +33,10 @@
 
 .input-field {
   width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }

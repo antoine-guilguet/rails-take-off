@@ -47,6 +47,7 @@ class TripsController < ApplicationController
       @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
     end
 
+    @topic = Topic.new
     @pending_topics = @trip.topics.where(status: "Pending")
     @closed_topics = @trip.topics.where(status: "Closed")
 

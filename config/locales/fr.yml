@@ -103,5 +103,8 @@ fr:
     create_topic: "Créer une tâche"
     close_topic: "Finir"
     add_suggestion: "Ajouter une Suggestion"
+    transport: "Transport"
+    housing: "Logement"
+    visit: "Visite"
   suggestions:
     create_suggestion: "Créer une Suggestion"

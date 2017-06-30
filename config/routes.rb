@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :trips do
     resources :topics, only:[:new, :create]
     get 'leave', on: :member
+    get 'create_auto', to: "topics#create_auto"
+
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
