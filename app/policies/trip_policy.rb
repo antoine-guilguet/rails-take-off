@@ -48,4 +48,8 @@ class TripPolicy < ApplicationPolicy
   def confirm?
     record.trip_participants.map(&:user_id).include?(user.id)
   end
+
+  def create_auto?
+    return true
+  end
 end

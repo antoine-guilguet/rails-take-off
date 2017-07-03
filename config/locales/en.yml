@@ -114,6 +114,9 @@ en:
     create_topic: "Create a Topic"
     close_topic: "Close Topic"
     add_suggestion: "Add a Suggestion"
+    transport: "Transport"
+    housing: "Housing"
+    visit: "Visit"
   suggestions:
     create_suggestion: "Create a suggestion"
 

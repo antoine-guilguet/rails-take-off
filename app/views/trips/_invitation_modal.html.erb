@@ -1,0 +1,54 @@
+<div id="invitation-modal" class="modal">
+  <div class="modal-header">
+    <h3><%= t('invite_user') %></h3>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for [trip, invite] do |f| %>
+    <label for="email"><%= t('email_invitation') %></label>
+    <div class="form-address">
+      <div class="form-address-first">
+        <div class="mail-address-row">
+          <div class="input-field" style="width: 100%;">
+            <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
+          </div>
+
+          <div class="new-invitation-button">
+            <i class="material-icons add-invitation-button clickable tooltipped" data-position="top" data-delay="100" data-tooltip="<%= t('email_invitation') %>">add_circle_outline</i>
+          </div>
+        </div>
+      </div>
+      <div id="mail-addresses" class="form-address"></div>
+    </div>
+
+        <div class="modal-actions">
+      <%= f.hidden_field :trip, value: trip %>
+      <%= f.submit t('send_invite'), class: "waves-effect waves-light btn" %>
+      <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+        $(document).ready(function(){
+          $('.new-invitation-button').on("click", function(){
+            var newInvitation = $('.form-address-first').html();
+
+            $('#mail-addresses').append(newInvitation).show('slow');
+            $('.add-invitation-button').last().text("remove_circle_outline").removeClass('new-invitation-button').addClass('remove-invitation-button');
+            $('.remove-invitation-button').one("click", function(){
+
+            if ($('#mail-addresses .mail-address-row').length > 1) {
+                $('#mail-addresses .mail-address-row').last().remove();
+            } else {
+              $('#mail-addresses').slideUp();
+              $('#mail-addresses .mail-address-row').last().remove();
+            };
+            });
+
+          });
+        });
+
+    <% end %>
+<% end %>

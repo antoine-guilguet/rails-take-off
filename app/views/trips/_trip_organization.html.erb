@@ -1,33 +1,72 @@
-<div class="detail-container">
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="trip-organization">
-        <div class="trip-organization-title">
-          <h5><%= t('topics.topics') %></h5>
-          <div class="fixed-action-btn horizontal">
-            <%= link_to new_trip_topic_path(@trip, @survey), class: "btn-floating btn-small indianred" do %>
-              <i class="material-icons">add</i>
-            <% end %>
-            <ul>
-              <li><a class="btn-floating red"><i class="material-icons">home</i></a></li>
-              <li><a class="btn-floating yellow darken-1"><i class="material-icons">flight_takeoff</i></a></li>
-              <li><a class="btn-floating green"><i class="material-icons">edit</i></a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="trip-topics">
-          <% @topics.each do |topic| %>
-            <%= render 'topics/topic_card', topic: topic %>
+<div class="row">
+  <div class="col s12 m6">
+    <div class="trip-organization-container">
+      <div class="trip-organization-title">
+        <h5><%= t('topics.topics') %></h5>
+        <div class="fixed-action-btn horizontal">
+          <%= link_to new_trip_topic_path(@trip, @survey), class: "btn-floating btn-small indianred" do %>
+            <i class="material-icons">add</i>
           <% end %>
+          <ul>
+            <li><a class="topic-button btn-floating red" value="Housing"><i class="material-icons">home</i></a></li>
+            <li><a class="topic-button btn-floating yellow darken-1" value="Transport"><i class="material-icons">flight_takeoff</i></a></li>
+            <li><a class="topic-button btn-floating green" value="Visit"><i class="material-icons">visibility</i></a></li>
+          </ul>
         </div>
-
       </div>
-    </div>
-    <div class="col s12 m6">
-      <div class="trip-details">
-        Chat
+      <div class="trip-topics">
+        <% @pending_topics.each do |topic| %>
+          <%= render 'topics/topic_card', topic: topic %>
+        <% end %>
       </div>
     </div>
   </div>
 
+
+  <div class="col s12 m6">
+    <div class="trip-organization-container">
+      Chat
+    </div>
+  </div>
+
 </div>
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+
+        $('.topic-button').click(function(){
+          $.ajax({
+              url: "<%= trip_create_auto_path(@trip) %>",
+              type: "GET",
+              data: { topic_type: $(this).attr('value') },
+              success: function(data){
+              },
+              error: function(jqXHR) {
+                  console.error(jqXHR.responseText);
+              }
+          });
+        });
+
+        $('.suggestion-vote-button').on("click", function(){
+          $.ajax({
+            type: "GET",
+            url: "<%= vote_path %>",
+            data: { suggestion_id: $(this).attr('suggestion_id') },
+            success: function(data){
+              var suggestionId = data.suggestion.id;
+              var numberOfVotes = data.number_of_votes;
+              var htmlListOfVoters = data.html_list_of_voters;
+              var selector = '#suggestion_id_' + suggestionId
+              $(selector).find('div').text(numberOfVotes);
+              // var popoverSelector = '#survey-popover-' + id;
+              // $(popoverSelector).html("");
+              // $(popoverSelector).append(htmlListOfVoters);
+            },
+            error: function(jqXHR) {
+              console.error(jqXHR.responseText);
+            }
+          });
+        });
+
+    <% end %>
+<% end %>

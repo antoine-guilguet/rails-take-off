@@ -27,25 +27,29 @@ class TripsController < ApplicationController
       @survey.trip_id = @trip.id
       @survey.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
-      redirect_to trips_path
+      redirect_to trip_path(@trip)
     elsif @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
       @trip.start_date = params[:trip][:start_date][0]
       @trip.end_date = params[:trip][:end_date][0]
       @trip.save
-      redirect_to trips_path
+      create_topics(@trip)
+      redirect_to trip_path(@trip)
     else
       render :new
     end
   end
 
   def show
+    @invite = Invite.new
     if @trip.survey
       @survey = @trip.survey
       @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
     end
 
-    @topics = @trip.topics
+    @topic = Topic.new
+    @pending_topics = @trip.topics.where(status: "Pending")
+    @closed_topics = @trip.topics.where(status: "Closed")
 
     @trips = [@trip]
     @hash = Gmaps4rails.build_markers(@trips) do |trip, marker|
@@ -106,6 +110,12 @@ class TripsController < ApplicationController
   def find_trip
     @trip = Trip.find(params[:id])
     authorize @trip
+  end
+
+  def create_topics(trip)
+    authorize trip
+    Topic.create(title: "Housing", status: "Pending", user_id: current_user.id, trip_id: trip.id)
+    Topic.create(title: "Transport", status: "Pending", user_id: current_user.id, trip_id: trip.id)
   end
 
 end

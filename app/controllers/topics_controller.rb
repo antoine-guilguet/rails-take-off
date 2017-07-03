@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :set_trip, except: [:vote]
+  before_action :set_trip, except: [:vote, :destroy, :close]
   skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
@@ -10,6 +10,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
     @topic.trip = @trip
+    @topic.status = "Pending"
     if @topic.save
       redirect_to trip_path(@trip)
     else
@@ -37,6 +38,27 @@ class TopicsController < ApplicationController
           html_list_of_voters: @suggestion.get_html_list_of_voters,
           message: "vote"
       }
+    end
+  end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+    @topic.destroy
+    redirect_to trip_path(@topic.trip)
+  end
+
+  def close
+    @topic = Topic.find(params[:id])
+    @topic.status = "Closed"
+    @topic.save
+    redirect_to trip_path(@topic.trip)
+  end
+
+  def create_auto
+    topic_type = params[:topic_type]
+    @topic = Topic.create(title: topic_type, user_id: current_user, trip_id: @trip.id, status: "Pending")
+    respond_to do |format|
+      format.js
     end
   end
 

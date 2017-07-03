@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   root 'pages#homepage'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   resources :trips do
     resources :topics, only:[:new, :create]
     get 'leave', on: :member
+    get 'create_auto', to: "topics#create_auto"
+
     resources :invites, only:[:new, :create] do
       get 'confirm', on: :member
       get 'decline', on: :member
@@ -26,10 +29,12 @@ Rails.application.routes.draw do
 
   resources :topics, only:[:edit, :update, :destroy] do
     member do
-      get 'vote'
+      get 'close'
     end
     resources :suggestions, only:[:new, :create, :destroy, :edit, :update]
   end
+
+  get 'vote', to: "topics#vote"
 
 
   # Example of regular route:
