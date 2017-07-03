@@ -11,15 +11,13 @@
 }
 
 .suggestion-number-button {
-  position: relative;
   width: 30px;
   height: 30px;
+  text-align: center;
 }
 
 .suggestion-number-button-text {
-  position: absolute;
-  left: 10px;
-  top: -4px;
+  margin-top: -4px;
 }
 
 .suggestion-name {

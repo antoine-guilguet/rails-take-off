@@ -1,7 +1,7 @@
 <div class="suggestion-line">
 
-  <input name="suggestion_line" class="suggestion-vote-button" type="checkbox" <%= suggestion.voted_by?(current_user) ? 'checked' : "" %> id="suggestion-button" suggestion_id="<%= suggestion.id %>" />
-  <label for="suggestion-button"></label>
+  <input name="suggestion_number" class="suggestion-vote-button" type="checkbox" <%= suggestion.voted_by?(current_user) ? 'checked' : "" %> id="suggestion-button-<%= suggestion.id %>" suggestion_id="<%= suggestion.id %>" />
+  <label for="suggestion-button-<%= suggestion.id %>"></label>
 
   <div class="btn-floating suggestion-number-button" id="suggestion_id_<%= suggestion.id %>">
     <div class="suggestion-number-button-text">
@@ -17,9 +17,3 @@
     <%= suggestion.price.round %>
   </div>
 </div>
-
-<%= content_for :js do %>
-    <%= javascript_tag do %>
-
-  <% end %>
-<% end %>

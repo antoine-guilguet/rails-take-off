@@ -34,10 +34,6 @@
 <%= content_for :js do %>
     <%= javascript_tag do %>
 
-        $(document).ready(function(){
-
-        });
-
         $('.topic-button').click(function(){
           $.ajax({
               url: "<%= trip_create_auto_path(@trip) %>",
@@ -48,6 +44,27 @@
               error: function(jqXHR) {
                   console.error(jqXHR.responseText);
               }
+          });
+        });
+
+        $('.suggestion-vote-button').on("click", function(){
+          $.ajax({
+            type: "GET",
+            url: "<%= vote_path %>",
+            data: { suggestion_id: $(this).attr('suggestion_id') },
+            success: function(data){
+              var suggestionId = data.suggestion.id;
+              var numberOfVotes = data.number_of_votes;
+              var htmlListOfVoters = data.html_list_of_voters;
+              var selector = '#suggestion_id_' + suggestionId
+              $(selector).find('div').text(numberOfVotes);
+              // var popoverSelector = '#survey-popover-' + id;
+              // $(popoverSelector).html("");
+              // $(popoverSelector).append(htmlListOfVoters);
+            },
+            error: function(jqXHR) {
+              console.error(jqXHR.responseText);
+            }
           });
         });
 
