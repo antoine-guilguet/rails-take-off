@@ -56,12 +56,12 @@ class TopicsController < ApplicationController
 
   def create_auto
     topic_type = params[:topic_type]
-    @topic = Topic.create(title: topic_type, user_id: current_user, trip_id: @trip, status: "Pending")
+    @topic = Topic.create(title: topic_type, user_id: current_user, trip_id: @trip.id, status: "Pending")
     respond_to do |format|
       format.js
     end
   end
-  
+
   private
 
   def set_trip

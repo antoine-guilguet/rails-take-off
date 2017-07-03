@@ -12,3 +12,29 @@
     <%= link_to t('topics.add_suggestion'), new_topic_suggestion_path(topic, Suggestion.new), class: "waves-effect waves-light btn" %>
   </div>
 </div>
+
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+      $('.suggestion-vote-button').on("click", function(){
+        $.ajax({
+          type: "GET",
+          url: "<%= vote_topic_path(topic) %>",
+          data: { suggestion_id: $(this).attr('suggestion_id') },
+          success: function(data){
+            var suggestionId = data.suggestion.id;
+            var numberOfVotes = data.number_of_votes;
+            var htmlListOfVoters = data.html_list_of_voters;
+            var selector = '#suggestion_id_' + suggestionId
+            $(selector).text(numberOfVotes);
+            // var popoverSelector = '#survey-popover-' + id;
+            // $(popoverSelector).html("");
+            // $(popoverSelector).append(htmlListOfVoters);
+            },
+          error: function(jqXHR) {
+            console.error(jqXHR.responseText);
+          }
+        });
+      });
+    <% end %>
+<% end %>
