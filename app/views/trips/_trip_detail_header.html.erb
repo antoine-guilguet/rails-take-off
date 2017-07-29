@@ -22,7 +22,7 @@
               </div>
           <% end %>
           <% if policy(@trip).destroy? %>
-              <%= link_to @trip, method: :delete, remote: true do %>
+              <%= link_to @trip, method: :delete do %>
                   <i class="material-icons card-icon">delete</i>
               <% end %>
           <% end %>

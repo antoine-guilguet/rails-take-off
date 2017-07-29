@@ -6,9 +6,13 @@
 
   <div class="card-participants">
     <% trip.trip_participants.each do |trip_participant| %>
-        <div class="avatar avatar-bordered">
-          <%= trip_participant.user.render_initials %>
-        </div>
+          <% if trip_participant.user.facebook_picture_url %>
+              <%= image_tag trip_participant.user.facebook_picture_url, class: "avatar-bordered-photo" %>
+          <% else %>
+            <div class="avatar avatar-bordered">
+              <%= trip_participant.user.render_initials %>
+            </div>
+          <% end %>
     <% end %>
   </div>
 

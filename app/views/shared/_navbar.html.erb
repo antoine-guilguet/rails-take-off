@@ -22,7 +22,7 @@
         <li><%= link_to t('trips'), trips_path %></li>
         <li><%= link_to t('log_out'), destroy_user_session_path, method: :delete %></li>
         <li>
-          <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+          <% avatar_url = current_user.facebook_picture_url || current_user.render_initials %>
           <%= link_to edit_user_registration_path do %>
               <div style="padding-top: 12px; height: 65px;" >
                 <%= image_tag avatar_url, class: "avatar-medium"%>
