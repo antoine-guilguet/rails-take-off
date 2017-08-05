@@ -1,4 +1,17 @@
-/* -------------------------------------
- * CSS code specific to home page
- * (margin/padding adjustments)
- * ------------------------------------- */
+.home-banner {
+  background-size: cover;
+  height: 100vh;
+  color: white;
+}
+
+.home-title-container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin: 0 auto;
+  width: 500px;
+  text-align: center;
+}
+
+.home-banner h1 {
+  font-family: 'Indie Flower', cursive;
+}
