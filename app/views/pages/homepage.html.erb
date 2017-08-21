@@ -2,9 +2,10 @@
   <div class="home-title-container">
     <h1>Take Off</h1>
     <h4>Group Holidays, made Simple</h4>
-    <div class="subscription-div">
-      <%= link_to t('log_in'), class: 'btn' %>
-      <%= link_to t('sign_up'), class: 'btn' %>
+    <div id="subscription">
+      <%= link_to t('log_in'), new_user_session_path, class: 'homepage-button' %>
+      <%= link_to t('sign_up'), new_user_registration_path, class: 'homepage-button homepage-button-sign-up' %>
+      <hr style="width:83%;">
     </div>
   </div>
 </div>
