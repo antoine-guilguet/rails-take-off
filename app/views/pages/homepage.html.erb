@@ -1,2 +1,13 @@
-<h1><%= t('hello') %></h1>
+<div class="home-banner" style="background-image: url('<%= image_path 'travel_2.jpg'%>')">
+  <div class="home-title-container">
+    <h1>Take Off</h1>
+    <h4>Group Holidays, made Simple</h4>
+    <div id="subscription">
+      <%= link_to t('log_in'), new_user_session_path, class: 'homepage-button' %>
+      <%= link_to t('sign_up'), new_user_registration_path, class: 'homepage-button homepage-button-sign-up' %>
+      <hr style="width:83%;">
+      <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    </div>
+  </div>
+</div>
 
