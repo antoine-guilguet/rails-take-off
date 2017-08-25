@@ -6,10 +6,14 @@
       <%= link_to t('log_in'), new_user_session_path, class: 'homepage-button' %>
       <%= link_to t('sign_up'), new_user_registration_path, class: 'homepage-button homepage-button-sign-up' %>
       <hr style="width:83%;">
-      <a href="/users/auth/facebook">
-        <div class="fb-login-button" data-width="250" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="false">
-        </div>
-      </a>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+              <div class="facebook-login-button">
+                <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "adjust" %><br />
+              </div>
+          <% end -%>
+      <% end %>
     </div>
   </div>
 </div>

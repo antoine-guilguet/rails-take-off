@@ -17,6 +17,7 @@
 
 #subscription {
   margin-top: 30px;
+  padding-top: 10px;
   background-color: $secondary-color;
   display: flex;
   flex-direction: column;
@@ -43,4 +44,24 @@
 
 .homepage-button-sign-up {
   background-color: #32B796;
+}
+
+.facebook-login-button {
+  background-color: rgb(59, 89, 152);
+  color: white;
+  height: 50px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  margin: 0 auto;
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.adjust {
+  margin-left: 6px;
 }

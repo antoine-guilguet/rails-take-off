@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  devise_scope :users do
+    get 'sign_in', to: 'users/sessions#new'
+  end
+
   root 'pages#homepage'
 
   resources :trips do
