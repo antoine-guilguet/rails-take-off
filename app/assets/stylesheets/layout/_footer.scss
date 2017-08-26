@@ -1,1 +1,8 @@
-// Your footer style
+#footer {
+  background-color: $secondary-color;
+  height: 150px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

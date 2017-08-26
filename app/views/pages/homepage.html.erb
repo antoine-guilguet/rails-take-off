@@ -1,7 +1,11 @@
-<div class="home-banner" style="background-image: url('<%= image_path 'travel_2.jpg'%>')">
+<div class="home-banner" style="background-image: url('<%= image_path 'travel_3.jpg'%>')">
   <div class="home-title-container">
-    <h1>Take Off</h1>
-    <h4>Group Holidays, made Simple</h4>
+    <div class="logo">
+      <a href="#"><span class="fa fa-map-marker"></i></a>
+    </div>
+    <hr style="width: 50px; background-color: #E57373">
+    <h1>TakeO<span>ff</span></h1>
+    <h4><%= t('punchline') %></h4>
     <div id="subscription">
       <%= link_to t('log_in'), new_user_session_path, class: 'homepage-button' %>
       <%= link_to t('sign_up'), new_user_registration_path, class: 'homepage-button homepage-button-sign-up' %>
@@ -16,5 +20,61 @@
       <% end %>
     </div>
   </div>
+
+  <div class="home-arrow">
+    <a href="#explanation-banner" >
+      <i class="material-icons homepage-icons" style="color: white;">keyboard_arrow_down</i>
+    </a>
+  </div>
 </div>
 
+<div id="explanation-banner">
+  <div class="container">
+    <div class="row">
+      <div class="explanation-box col s10 offset-s1 m6 offset-m3">
+        <div class="icon-box">
+          <i class="material-icons homepage-icons" style="font-size: 100px;">insert_invitation</i>
+        </div>
+        <div>
+          <h5><%= t('invitation_task') %></h5>
+          <p><%= t('invitation_pitch') %></p>
+        </div>
+      </div>
+      <div class="explanation-box col s10 offset-s1 m6 offset-m3">
+        <div class="icon-box">
+          <i class="material-icons homepage-icons" style="font-size: 100px;">assignment</i>
+        </div>
+        <div>
+          <h5><%= t('organization_task') %></h5>
+          <p><%= t('organization_pitch') %></p>
+        </div>
+      </div>
+      <div class="explanation-box col s10 offset-s1 m6 offset-m3">
+        <div class="icon-box">
+          <i class="material-icons homepage-icons" style="font-size: 100px;">attach_money</i>
+        </div>
+        <div>
+          <h5><%= t('share_expense_task') %></h5>
+          <p><%= t('share_expense_pitch') %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="footer">
+  <p>with <span><i class="fa fa-heart" aria-hidden="true"></i></span> from the TakeOff Team </p>
+</div>
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+        $('.home-arrow').mouseenter(function(){
+            $('.material-icons').first().css("color", "black");
+        });
+        $('.home-arrow').mouseleave(function(){
+            $('.material-icons').first().css("color", "white");
+        });
+
+    <% end %>
+<% end %>

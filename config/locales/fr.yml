@@ -108,3 +108,10 @@ fr:
     visit: "Visite"
   suggestions:
     create_suggestion: "Créer une Suggestion"
+  punchline: "Des vacances, sans prise de tête"
+  invitation_task: "Invite tes potes"
+  invitation_pitch: "Envoie une invitation à tes potes, vérifie les disponibilités de chacun et ça part!"
+  organization_task: "Organise ton voyage collectivement"
+  organization_pitch: "AJoute des tâches, envoie tes suggestions et prends une décision en fonction de tes potes"
+  share_expense_task: "Partage les dépenses avec tes potes, sans embrouille"
+  share_expense_pitch: "Récapitule toutes les infos, TakeOff additionne tes dépenses et te permet de les partager avec tes potes facilement."
