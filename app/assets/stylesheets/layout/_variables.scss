@@ -5,7 +5,9 @@ $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 $red: #ee6e73;
 $success-color: color("green", "base") !default;
+$light-success-color: lighten($success-color, 15%) !default;
 $error-color: color("red", "base") !default;
+$light-error-color: lighten($error-color, 15%) !default;
 $link-color: color("light-blue", "darken-1") !default;
 
 

@@ -18,4 +18,11 @@ $third-color: #7BC2FC  !default;
 
 body {
   background: whitesmoke;
+  font-family: 'Lato', sans-serif;
+}
+
+@media (max-width: 500px) {
+ .trip-page-container {
+   width: 90%;
+ }
 }

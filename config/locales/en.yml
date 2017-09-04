@@ -84,6 +84,7 @@ en:
   unlock_instructions: "Didn't receive unlock instructions?"
   send_reset_link: "Reset password"
   invite_user: "Invite a Friend!"
+  invited_by: "Invited by"
   send_invite: "Send Invite"
   confirm_invite: "Confirm Invitation"
   my_invitations: "My Invites"
@@ -109,6 +110,7 @@ en:
   trip:
     details: "Details"
     organization: "Organization"
+    no_trip_information: "You don't have trips yet! Create one!"
   topics:
     topics: "Topics"
     create_topic: "Create a Topic"
@@ -119,6 +121,7 @@ en:
     visit: "Visit"
   suggestions:
     create_suggestion: "Create a suggestion"
+  no_invitation: "You don't have invitations pending"
   punchline: "Group Holidays, made Simple"
   invitation_task: "Invite your friends to join the Trip"
   invitation_pitch: "Send an invitation to your friends. Know who is available, who is not and agree on a date altogether."
@@ -126,4 +129,5 @@ en:
   organization_pitch: "Create Topics, make suggestion and take a collective decision out of it"
   share_expense_task: "Share your expenses among your friends"
   share_expense_pitch: "Summarize all the information of your trip and share expenses with your friends!"
+
 

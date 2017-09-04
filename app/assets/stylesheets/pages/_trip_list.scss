@@ -1,0 +1,30 @@
+.trip-container {
+  background-color: white;
+  border: 3px dashed $primary-color;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding-top: 10px !important;
+  padding-bottom: 30px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  height: 86vh;
+  overflow: scroll;
+}
+
+.trip-headline {
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.no-trip-warning {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  color: $primary-color;
+  font-size: 60px;
+}

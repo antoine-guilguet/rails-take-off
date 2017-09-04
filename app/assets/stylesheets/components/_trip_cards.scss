@@ -1,0 +1,102 @@
+.card {
+  position: relative;
+  height: 170px;
+}
+
+.card-title {
+  color: $primary-color-light;
+  position: absolute;
+  left: 15px;
+  top: 7px;
+  width: 100%;
+  &:hover {
+    text-decoration: underline;
+    transition-duration: 500ms;
+    transition-property: text-decoration;
+  }
+}
+
+.card-destination {
+  position: absolute;
+  top: 98px;
+  left: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.card-dates {
+  position: absolute;
+  bottom: 10px;
+  left: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.card-participants {
+  position: absolute;
+  top: 50px;
+  left: 31px;
+  align-items: center;
+  display: inline-flex;
+}
+
+.card-buttons {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50px;
+}
+
+.card-invite-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 17px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-icon {
+  color: $secondary-color;
+}
+
+.invitation-card-host {
+  top: 45px;
+  left: 17px;
+  position: absolute;
+}
+
+.invitation-card-destination {
+  top: 74px;
+  left: 12px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.invite-button-accept {
+  height: 30px;
+  font-size: 12px;
+  line-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: $light-success-color;
+  &:hover {
+    background-color: $success-color;
+  }
+}
+
+.invite-button-decline {
+  height: 30px;
+  font-size: 12px;
+  line-height: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: $light-error-color;
+  &:hover {
+    background-color: $error-color;
+  }
+}

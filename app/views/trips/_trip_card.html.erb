@@ -1,44 +1,47 @@
-<div class="col s12 card" id="trip-id-<%= trip.id %>">
+<div class="card" id="trip-id-<%= trip.id %>">
 
   <div class="card-title">
     <%= link_to trip.name, trip_path(trip), class: "card-title" %>
   </div>
 
   <div class="card-participants">
+    <p><%= t('participants') %>:</p>
     <% trip.trip_participants.each do |trip_participant| %>
-          <% if trip_participant.user.facebook_picture_url %>
-              <%= image_tag trip_participant.user.facebook_picture_url, class: "avatar-bordered-photo" %>
-          <% else %>
+        <% if trip_participant.user.facebook_picture_url %>
+            <%= image_tag trip_participant.user.facebook_picture_url, class: "avatar-bordered-photo" %>
+        <% else %>
             <div class="avatar avatar-bordered">
               <%= trip_participant.user.render_initials %>
             </div>
-          <% end %>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div class="card-buttons">
+    <% if policy(trip).edit? %>
+        <%= link_to edit_trip_path(trip) do %>
+            <i class="material-icons card-icon">mode_edit</i>
+        <% end %>
+    <% end %>
+    <% if policy(trip).destroy? %>
+        <%= link_to trip, method: :delete, remote: true do %>
+            <i class="material-icons card-icon">delete</i>
+        <% end %>
     <% end %>
   </div>
 
   <div class="card-destination">
+    <i class="material-icons">location_on</i>
     <%= trip.destination %>
-    <p><%= t('number_of_participants') %>: <%= trip.trip_participants.count %></p>
   </div>
 
   <div class="card-dates">
     <% if !trip.start_date.nil? %>
+        <i class="material-icons" style="margin-right: 5px;">date_range</i>
         <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
     <% elsif trip.survey %>
         <%= link_to t('show_survey'), survey_path(trip.survey) %>
     <% end %>
   </div>
 
-  <div class="card-buttons">
-    <% if policy(trip).edit? %>
-      <%= link_to edit_trip_path(trip) do %>
-          <i class="material-icons card-icon">mode_edit</i>
-      <% end %>
-    <% end %>
-    <% if policy(trip).destroy? %>
-      <%= link_to trip, method: :delete, remote: true do %>
-          <i class="material-icons card-icon">delete</i>
-      <% end %>
-    <% end %>
-  </div>
 </div>

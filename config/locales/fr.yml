@@ -76,6 +76,7 @@ fr:
   confirm_invite: "Confirmer l'invitation"
   decline: "Décliner"
   confirm: "Confirmer"
+  invited_by: "Invité par"
   delete: "Supprimer"
   update: "Modifier"
   participants: "Participants"
@@ -98,6 +99,7 @@ fr:
   trip:
     details: "Détails"
     organization: "Organisation"
+    no_trip_information: "Pas de voyage organisé pour le moment, créez en un!"
   topics:
     topics: "Tâches"
     create_topic: "Créer une tâche"
@@ -108,6 +110,7 @@ fr:
     visit: "Visite"
   suggestions:
     create_suggestion: "Créer une Suggestion"
+  no_invitation: "Vous n'avez pas d'invitation en attente"
   punchline: "Des vacances, sans prise de tête"
   invitation_task: "Invite tes potes"
   invitation_pitch: "Envoie une invitation à tes potes, vérifie les disponibilités de chacun et ça part!"

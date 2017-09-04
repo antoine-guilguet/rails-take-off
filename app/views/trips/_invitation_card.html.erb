@@ -1,20 +1,21 @@
-<div class="col s12 card">
+<div class="card">
   <div class="card-title">
     <%= invitation.trip.name %>
   </div>
 
-  <div class="card-destination">
+  <div class="invitation-card-host">
+    <%= t('invited_by') %> <%= invitation.full_name_of_host %>
+  </div>
+
+  <div class="invitation-card-destination">
+    <i class="material-icons">location_on</i>
     <%= invitation.trip.destination %>
   </div>
 
-  <div class="card-participants">
-    <div class="avatar avatar-bordered">
-      <%= User.find(invitation.host_id).render_initials %>
-    </div>
-  </div>
+
 
   <div class="card-invite-buttons">
-    <%= link_to t('decline'), decline_trip_invite_path(invitation.trip, invitation), class: "btn" %>
-    <%= link_to t('confirm'), confirm_trip_invite_path(invitation.trip, invitation), class: "btn" %>
+    <%= link_to t('decline'), decline_trip_invite_path(invitation.trip, invitation), class: "waves-effect waves-light btn invite-button-decline" %>
+    <%= link_to t('confirm'), confirm_trip_invite_path(invitation.trip, invitation), class: "waves-effect waves-light btn invite-button-accept" %>
   </div>
 </div>

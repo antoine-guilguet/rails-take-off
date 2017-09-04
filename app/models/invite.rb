@@ -13,4 +13,12 @@ class Invite < ActiveRecord::Base
   def auto_invitation?
     self.email == User.find(self.host_id).email
   end
+
+  def full_name_of_host
+    if self.trip.host.first_name
+      self.trip.host.first_name + " " + self.trip.host.last_name
+    else
+      self.trip.host.email
+    end
+  end
 end

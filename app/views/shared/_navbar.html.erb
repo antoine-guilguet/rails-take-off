@@ -1,6 +1,7 @@
 <nav>
   <div class="nav-wrapper">
-    <%= link_to 'Take Off', root_path, class:"brand-logo" %>
+    <%= link_to 'Take Off', trips_path, class:"brand-logo" %>
+
     <% if user_signed_in? %>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
