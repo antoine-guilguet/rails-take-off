@@ -41,14 +41,6 @@ class TripPolicy < ApplicationPolicy
     record.host == user
   end
 
-  def decline?
-    record.trip_participants.map(&:user_id).include?(user.id)
-  end
-
-  def confirm?
-    record.trip_participants.map(&:user_id).include?(user.id)
-  end
-
   def create_auto?
     return true
   end

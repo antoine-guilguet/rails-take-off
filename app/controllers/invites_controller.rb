@@ -5,6 +5,7 @@ class InvitesController < ApplicationController
 
   def new
     @invite = Invite.new
+    authorize @invite
   end
 
   def create
@@ -13,6 +14,7 @@ class InvitesController < ApplicationController
       # multi-invitation
       @params.each do |invitee|
         @invite = Invite.new(email: invitee)
+        authorize @invite
         build_invitation(@invite)
         send_invitation(@invite)
       end
@@ -20,6 +22,7 @@ class InvitesController < ApplicationController
     else
       # single invitation
       @invite = Invite.new(email: params[:invite][:email].first)
+      authorize @invite
       build_invitation(@invite)
       send_invitation(@invite)
       if @invite.valid?
@@ -45,11 +48,11 @@ class InvitesController < ApplicationController
 
   def find_trip
     @trip = Trip.find(params[:trip_id])
-    authorize @trip
   end
 
   def find_invite
     @invite = Invite.find(params[:id])
+    authorize @invite
   end
 
   def invite_params
