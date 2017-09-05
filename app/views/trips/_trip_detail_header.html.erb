@@ -2,22 +2,26 @@
   <div class="row">
     <div class="col s12 m6">
       <div class="trip-detail-title">
-        <h4><%= @trip.name %></h4>
-        <h6><%= @trip.destination %></h6>
+        <h5 class="trip-headline"><%= @trip.name %></h5>
+        <h6 class="trip-destination">
+          <i class="material-icons" style="margin-right: 5px;">location_on</i>
+          <%= @trip.destination %>
+        </h6>
+        <h6><%= t('organized_by') %>: <%= @trip.get_host_full_name %></h6>
         <hr>
         <div class="trip-detail-buttons">
           <% if policy(@trip).edit? %>
-              <a href="<%= edit_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('edit_trip') %>">
+              <a href="<%= edit_trip_path(@trip) %>" style="margin-right: 20px;" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('edit_trip') %>">
                 <i class="material-icons card-icon">mode_edit</i>
               </a>
           <% end %>
           <% if policy(@trip).leave? %>
-              <a href="<%= leave_trip_path(@trip) %>" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('leave_trip') %>">
+              <a href="<%= leave_trip_path(@trip) %>" style="margin-right: 20px;" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<%= t('leave_trip') %>">
                 <i class="material-icons">exit_to_app</i>
               </a>
           <% end %>
           <% if policy(@trip).invite? %>
-              <div class="invitation-button tooltipped" data-target="invitation-modal" data-position="top" data-delay="50" data-tooltip="<%= t('invite_user') %>">
+              <div class="invitation-button tooltipped" style="margin-right: 20px;" data-target="invitation-modal" data-position="top" data-delay="50" data-tooltip="<%= t('invite_user') %>">
                 <i class="material-icons">insert_invitation</i>
               </div>
           <% end %>
@@ -32,7 +36,7 @@
 
     <div class="col s12 m6">
       <div class="trip-detail-actions">
-        <h5><%= t('participants') %></h5>
+        <h5 class="trip-headline"><%= t('participants') %></h5>
         <div class="trip-detail-participant">
           <% @trip.trip_participants.each do |trip_participant| %>
               <div class="avatar avatar-bordered">
@@ -40,6 +44,16 @@
               </div>
           <% end %>
         </div>
+
+        <% if @trip.get_trip_invites.empty? %>
+          <div class="trip-detail-participant-not-confirmed">
+            <%= t('all_confirmed') %>
+          </div>
+        <% else %>
+          <div class="trip-detail-participant-not-confirmed tooltipped" data-position="top" data-delay="50" data-tooltip="<%= @trip.get_pending_invites_email.html_safe if !@trip.get_pending_invites_email.nil? %>">
+            <%= t('not_confirmed_participants') %> : <%= @trip.get_trip_invites.count %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

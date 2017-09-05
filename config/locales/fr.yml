@@ -100,6 +100,7 @@ fr:
     details: "Détails"
     organization: "Organisation"
     no_trip_information: "Pas de voyage organisé pour le moment, créez en un!"
+    no_trip_invitation: "Vous n'avez pas acccepté d'invitation pour l'instant!"
   topics:
     topics: "Tâches"
     create_topic: "Créer une tâche"
@@ -118,3 +119,6 @@ fr:
   organization_pitch: "AJoute des tâches, envoie tes suggestions et prends une décision en fonction de tes potes"
   share_expense_task: "Partage les dépenses avec tes potes, sans embrouille"
   share_expense_pitch: "Récapitule toutes les infos, TakeOff additionne tes dépenses et te permet de les partager avec tes potes facilement."
+  not_confirmed_participants: "Non-confirmés"
+  all_confirmed: "Tous les invités ont confirmé"
+  organized_by: "Organisé par"

@@ -1,30 +1,37 @@
-<div class="container form-container">
+<div class="container">
   <div class="row">
-    <div class="col s8 offset-s2">
-      <%= simple_form_for [@trip, @invite] do |f| %>
-          <% if @invite.errors.any? %>
-              <div id="error_explanation">
-                <ul>
-                  <% @invite.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                  <% end %>
-                </ul>
+    <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+      <div class="form-container">
+        <div class="form-header">
+          <h3><%= t('send_invite') %></h3>
+        </div>
+        <div class="form-body">
+          <%= simple_form_for [@trip, @invite] do |f| %>
+              <% if @invite.errors.any? %>
+                  <div id="error_explanation" style="color: red;">
+                    <ul>
+                      <% @invite.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+              <label for="email"><%= t('email_invitation') %></label>
+              <div id="invitations-<%= @trip.id %>">
+                <div class="invitation-row">
+                  <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
+                </div>
+              </div>
+              <div id="new_invitation_button">
+                <i class="fa fa-plus-circle small" aria-hidden="true"></i>
+              </div>
+              <div class="form-actions">
+                <%= f.submit t('send_invite'), class: "waves-effect waves-light btn" %>
+                <%= link_to t('back'), trip_path(@trip), class: "waves-effect waves-light btn" %>
               </div>
           <% end %>
-          <label for="email"><%= t('email_invitation') %></label>
-          <div id="invitations-<%= @trip.id %>">
-            <div class="invitation-row">
-              <%= f.input_field :email, multiple: true, placeholder: "yourfriend@takeoff.com" %>
-            </div>
-          </div>
-          <div id="new_invitation_button">
-            <i class="fa fa-plus-circle small" aria-hidden="true"></i>
-          </div>
-          <div class="form-actions">
-            <%= f.submit t('send_invite'), class: "waves-effect waves-light btn" %>
-            <%= link_to t('back'), trips_path, class: "waves-effect waves-light btn" %>
-          </div>
-      <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -32,11 +39,22 @@
 <%= content_for :js do %>
   <%= javascript_tag do %>
 
-    var emailRow = $('#invitations-<%= @trip.id %>').html();
+        $(document).ready(function(){
+          $('.new-invitation-button').on("click", function(){
+            var newInvitation = $('.form-address-first').html();
 
-    $('#new_invitation_button').click(function(){
-      $('#invitations-<%= @trip.id %>').append(emailRow);
-    });
+            $('#mail-addresses').append(newInvitation).show('slow');
+            $('.add-invitation-button').last().text("remove_circle_outline").removeClass('new-invitation-button').addClass('remove-invitation-button');
+            $('.remove-invitation-button').one("click", function(){
 
+              if ($('#mail-addresses .mail-address-row').length > 1) {
+                $('#mail-addresses .mail-address-row').last().remove();
+              } else {
+                $('#mail-addresses').slideUp();
+                $('#mail-addresses .mail-address-row').last().remove();
+                };
+              });
+          });
+        });
   <% end %>
 <% end %>
