@@ -27,6 +27,7 @@ class TripsController < ApplicationController
       @survey.trip_id = @trip.id
       @survey.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)
+      create_topics(@trip)
       redirect_to trip_path(@trip)
     elsif @trip.save
       TripParticipant.create(user_id: current_user.id, trip_id: @trip.id)

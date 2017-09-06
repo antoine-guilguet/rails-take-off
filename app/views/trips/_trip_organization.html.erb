@@ -15,6 +15,9 @@
         </div>
       </div>
       <div class="trip-topics">
+        <% if @trip.survey %>
+            <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
+        <% end %>
         <% @pending_topics.each do |topic| %>
           <%= render 'topics/topic_card', topic: topic %>
         <% end %>

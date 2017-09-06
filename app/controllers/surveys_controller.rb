@@ -4,13 +4,13 @@ class SurveysController < ApplicationController
   skip_after_action :verify_policy_scoped
 
   def show
-    @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
+    @survey_dates = @survey.sort_by_votes
   end
 
   def destroy
     @trip = @survey.trip
     authorize @trip
-    @survey_date = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!.first
+    @survey_date = @survey.sort_by_votes.first
     @trip.start_date = @survey_date.start_date
     @trip.end_date = @survey_date.end_date
     @trip.save

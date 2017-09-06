@@ -1,8 +1,4 @@
 <div class="survey-body">
-  <% if survey.deadline %>
-      <% deadline = l(survey.deadline, format: :long) %>
-      <p><%= t('survey.deadline', deadline: deadline) %></p>
-  <% end %>
   <div class="survey-table">
     <div class="survey-line-header">
       <div>
@@ -28,10 +24,11 @@
             <%= survey_date.votes_for.size %>
           </div>
 
-          <div class="vote-button-popover" id="survey-popover-<%= survey_date.id %>">
-            <%= survey_date.get_html_list_of_voters.html_safe %>
-          </div>
-
+          <% if survey_date.votes_for.size > 0 %>
+              <div class="vote-button-popover-modal" id="survey-popover-<%= survey_date.id %>">
+                <%= survey_date.get_html_list_of_voters.html_safe %>
+              </div>
+          <% end %>
 
           <div class="survey-dates">
             <%= l(survey_date.start_date, format: :short) %>
@@ -42,8 +39,7 @@
     <% end %>
   </div>
 
-  <div class="survey-action">
-    <%= link_to t('back'), trips_path, class: "btn" %>
+  <div class="survey-action" style="justify-content: center">
     <% if policy(survey).destroy? %>
         <%= link_to t('survey.close_survey'), survey, method: :delete, class: "btn" %>
     <% end %>
@@ -54,7 +50,7 @@
 
 <%= content_for :js do %>
     <%= javascript_tag do %>
-        $('.vote-button-popover').hide();
+        $('.vote-button-popover-modal').hide();
 
         $('.vote-button').on("click", function(){
             $.ajax({
@@ -77,13 +73,13 @@
             });
         });
 
-        $('.survey-number-button').mouseenter(function(){
+        $('.survey-button').mouseenter(function(){
           var id = $(this).attr('survey_date_id');
           var selector = '#survey-popover-' + id;
           $(selector).show();
         });
 
-        $('.survey-number-button').mouseleave(function(){
+        $('.survey-button').mouseleave(function(){
           var id = $(this).attr('survey_date_id');
           var selector = '#survey-popover-' + id;
           $(selector).hide();

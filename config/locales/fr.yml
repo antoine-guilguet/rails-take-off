@@ -96,6 +96,7 @@ fr:
     close_survey: "Clôturer le Sondage"
     set_deadline: "Set a Deadline"
     deadline: "Vous avez jusqu'au %{deadline} pour répondre au sondage"
+    show_survey: "Voir le sondage des dates"
   trip:
     details: "Détails"
     organization: "Organisation"

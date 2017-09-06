@@ -40,7 +40,7 @@
         <i class="material-icons" style="margin-right: 5px;">date_range</i>
         <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
     <% elsif trip.survey %>
-        <%= link_to t('show_survey'), survey_path(trip.survey) %>
+        <%= link_to t('survey.show_survey'), survey_path(trip.survey), class: "card-survey-button" %>
     <% end %>
   </div>
 

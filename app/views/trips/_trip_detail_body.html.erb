@@ -2,28 +2,26 @@
   <div class="col s12 m6">
     <div class="trip-dates-container">
 
-      <% if @trip.survey %>
-          <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
-      <% elsif @trip.start_date %>
-          <div class="trip-summary">
+      <div class="trip-summary">
+        <% if @trip.start_date %>
+        <div class="trip-date">
+          <i class="material-icons">flight_takeoff</i>
+          <%= l(@trip.start_date, format: :long) %>
+        </div>
+        <% if !@closed_topics.nil? %>
+            <ul>
+              <% @closed_topics.each do |topic| %>
+                  <li><%= topic.title %></li>
+              <% end %>
+            </ul>
+        <% end %>
+        <div class="trip-date">
+          <i class="material-icons">flight_land</i>
+          <%= l(@trip.end_date, format: :long) %>
+        </div>
+        <% end %>
+      </div>
 
-            <div class="trip-date">
-              <i class="material-icons">flight_takeoff</i>
-              <%= l(@trip.start_date, format: :long) %>
-            </div>
-            <% if !@closed_topics.nil? %>
-                <ul>
-                  <% @closed_topics.each do |topic| %>
-                      <li><%= topic.title %></li>
-                  <% end %>
-                </ul>
-            <% end %>
-            <div class="trip-date">
-              <i class="material-icons">flight_land</i>
-              <%= l(@trip.end_date, format: :long) %>
-            </div>
-          </div>
-      <% end %>
     </div>
   </div>
 
