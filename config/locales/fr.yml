@@ -57,6 +57,7 @@ fr:
               confirmation: "Les mots de passes ne sont pas identiques"
   hello: "Bonjour world"
   back: "Retour"
+  date: "Dates"
   create_trip: "Créer un Voyage"
   trips: "Voyages"
   log_in: "Connexion"
@@ -112,6 +113,8 @@ fr:
     visit: "Visite"
   suggestions:
     create_suggestion: "Créer une Suggestion"
+    price: "Prix"
+    name: "Nom"
   no_invitation: "Vous n'avez pas d'invitation en attente"
   punchline: "Des vacances, sans prise de tête"
   invitation_task: "Invite tes potes"

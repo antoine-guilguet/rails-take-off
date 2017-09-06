@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div class="trip-organization-container">
       <div class="trip-organization-title">
-        <h5><%= t('topics.topics') %></h5>
+        <h5 class="trip-headline"><%= t('topics.topics') %></h5>
         <div class="fixed-action-btn horizontal">
           <%= link_to new_trip_topic_path(@trip, @survey), class: "btn-floating btn-small indianred" do %>
             <i class="material-icons">add</i>
@@ -14,9 +14,16 @@
           </ul>
         </div>
       </div>
+
       <div class="trip-topics">
         <% if @trip.survey %>
+          <div class="topic-card">
+            <div class="topic-card-title">
+              <h6><%= t('date') %></h6>
+            </div>
             <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
+          </div>
+
         <% end %>
         <% @pending_topics.each do |topic| %>
           <%= render 'topics/topic_card', topic: topic %>

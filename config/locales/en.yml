@@ -73,6 +73,7 @@ en:
               confirmation: "Passwords are not identical"
   hello: "Hello world"
   back: "Back"
+  date: "Dates"
   create_trip: "Create Trip"
   trips: "Trips"
   log_in: "Log In"
@@ -127,6 +128,8 @@ en:
     visit: "Visit"
   suggestions:
     create_suggestion: "Create a suggestion"
+    price: "Price"
+    name: "Name"
   no_invitation: "You don't have invitations pending"
   punchline: "Group Holidays, made Simple"
   invitation_task: "Invite your friends to join the Trip"

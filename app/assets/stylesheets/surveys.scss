@@ -27,6 +27,12 @@
   padding-bottom: 20px;
 }
 
+.survey-body-modal {
+  padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 10px;
+}
+
 .survey-line {
   display: flex;
   justify-content: space-between;
@@ -38,6 +44,15 @@
   border-radius: 4px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.survey-line-modal {
+  height: 50px;
+}
+
+.survey-line-modal > .btn-floating {
+  height: 35px;
+  width: 35px;
 }
 
 .survey-line-header {

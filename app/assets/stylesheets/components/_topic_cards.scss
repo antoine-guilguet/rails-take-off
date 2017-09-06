@@ -1,16 +1,44 @@
 .topic-card{
   border: solid 1px indianred;
-  padding: 20px;
   border-radius: 4px;
-  color: indianred;
   margin-bottom: 15px;
+  padding-top: 10px;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  padding-bottom: 10px;
+}
+
+.topic-body {
+  padding: 10px;
+  padding-top: 2px;
+  padding-bottom: 10px;
 }
 
 .topic-card-title {
-
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
+.topic-line-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  border: solid 0.1px #d4c6c6;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  margin-top: 10px;
+  border-radius: 4px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.topic-line-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 160px;
+}
 
 .topic-card-actions {
   margin-top: 20px;
