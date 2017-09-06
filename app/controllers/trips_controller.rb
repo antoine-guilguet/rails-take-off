@@ -14,6 +14,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     @trip.host = current_user
 
     if params[:trip][:start_date].count > 1 && @trip.save
@@ -45,7 +46,7 @@ class TripsController < ApplicationController
     @invite = Invite.new
     if @trip.survey
       @survey = @trip.survey
-      @survey_dates = @survey.survey_dates.sort_by { |survey_date| survey_date.votes_for.size }.reverse!
+      @survey_dates = @survey.sort_by_votes
     end
 
     @topic = Topic.new
@@ -74,12 +75,12 @@ class TripsController < ApplicationController
       end
       @survey.trip_id = @trip.id
       @survey.save
-      redirect_to trips_path
+      redirect_to trip_path(@trip)
     elsif @trip.update(trip_params)
       @trip.start_date = params[:trip][:start_date][0]
       @trip.end_date = params[:trip][:end_date][0]
       @trip.save
-      redirect_to trips_path
+      redirect_to trip_path(@trip)
     else
       render :edit
     end

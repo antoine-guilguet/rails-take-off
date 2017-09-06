@@ -51,9 +51,13 @@ en:
         trip:
           attributes:
             name:
-              blank: "Donnez un nom frais à votre voyage"
+              blank: "Give a fancy name to your trip"
             destination:
-              blank: "Entrez une destination pour votre voyage"
+              blank: "Enter a destination for your trip!"
+            start_date:
+              blank: "You trip must have a start date"
+            end_date:
+              blank: "You trip must have an end date"
         user:
           attributes:
             first_name:

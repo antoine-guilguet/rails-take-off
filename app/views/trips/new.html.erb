@@ -8,7 +8,8 @@
         <div class="form-body">
           <%= simple_form_for @trip do |f| %>
               <%= f.input :name %>
-              <%= f.input :destination %>
+              <%= f.label :destination, required: true %>
+              <%= f.input :destination, label: false %>
               <div id="trip-dates">
                 <div class="form-dates">
                   <div class="input-field label">
