@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
   before_action :find_survey
-  skip_after_action :verify_authorized, except: [:destroy, :set_deadline]
+  skip_after_action :verify_authorized, except: [:destroy]
   skip_after_action :verify_policy_scoped
 
   def show
@@ -38,19 +38,6 @@ class SurveysController < ApplicationController
           html_list_of_voters: @survey_date.get_html_list_of_voters,
           message: "vote"
       }
-    end
-  end
-
-  def set_deadline
-    authorize @survey
-  end
-
-  def send_deadline
-    authorize @survey
-    if @survey.update(set_deadline_params)
-      redirect_to survey_path(@survey)
-    else
-      render :'set_deadline'
     end
   end
 

@@ -24,8 +24,4 @@ class SurveyPolicy < ApplicationPolicy
   def set_deadline?
     record.trip.host == user
   end
-
-  def set_deadline?
-    record.trip.host == user
-  end
 end

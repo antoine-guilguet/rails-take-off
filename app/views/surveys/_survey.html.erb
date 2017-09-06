@@ -44,9 +44,6 @@
 
   <div class="survey-action">
     <%= link_to t('back'), trips_path, class: "btn" %>
-    <% if !survey.deadline && policy(survey).set_deadline? %>
-        <%= link_to t('survey.set_deadline'), set_deadline_survey_path(survey), class: "btn" %>
-    <% end %>
     <% if policy(survey).destroy? %>
         <%= link_to t('survey.close_survey'), survey, method: :delete, class: "btn" %>
     <% end %>
