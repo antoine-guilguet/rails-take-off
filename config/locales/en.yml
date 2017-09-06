@@ -133,5 +133,9 @@ en:
   not_confirmed_participants: "Not confirmed"
   all_confirmed: "Everyone invited has confirmed"
   organized_by: "Organized by"
+  waiting_for_confirmation: "Currently waiting confirmation for"
+  cancel_account: "Cancel your account"
+  wish_to_cancel_account: "Do you want to cancel your account?"
+  edit_account: "Edit your profile"
 
 

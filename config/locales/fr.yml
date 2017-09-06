@@ -122,3 +122,7 @@ fr:
   not_confirmed_participants: "Non-confirmés"
   all_confirmed: "Tous les invités ont confirmé"
   organized_by: "Organisé par"
+  waiting_for_confirmation: "Actuellement en attente de confirmation"
+  cancel_account: "Clôturer votre compte"
+  wish_to_cancel_account: "Voulez-vous supprimer votre compte?"
+  edit_account: "Modifier votre profil"

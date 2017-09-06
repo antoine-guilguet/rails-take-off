@@ -1,37 +1,39 @@
-<div class="container form-container">
+<div class="container">
   <div class="row">
-    <div class="col s8 offset-s2">
+    <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+      <div class="form-container">
+        <div class="form-header">
+          <h3><%= t('edit_account') %></h3>
+        </div>
+        <div class="form-body">
 
-      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= f.error_notification %>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= f.error_notification %>
+              <div class="form-inputs">
+                <%= f.input :first_name, required: true, autofocus: true %>
+                <%= f.input :last_name, required: true, autofocus: true %>
+                <%= f.input :email, required: true, autofocus: true %>
 
-        <div class="form-inputs">
-          <%= f.input :first_name, required: true, autofocus: true %>
-          <%= f.input :last_name, required: true, autofocus: true %>
-          <%= f.input :email, required: true, autofocus: true %>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <p><%= t('waiting_for_confirmation') %>: <%= resource.unconfirmed_email %></p>
+                <% end %>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+                <%= f.input :password_confirmation, required: false %>
+                <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, "Update" %>
+              </div>
           <% end %>
 
-          <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-          <%= f.input :password_confirmation, required: false %>
-          <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+          <h5><%= t('cancel_account') %></h5>
+
+          <div class="form-actions"><%= t('wish_to_cancel_account') %>: <%= link_to "Cancel", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn" %></div>
+
         </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Update" %>
-        </div>
-      <% end %>
-
-      <h3>Cancel my account</h3>
-
-      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-      <%= link_to t('back'), root_path, class: 'btn' %>
-
+      </div>
     </div>
   </div>
-</div>
