@@ -11,6 +11,11 @@
   padding-right: 20px;
 }
 
+.suggestion-line:hover {
+  background-color: #f1f1f1;
+  transition-duration: 300ms;
+}
+
 .suggestion-line-description {
   display: flex;
   justify-content: space-between;

@@ -24,11 +24,13 @@
             </div>
             <% @survey_dates.each do |survey_date| %>
                 <div class="survey-line">
-                  <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
+                  <input name="group1" class="survey-vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
                   <label for="<%= survey_date.id %>"></label>
 
-                  <div class="btn-floating survey-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
-                    <%= survey_date.votes_for.size %>
+                  <div class="btn-floating number-votes-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
+                    <div class="number-votes-button-text">
+                      <%= survey_date.votes_for.size %>
+                    </div>
                   </div>
 
                   <% if survey_date.votes_for.size > 0 %>
@@ -47,7 +49,7 @@
             <% end %>
           </div>
 
-          <div class="survey-action">
+          <div class="survey-actions">
             <%= link_to t('back'), trips_path, class: "btn" %>
             <% if policy(@survey).destroy? %>
                 <%= link_to t('survey.close_survey'), @survey, method: :delete, class: "btn" %>
@@ -62,7 +64,7 @@
       <%= javascript_tag do %>
           $('.vote-button-popover').hide();
 
-          $('.vote-button').on("click", function(){
+          $('.survey-vote-button').on("click", function(){
             $.ajax({
               type: "GET",
               url: "<%= vote_survey_path(@survey) %>",
@@ -72,7 +74,7 @@
                 var numberOfVotes = data.number_of_votes;
                 var htmlListOfVoters = data.html_list_of_voters;
                 var selector = '[survey_date_id =' + id + ']'
-                $(selector).text(numberOfVotes);
+                $(selector).find('div').text(numberOfVotes);
                 var popoverSelector = '#survey-popover-' + id;
                 $(popoverSelector).html("");
                 $(popoverSelector).append(htmlListOfVoters);
@@ -83,13 +85,13 @@
             });
           });
 
-          $('.survey-button').mouseenter(function(){
+          $('.number-votes-button').mouseenter(function(){
             var id = $(this).attr('survey_date_id');
             var selector = '#survey-popover-' + id;
             $(selector).show();
           });
 
-          $('.survey-button').mouseleave(function(){
+          $('.number-votes-button').mouseleave(function(){
             var id = $(this).attr('survey_date_id');
             var selector = '#survey-popover-' + id;
             $(selector).hide();
