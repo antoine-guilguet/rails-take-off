@@ -5,7 +5,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     @token = params[:invite_token]
-    @email = Invite.find_by(token: @token).email
+    @email = Invite.find_by(token: @token).email if Invite.find_by(token: @token)
     super
   end
 
