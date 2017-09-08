@@ -100,3 +100,20 @@
     background-color: $error-color;
   }
 }
+
+.card-survey-button {
+  background-color: white;
+  color: $badge-bg-color;
+  padding: 5px;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid $badge-bg-color;
+  transition: all ease 300ms;
+  &:hover {
+    background-color: $badge-bg-color;
+    color: white;
+    transition-property: background-color;
+    transition-duration: 300ms;
+  }
+}

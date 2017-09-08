@@ -51,9 +51,13 @@ en:
         trip:
           attributes:
             name:
-              blank: "Donnez un nom frais à votre voyage"
+              blank: "Give a fancy name to your trip"
             destination:
-              blank: "Entrez une destination pour votre voyage"
+              blank: "Enter a destination for your trip!"
+            start_date:
+              blank: "You trip must have a start date"
+            end_date:
+              blank: "You trip must have an end date"
         user:
           attributes:
             first_name:
@@ -69,6 +73,7 @@ en:
               confirmation: "Passwords are not identical"
   hello: "Hello world"
   back: "Back"
+  date: "Dates"
   create_trip: "Create Trip"
   trips: "Trips"
   log_in: "Log In"
@@ -107,6 +112,7 @@ en:
     close_survey: "Close survey"
     set_deadline: "Set a Deadline"
     deadline: "You have until %{deadline} to answer the survey"
+    show_survey: "See Survey dates"
   trip:
     details: "Details"
     organization: "Organization"
@@ -122,6 +128,8 @@ en:
     visit: "Visit"
   suggestions:
     create_suggestion: "Create a suggestion"
+    price: "Price"
+    name: "Name"
   no_invitation: "You don't have invitations pending"
   punchline: "Group Holidays, made Simple"
   invitation_task: "Invite your friends to join the Trip"

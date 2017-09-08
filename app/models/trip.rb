@@ -1,8 +1,10 @@
 class Trip < ActiveRecord::Base
 
+  #### VALIDATIONS ###
   validates :name, presence: true
   validates :destination, presence: true
 
+  #### RELATIONS ###
   has_many :trip_participants, dependent: :destroy
   has_many :users, through: :trip_participants, dependent: :destroy
   belongs_to :host, class_name: 'User', foreign_key: 'user_id'

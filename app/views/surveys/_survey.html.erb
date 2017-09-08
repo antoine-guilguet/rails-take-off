@@ -1,62 +1,59 @@
-<div class="survey-body">
-  <% if survey.deadline %>
-      <% deadline = l(survey.deadline, format: :long) %>
-      <p><%= t('survey.deadline', deadline: deadline) %></p>
-  <% end %>
-  <div class="survey-table">
-    <div class="survey-line-header">
+<div class="survey-body survey-body-modal">
+  <div class="survey-line-header" style="height: 50px;">
+    <div>
+    </div>
+    <div class="survey-line-header-vote">
+      <%= t('survey.number_of_votes') %>
+    </div>
+    <div class="survey-dates">
       <div>
+        <%= t('date.start_date') %>
       </div>
       <div>
-        <%= t('survey.number_of_votes') %>
-      </div>
-      <div class="survey-dates">
-        <div>
-          <%= t('date.start_date') %>
-        </div>
-        <div>
-          <%= t('date.end_date') %>
-        </div>
+        <%= t('date.end_date') %>
       </div>
     </div>
-    <% survey_dates.each do |survey_date| %>
-        <div class="survey-line">
-          <input name="group1" class="vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
-          <label for="<%= survey_date.id %>"></label>
+  </div>
+  <% survey_dates.each do |survey_date| %>
+      <div class="survey-line survey-line-modal">
+        <input name="group1" class="survey-vote-button" type="checkbox" <%= survey_date.voted_by?(current_user) ? 'checked' :"" %> id="<%= survey_date.id %>" />
+        <label for="<%= survey_date.id %>"></label>
 
-          <div class="btn-floating survey-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
+        <div class="btn-floating number-votes-button" survey_date_id="<%= survey_date.id %>" id="survey_date_button_<%= survey_date.id %>">
+          <div class="number-votes-button-text">
             <%= survey_date.votes_for.size %>
           </div>
-
-          <div class="vote-button-popover" id="survey-popover-<%= survey_date.id %>">
-            <%= survey_date.get_html_list_of_voters.html_safe %>
-          </div>
-
-
-          <div class="survey-dates">
-            <%= l(survey_date.start_date, format: :short) %>
-            <i class="material-icons">trending_flat</i>
-            <%= l(survey_date.end_date, format: :short) %>
-          </div>
         </div>
-    <% end %>
-  </div>
 
-  <div class="survey-action">
-    <%= link_to t('back'), trips_path, class: "btn" %>
-    <% if policy(survey).destroy? %>
-        <%= link_to t('survey.close_survey'), survey, method: :delete, class: "btn" %>
-    <% end %>
-  </div>
+        <% if survey_date.votes_for.size > 0 %>
+            <div class="number-votes-button-popover" id="survey-popover-<%= survey_date.id %>">
+              <%= survey_date.get_html_list_of_voters.html_safe %>
+            </div>
+        <% end %>
+
+        <div class="survey-dates">
+          <%= l(survey_date.start_date, format: :short) %>
+          <i class="material-icons">trending_flat</i>
+          <%= l(survey_date.end_date, format: :short) %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<div class="survey-actions" style="justify-content: center">
+  <% if policy(survey).destroy? %>
+      <%= link_to t('survey.close_survey'), survey, method: :delete, class: "btn" %>
+  <% end %>
 </div>
 
 
 
 <%= content_for :js do %>
     <%= javascript_tag do %>
-        $('.vote-button-popover').hide();
 
-        $('.vote-button').on("click", function(){
+        $('.number-votes-button-popover').hide();
+
+        $('.survey-vote-button').on("click", function(){
             $.ajax({
               type: "GET",
               url: "<%= vote_survey_path(survey) %>",
@@ -65,8 +62,8 @@
                 var id = data.survey_date.id;
                 var numberOfVotes = data.number_of_votes;
                 var htmlListOfVoters = data.html_list_of_voters;
-                var selector = '[survey_date_id =' + id + ']'
-                $(selector).text(numberOfVotes);
+                var selector = '[survey_date_id =' + id + ']';
+                $(selector).find('div').text(numberOfVotes);
                 var popoverSelector = '#survey-popover-' + id;
                 $(popoverSelector).html("");
                 $(popoverSelector).append(htmlListOfVoters);
@@ -77,13 +74,13 @@
             });
         });
 
-        $('.survey-number-button').mouseenter(function(){
+        $('.number-votes-button').mouseenter(function(){
           var id = $(this).attr('survey_date_id');
           var selector = '#survey-popover-' + id;
           $(selector).show();
         });
 
-        $('.survey-number-button').mouseleave(function(){
+        $('.number-votes-button').mouseleave(function(){
           var id = $(this).attr('survey_date_id');
           var selector = '#survey-popover-' + id;
           $(selector).hide();
