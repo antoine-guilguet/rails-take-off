@@ -3,11 +3,17 @@
   <input name="suggestion_number" class="suggestion-vote-button" type="checkbox" <%= suggestion.voted_by?(current_user) ? 'checked' : "" %> id="suggestion-button-<%= suggestion.id %>" suggestion_id="<%= suggestion.id %>" />
   <label for="suggestion-button-<%= suggestion.id %>"></label>
 
-  <div class="btn-floating suggestion-number-button" id="suggestion_id_<%= suggestion.id %>">
+  <div class="btn-floating suggestion-number-button" id="suggestion_id_<%= suggestion.id %>" suggestion_id="<%= suggestion.id %>">
     <div class="suggestion-number-button-text">
       <%= suggestion.votes_for.size %>
     </div>
   </div>
+
+  <% if suggestion.votes_for.size > 0 %>
+      <div class="number-votes-button-popover" id="suggestion-popover-<%= suggestion.id %>">
+        <%= suggestion.get_html_list_of_voters.html_safe %>
+      </div>
+  <% end %>
 
   <div class="suggestion-line-description">
     <div class="suggestion-name">

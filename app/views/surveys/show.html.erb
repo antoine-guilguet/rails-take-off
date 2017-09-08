@@ -34,7 +34,7 @@
                   </div>
 
                   <% if survey_date.votes_for.size > 0 %>
-                    <div class="vote-button-popover" id="survey-popover-<%= survey_date.id %>">
+                    <div class="number-votes-button-popover" id="survey-popover-<%= survey_date.id %>">
                       <%= survey_date.get_html_list_of_voters.html_safe %>
                     </div>
                   <% end %>
@@ -62,7 +62,7 @@
 
   <%= content_for :js do %>
       <%= javascript_tag do %>
-          $('.vote-button-popover').hide();
+          $('.number-votes-button-popover').hide();
 
           $('.survey-vote-button').on("click", function(){
             $.ajax({

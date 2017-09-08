@@ -68,14 +68,28 @@
               var htmlListOfVoters = data.html_list_of_voters;
               var selector = '#suggestion_id_' + suggestionId
               $(selector).find('div').text(numberOfVotes);
-              // var popoverSelector = '#survey-popover-' + id;
-              // $(popoverSelector).html("");
-              // $(popoverSelector).append(htmlListOfVoters);
+              var popoverSelector = '#suggestion-popover-' + id;
+              $(popoverSelector).html("");
+              $(popoverSelector).append(htmlListOfVoters);
             },
             error: function(jqXHR) {
               console.error(jqXHR.responseText);
             }
           });
+        });
+
+        $('.number-votes-button-popover').hide();
+
+        $('.suggestion-number-button').mouseenter(function(){
+          var id = $(this).attr('suggestion_id');
+          var selector = '#suggestion-popover-' + id;
+          $(selector).show();
+        });
+
+        $('.suggestion-number-button').mouseleave(function(){
+          var id = $(this).attr('suggestion_id');
+          var selector = '#suggestion-popover-' + id;
+          $(selector).hide();
         });
 
     <% end %>

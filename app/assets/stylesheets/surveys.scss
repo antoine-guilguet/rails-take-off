@@ -61,6 +61,7 @@
   border-radius: 4px;
   padding-left: 20px;
   padding-right: 20px;
+  position: relative;
 }
 
 .survey-line-modal {
@@ -79,32 +80,21 @@
   transition-duration: 300ms;
 }
 
-.vote-button-popover{
-  background-color: #585555;
-  color: white;
-  border-radius: 4px;
-  position: absolute;
-  left: 47%;
-  z-index: 200;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 .number-votes-button-popover{
   background-color: #585555;
   color: white;
   border-radius: 4px;
-  position: absolute;
-  left: 25%;
-  z-index: 200;
   padding-left: 5px;
   padding-right: 5px;
+  position: absolute;
+  left: 41%;
 }
 
 .number-votes-button {
   width: 30px;
   height: 30px;
   text-align: center;
+  position: relative;
 }
 
 .number-votes-button-text {
