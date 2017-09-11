@@ -1,0 +1,15 @@
+<%= simple_form_for [topic, suggestion] do |f| %>
+
+    <%= f.label :name %>
+    <%= f.input :name, label: false %>
+    <%= f.label :price %>
+    <%= f.input :price, label: false %>
+    <%= f.label :description %>
+    <%= f.input :description, label: false %>
+    <%= f.hidden_field :confirmation, value: true %>
+    <div class="form-actions">
+      <%= t('paid_by') %>: <%= current_user.get_user_full_name %> (<%= t('you') %>)
+      <%= f.submit t('validate'), class: "waves-effect waves-light btn", data: { confirm: "Are you sure?" } %>
+    </div>
+
+<% end %>

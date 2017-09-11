@@ -66,7 +66,7 @@ class TripsController < ApplicationController
 
   def update
     authorize @trip
-    if @trip.update(trip_params) && params[:trip][:start_date].count > 1
+    if @trip.update(trip_params) && params[:trip][:start_date] && params[:trip][:start_date].count > 1
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
       end_dates = params[:trip][:end_date]
@@ -76,10 +76,12 @@ class TripsController < ApplicationController
       @survey.trip_id = @trip.id
       @survey.save
       redirect_to trip_path(@trip)
-    elsif @trip.update(trip_params)
+    elsif @trip.update(trip_params) && params[:trip][:start_date]
       @trip.start_date = params[:trip][:start_date][0]
       @trip.end_date = params[:trip][:end_date][0]
       @trip.save
+      redirect_to trip_path(@trip)
+    elsif @trip.update(trip_params)
       redirect_to trip_path(@trip)
     else
       render :edit

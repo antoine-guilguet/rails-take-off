@@ -106,6 +106,8 @@ fr:
   topics:
     topics: "Tâches"
     create_topic: "Créer une tâche"
+    edit_topic: "Modifier une tâche"
+    validate_topic: "Êtes-vous sûr de vouloir valider cette tâche?"
     close_topic: "Finir"
     add_suggestion: "Ajouter une Suggestion"
     transport: "Transport"
@@ -113,6 +115,7 @@ fr:
     visit: "Visite"
   suggestions:
     create_suggestion: "Créer une Suggestion"
+    edit_suggestion: "Modifier votre suggestion"
     price: "Prix"
     name: "Nom"
   no_invitation: "Vous n'avez pas d'invitation en attente"
@@ -131,3 +134,6 @@ fr:
   wish_to_cancel_account: "Voulez-vous supprimer votre compte?"
   edit_account: "Modifier votre profil"
   expenses: "Dépenses"
+  paid_by: "Payé par:"
+  you: "Toi"
+  validate: "Valider"

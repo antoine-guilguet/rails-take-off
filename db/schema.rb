@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908165021) do
+ActiveRecord::Schema.define(version: 20170911204426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,10 +91,12 @@ ActiveRecord::Schema.define(version: 20170908165021) do
     t.datetime "end_date"
     t.integer  "trip_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "suggestion_id"
   end
 
+  add_index "topics", ["suggestion_id"], name: "index_topics_on_suggestion_id", using: :btree
   add_index "topics", ["trip_id"], name: "index_topics_on_trip_id", using: :btree
   add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
@@ -172,6 +174,7 @@ ActiveRecord::Schema.define(version: 20170908165021) do
   add_foreign_key "suggestions", "users"
   add_foreign_key "survey_dates", "surveys"
   add_foreign_key "surveys", "trips"
+  add_foreign_key "topics", "suggestions"
   add_foreign_key "topics", "trips"
   add_foreign_key "topics", "users"
   add_foreign_key "trip_participants", "trips"

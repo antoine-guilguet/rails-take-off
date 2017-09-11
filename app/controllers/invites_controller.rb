@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
 
-  before_action :find_trip, only: [:new, :create, :confirm, :decline]
+  before_action :find_trip
   before_action :find_invite, only: [:confirm, :decline]
 
   def new

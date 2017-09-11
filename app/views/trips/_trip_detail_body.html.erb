@@ -4,21 +4,23 @@
 
       <div class="trip-summary">
         <% if @trip.start_date %>
-        <div class="trip-date">
-          <i class="material-icons">flight_takeoff</i>
-          <%= l(@trip.start_date, format: :long) %>
-        </div>
+          <div class="trip-date">
+            <i class="material-icons">flight_takeoff</i>
+            <%= l(@trip.start_date, format: :long) %>
+          </div>
+
+          <div class="trip-date">
+            <i class="material-icons">flight_land</i>
+            <%= l(@trip.end_date, format: :long) %>
+          </div>
+        <% end %>
+
         <% if !@closed_topics.nil? %>
             <ul>
               <% @closed_topics.each do |topic| %>
                   <li><%= topic.title %></li>
               <% end %>
             </ul>
-        <% end %>
-        <div class="trip-date">
-          <i class="material-icons">flight_land</i>
-          <%= l(@trip.end_date, format: :long) %>
-        </div>
         <% end %>
       </div>
 

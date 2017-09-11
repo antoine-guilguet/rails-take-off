@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="row">
+    <div class="col l6 offset-l3 m8 offset-m2 s12 ">
+      <div class="form-container">
+        <div class="form-header">
+          <h3><%= t('topics.close_topic') %></h3>
+        </div>
+        <div class="form-body">
+          <div class="row">
+            <div class="col s12">
+              <div class="topic-line-header"">
+                <div>
+                </div>
+                <div class="topic-line-header-vote">
+                  <%= t('survey.number_of_votes') %>
+                </div>
+                <div class="topic-line-header-title">
+                  <div>
+                    <%= t('suggestions.name') %>
+                  </div>
+                  <div>
+                    <%= t('suggestions.price') %>
+                  </div>
+                </div>
+              </div>
+
+              <% @suggestions.each do |suggestion| %>
+                  <%= render "suggestions/suggestion_list", suggestion: suggestion %>
+              <% end %>
+            </div>
+
+            <div class="col s12" id="winning-suggestion">
+              <%= render 'suggestions/suggestion_form', topic: @topic, suggestion: @suggestion %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= content_for :js do %>
+    <%= javascript_tag do %>
+
+      $('.suggestion-line').click(function(){
+        $.ajax({
+          url: "<%= get_suggestion_topic_path(@topic) %>",
+          type: "GET",
+          data: { suggestion_id: $(this).find('input').attr('suggestion_id') },
+          success: function(data){
+          },
+          error: function(jqXHR) {
+            console.error(jqXHR.responseText);
+          }
+        });
+      });
+
+
+      $('.number-votes-button-popover').hide();
+
+      $('.suggestion-number-button').mouseenter(function(){
+      var id = $(this).attr('suggestion_id');
+      var selector = '#suggestion-popover-' + id;
+      $(selector).show();
+      });
+
+      $('.suggestion-number-button').mouseleave(function(){
+      var id = $(this).attr('suggestion_id');
+      var selector = '#suggestion-popover-' + id;
+      $(selector).hide();
+      });
+
+    <% end %>
+<% end %>

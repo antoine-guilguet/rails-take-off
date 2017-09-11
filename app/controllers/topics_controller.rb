@@ -1,14 +1,16 @@
 class TopicsController < ApplicationController
-  before_action :set_trip, except: [:vote, :destroy, :close]
-  skip_after_action :verify_authorized
-  skip_after_action :verify_policy_scoped
+
+  before_action :set_trip, only: [:new, :create]
+  before_action :set_topic, only: [:edit, :update, :destroy, :confirm]
 
   def new
     @topic = Topic.new
+    authorize @topic
   end
 
   def create
     @topic = Topic.new(topic_params)
+    authorize @topic
     @topic.trip = @trip
     @topic.status = "Pending"
     if @topic.save
@@ -18,41 +20,34 @@ class TopicsController < ApplicationController
     end
   end
 
-  def vote
-    @suggestion = Suggestion.find(params[:suggestion_id])
-    if current_user.voted_up_on? @suggestion
-      # Downvote Suggestion
-      @suggestion.unliked_by current_user
-      render json: {
-          suggestion: @suggestion,
-          number_of_votes: @suggestion.votes_for.size,
-          html_list_of_voters: @suggestion.get_html_list_of_voters,
-          message: "downvote"
-      }
+  def edit
+  end
+
+  def update
+    if @topic.update(topic_params)
+      redirect_to trip_path(@topic.trip)
     else
-      # Vote for suggestion
-      @suggestion.liked_by current_user
-      render json: {
-          suggestion: @suggestion,
-          number_of_votes: @suggestion.votes_for.size,
-          html_list_of_voters: @suggestion.get_html_list_of_voters,
-          message: "vote"
-      }
+      render :edit
     end
   end
 
   def destroy
-    @topic = Topic.find(params[:id])
     @topic.destroy
     redirect_to trip_path(@topic.trip)
   end
 
-  def close
+  def confirm
     @topic = Topic.find(params[:id])
+    @suggestions = @topic.sort_suggestions_by_vote
     @suggestion = @topic.find_winning_suggestion
+    # Lead to suggestions#update
     # @topic.status = "Closed"
     # @topic.save
     # redirect_to trip_path(@topic.trip)
+  end
+
+  def close
+    raise
   end
 
   def create_auto
@@ -63,11 +58,24 @@ class TopicsController < ApplicationController
     end
   end
 
+  def get_suggestion
+    @topic = Topic.find(params[:id])
+    authorize @topic
+    @suggestion = Suggestion.find(params[:suggestion_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def set_trip
     @trip = Trip.find(params[:trip_id])
-    authorize @trip
+  end
+
+  def set_topic
+    @topic = Topic.find(params[:id])
+    authorize @topic
   end
 
   def topic_params

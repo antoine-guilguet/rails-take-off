@@ -1,0 +1,6 @@
+var suggestion = $("<%= j render 'suggestions/suggestion_form', topic: @topic, suggestion: @suggestion %>").hide();
+
+$('#winning-suggestion').html("");
+$('#winning-suggestion').prepend(suggestion);
+
+suggestion.show();

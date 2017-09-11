@@ -41,6 +41,14 @@ class User < ActiveRecord::Base
     !self.first_name.nil? ? self.first_name.first + self.last_name.first : ""
   end
 
+  def get_user_full_name
+    if self.first_name
+      self.first_name + " " + self.last_name
+    else
+      self.email
+    end
+  end
+
   private
 
   def send_welcome_email

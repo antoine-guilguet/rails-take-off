@@ -121,13 +121,16 @@ en:
   topics:
     topics: "Topics"
     create_topic: "Create a Topic"
+    edit_topic: "Edit a Topic"
     close_topic: "Close Topic"
+    validate_topic: "Are you sure to validate this Topic?"
     add_suggestion: "Add a Suggestion"
     transport: "Transport"
     housing: "Housing"
     visit: "Visit"
   suggestions:
     create_suggestion: "Create a suggestion"
+    edit_suggestion: "Edit your suggestion"
     price: "Price"
     name: "Name"
   no_invitation: "You don't have invitations pending"
@@ -146,4 +149,6 @@ en:
   wish_to_cancel_account: "Do you want to cancel your account?"
   edit_account: "Edit your profile"
   expenses: "Expenses"
-
+  paid_by: "Paid by"
+  you: "You"
+  validate: "Validate"
