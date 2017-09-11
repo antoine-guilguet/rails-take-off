@@ -25,7 +25,9 @@
     <% end %>
 
     <div class="topic-card-actions">
-      <%= link_to t('topics.close_topic'), close_topic_path(topic), class: "waves-effect waves-light btn" %>
+      <% if !topic.suggestions.empty? %>
+        <%= link_to t('topics.close_topic'), close_topic_path(topic), class: "waves-effect waves-light btn" %>
+      <% end %>
       <%= link_to t('topics.add_suggestion'), new_topic_suggestion_path(topic, Suggestion.new), class: "waves-effect waves-light btn" %>
     </div>
   </div>

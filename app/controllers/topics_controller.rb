@@ -49,9 +49,10 @@ class TopicsController < ApplicationController
 
   def close
     @topic = Topic.find(params[:id])
-    @topic.status = "Closed"
-    @topic.save
-    redirect_to trip_path(@topic.trip)
+    @suggestion = @topic.find_winning_suggestion
+    # @topic.status = "Closed"
+    # @topic.save
+    # redirect_to trip_path(@topic.trip)
   end
 
   def create_auto
