@@ -1,0 +1,15 @@
+<h5 class="trip-headline"><%= t('expenses') %></h5>
+
+<div>
+  Total: <%= @trip.compute_total_expenses %>
+</div>
+
+<div>
+  <% @trip.trip_participants.each do |participant| %>
+      <ul>
+        <li>
+          <%= participant.user.compute_user_expenses(@trip) %>
+        </li>
+      </ul>
+  <% end %>
+</div>

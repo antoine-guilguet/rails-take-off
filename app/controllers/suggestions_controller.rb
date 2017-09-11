@@ -89,5 +89,7 @@ class SuggestionsController < ApplicationController
     @topic.expense = @suggestion.price
     @topic.suggestion = @suggestion
     @topic.save
+    Expense.create(amount: @suggestion.price, user_id: current_user.id, trip_id: @topic.trip.id, topic_id: @topic)
   end
+
 end

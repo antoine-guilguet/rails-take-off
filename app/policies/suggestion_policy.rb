@@ -13,6 +13,6 @@ class SuggestionPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user_id == user.id
+    true
   end
 end

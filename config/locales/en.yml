@@ -128,6 +128,7 @@ en:
     transport: "Transport"
     housing: "Housing"
     visit: "Visit"
+    created_by: "Created by"
   suggestions:
     create_suggestion: "Create a suggestion"
     edit_suggestion: "Edit your suggestion"

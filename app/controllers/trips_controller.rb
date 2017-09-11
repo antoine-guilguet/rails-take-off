@@ -118,8 +118,8 @@ class TripsController < ApplicationController
 
   def create_topics(trip)
     authorize trip
-    Topic.create(title: "Housing", status: "Pending", user_id: current_user.id, trip_id: trip.id)
-    Topic.create(title: "Transport", status: "Pending", user_id: current_user.id, trip_id: trip.id)
+    Topic.create(title: "Housing", status: "Pending", user_id: trip.host.id, trip_id: trip.id)
+    Topic.create(title: "Transport", status: "Pending", user_id: trip.host.id, trip_id: trip.id)
   end
 
 end

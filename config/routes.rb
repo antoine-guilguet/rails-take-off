@@ -34,7 +34,6 @@ Rails.application.routes.draw do
   resources :topics, only:[:edit, :update, :destroy] do
     member do
       get 'confirm'
-      post 'close'
       get 'get_suggestion'
     end
     resources :suggestions, only:[:new, :create, :destroy, :edit, :update]

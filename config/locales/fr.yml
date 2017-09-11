@@ -113,6 +113,7 @@ fr:
     transport: "Transport"
     housing: "Logement"
     visit: "Visite"
+    created_by: "Crée par"
   suggestions:
     create_suggestion: "Créer une Suggestion"
     edit_suggestion: "Modifier votre suggestion"

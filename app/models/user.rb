@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :trips, through: :trip_participants
   has_many :trip_participants
   has_many :my_trips, class_name: "Trip"
+  has_many :expenses
 
   after_create :send_welcome_email
 
@@ -47,6 +48,15 @@ class User < ActiveRecord::Base
     else
       self.email
     end
+  end
+
+  def compute_user_expenses(trip)
+    expenses = Expense.where(user_id: self.id, trip_id: trip.id)
+    sum = 0
+    expenses.each do |expense|
+      sum += expense.amount
+    end
+    return sum
   end
 
   private

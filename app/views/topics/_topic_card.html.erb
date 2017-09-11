@@ -1,8 +1,11 @@
 <div class="topic-card">
   <div class="topic-body">
+
     <div class="topic-card-title">
       <%= link_to topic.title, edit_topic_path(topic) %>
+      <%= t('topics.created_by') %> <%= current_user.get_user_full_name %>
     </div>
+
 
     <div class="topic-line-header"">
       <div>

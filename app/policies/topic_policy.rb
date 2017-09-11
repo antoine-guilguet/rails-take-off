@@ -9,11 +9,11 @@ class TopicPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user_id == user.id
+    true
   end
 
   def update?
-    record.user_id == user.id
+    true
   end
 
   def destroy?

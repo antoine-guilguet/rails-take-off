@@ -41,18 +41,11 @@ class TopicsController < ApplicationController
     @suggestions = @topic.sort_suggestions_by_vote
     @suggestion = @topic.find_winning_suggestion
     # Lead to suggestions#update
-    # @topic.status = "Closed"
-    # @topic.save
-    # redirect_to trip_path(@topic.trip)
-  end
-
-  def close
-    raise
   end
 
   def create_auto
     topic_type = params[:topic_type]
-    @topic = Topic.create(title: topic_type, user_id: current_user, trip_id: @trip.id, status: "Pending")
+    @topic = Topic.create(title: topic_type, user_id: current_user.id, trip_id: @trip.id, status: "Pending")
     respond_to do |format|
       format.js
     end

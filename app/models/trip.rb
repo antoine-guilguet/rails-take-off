@@ -40,4 +40,14 @@ class Trip < ActiveRecord::Base
       self.host.email
     end
   end
+
+  def compute_total_expenses
+    topics = self.topics.where(status: "Closed")
+    sum = 0
+    topics.each do |topic|
+      sum += topic.expense
+    end
+    return sum
+  end
+
 end
