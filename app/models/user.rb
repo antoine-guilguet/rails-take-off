@@ -50,13 +50,19 @@ class User < ActiveRecord::Base
     end
   end
 
-  def compute_user_expenses(trip)
+  def compute_user_expense(trip)
     expenses = Expense.where(user_id: self.id, trip_id: trip.id)
     sum = 0
     expenses.each do |expense|
       sum += expense.amount
     end
     return sum
+  end
+
+  def compute_user_balance(trip, total)
+    number_participants = trip.trip_participants.length
+    user_expense = self.compute_user_expense(trip)
+    return user_expense - ( total / number_participants )
   end
 
   private

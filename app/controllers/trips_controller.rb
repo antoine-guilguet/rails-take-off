@@ -58,6 +58,9 @@ class TripsController < ApplicationController
       marker.lat trip.latitude
       marker.lng trip.longitude
     end
+
+    @total = @trip.compute_total_expenses
+    @participants = @trip.trip_participants.map{ |participant| participant.user }
   end
 
   def edit
