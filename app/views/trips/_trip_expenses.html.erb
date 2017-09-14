@@ -12,4 +12,13 @@
         </li>
       </ul>
   <% end %>
+
+  <% @expenses.each do |key, value| %>
+      <ul>
+        <li>
+          <%= key %> owes <%= value %>
+        </li>
+      </ul>
+  <% end %>
+
 </div>
