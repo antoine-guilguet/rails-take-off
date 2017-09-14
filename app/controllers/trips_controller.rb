@@ -58,6 +58,10 @@ class TripsController < ApplicationController
       marker.lat trip.latitude
       marker.lng trip.longitude
     end
+
+    @total = @trip.compute_total_expenses
+    @participants = @trip.trip_participants.map{ |participant| participant.user }
+    @expenses = compute_debts(@participants, @trip, @total)
   end
 
   def edit
@@ -66,7 +70,7 @@ class TripsController < ApplicationController
 
   def update
     authorize @trip
-    if @trip.update(trip_params) && params[:trip][:start_date].count > 1
+    if @trip.update(trip_params) && params[:trip][:start_date] && params[:trip][:start_date].count > 1
       @survey = Survey.create
       start_dates = params[:trip][:start_date]
       end_dates = params[:trip][:end_date]
@@ -76,10 +80,12 @@ class TripsController < ApplicationController
       @survey.trip_id = @trip.id
       @survey.save
       redirect_to trip_path(@trip)
-    elsif @trip.update(trip_params)
+    elsif @trip.update(trip_params) && params[:trip][:start_date]
       @trip.start_date = params[:trip][:start_date][0]
       @trip.end_date = params[:trip][:end_date][0]
       @trip.save
+      redirect_to trip_path(@trip)
+    elsif @trip.update(trip_params)
       redirect_to trip_path(@trip)
     else
       render :edit
@@ -116,8 +122,46 @@ class TripsController < ApplicationController
 
   def create_topics(trip)
     authorize trip
-    Topic.create(title: "Housing", status: "Pending", user_id: current_user.id, trip_id: trip.id)
-    Topic.create(title: "Transport", status: "Pending", user_id: current_user.id, trip_id: trip.id)
+    Topic.create(title: "Housing", status: "Pending", user_id: trip.host.id, trip_id: trip.id)
+    Topic.create(title: "Transport", status: "Pending", user_id: trip.host.id, trip_id: trip.id)
+  end
+
+  def compute_debts(users, t, total)
+    # User and balance
+    hash_debt = {}
+    # User owes balance to another User
+    hash_result = {}
+
+    users.each do |user|
+      hash_debt[user] = user.compute_user_balance(t, total)
+    end
+
+    hash_positive = hash_debt.select { |k, v| v >= 0 }.sort_by { |key, value| - value }.to_h
+    hash_debt = hash_debt.select { |k, v| v < 0 }.sort_by { |key, value| value }.to_h
+
+
+    hash_debt.each do |ower, balance|
+      debt = balance.abs
+
+      until debt == 0
+
+        hash_result[ower] = []
+        hash_positive.each do |receiver, value|
+          if debt > value
+            debt -= value
+            hash_positive[receiver] = 0
+            hash_result[ower] << [receiver, value]
+          else
+            hash_positive[receiver] -= debt
+            hash_result[ower] << [receiver, debt]
+            debt = 0
+          end
+
+        end
+
+      end
+    end
+    return hash_result
   end
 
 end

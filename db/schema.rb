@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627123302) do
+ActiveRecord::Schema.define(version: 20170911204426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.float    "amount"
+    t.integer  "user_id"
+    t.integer  "trip_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "expenses", ["topic_id"], name: "index_expenses_on_topic_id", using: :btree
+  add_index "expenses", ["trip_id"], name: "index_expenses_on_trip_id", using: :btree
+  add_index "expenses", ["user_id"], name: "index_expenses_on_user_id", using: :btree
 
   create_table "invites", force: :cascade do |t|
     t.integer  "trip_id"
@@ -72,10 +91,12 @@ ActiveRecord::Schema.define(version: 20170627123302) do
     t.datetime "end_date"
     t.integer  "trip_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "suggestion_id"
   end
 
+  add_index "topics", ["suggestion_id"], name: "index_topics_on_suggestion_id", using: :btree
   add_index "topics", ["trip_id"], name: "index_topics_on_trip_id", using: :btree
   add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
 
@@ -145,11 +166,15 @@ ActiveRecord::Schema.define(version: 20170627123302) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
+  add_foreign_key "expenses", "topics"
+  add_foreign_key "expenses", "trips"
+  add_foreign_key "expenses", "users"
   add_foreign_key "invites", "trips"
   add_foreign_key "suggestions", "topics"
   add_foreign_key "suggestions", "users"
   add_foreign_key "survey_dates", "surveys"
   add_foreign_key "surveys", "trips"
+  add_foreign_key "topics", "suggestions"
   add_foreign_key "topics", "trips"
   add_foreign_key "topics", "users"
   add_foreign_key "trip_participants", "trips"

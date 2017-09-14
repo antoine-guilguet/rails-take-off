@@ -35,7 +35,7 @@
 
   <div class="col s12 m6">
     <div class="trip-organization-container">
-      Chat
+      <%= render 'trips/trip_expenses' %>
     </div>
   </div>
 
@@ -68,7 +68,7 @@
               var htmlListOfVoters = data.html_list_of_voters;
               var selector = '#suggestion_id_' + suggestionId
               $(selector).find('div').text(numberOfVotes);
-              var popoverSelector = '#suggestion-popover-' + id;
+              var popoverSelector = '#suggestion-popover-' + suggestionId;
               $(popoverSelector).html("");
               $(popoverSelector).append(htmlListOfVoters);
             },

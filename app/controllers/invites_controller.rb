@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
 
-  before_action :find_trip, only: [:new, :create, :confirm, :decline]
+  before_action :find_trip
   before_action :find_invite, only: [:confirm, :decline]
 
   def new
@@ -18,7 +18,7 @@ class InvitesController < ApplicationController
         build_invitation(@invite)
         send_invitation(@invite)
       end
-      redirect_to trips_path
+      redirect_to trip_path(@trip)
     else
       # single invitation
       @invite = Invite.new(email: params[:invite][:email].first)
@@ -26,7 +26,7 @@ class InvitesController < ApplicationController
       build_invitation(@invite)
       send_invitation(@invite)
       if @invite.valid?
-        redirect_to trips_path
+        redirect_to trip_path(@trip)
       else
         render :new
       end
@@ -36,7 +36,7 @@ class InvitesController < ApplicationController
   def confirm
     confirm_invitation(@invite)
     TripParticipant.create(user_id: current_user.id, trip_id: @invite.trip.id)
-    redirect_to trips_path
+    redirect_to trip_path(@invite.trip)
   end
 
   def decline

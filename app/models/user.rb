@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :trips, through: :trip_participants
   has_many :trip_participants
   has_many :my_trips, class_name: "Trip"
+  has_many :expenses
 
   after_create :send_welcome_email
 
@@ -39,6 +40,29 @@ class User < ActiveRecord::Base
 
   def render_initials
     !self.first_name.nil? ? self.first_name.first + self.last_name.first : ""
+  end
+
+  def get_user_full_name
+    if self.first_name
+      self.first_name + " " + self.last_name
+    else
+      self.email
+    end
+  end
+
+  def compute_user_expense(trip)
+    expenses = Expense.where(user_id: self.id, trip_id: trip.id)
+    sum = 0
+    expenses.each do |expense|
+      sum += expense.amount
+    end
+    return sum
+  end
+
+  def compute_user_balance(trip, total)
+    number_participants = trip.trip_participants.length
+    user_expense = self.compute_user_expense(trip)
+    return user_expense - ( total / number_participants )
   end
 
   private

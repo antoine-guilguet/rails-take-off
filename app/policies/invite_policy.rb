@@ -6,11 +6,11 @@ class InvitePolicy < ApplicationPolicy
   end
 
   def new?
-    return true
+    true
   end
 
   def create?
-    return true
+    true
   end
 
   def decline?
@@ -20,4 +20,5 @@ class InvitePolicy < ApplicationPolicy
   def confirm?
     record.recipient_id == User.find_by(email: record.email).id
   end
+
 end

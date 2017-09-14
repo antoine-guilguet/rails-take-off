@@ -14,14 +14,19 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def create?
-    return true
+    true
   end
 
   def destroy?
     record.trip.host == user
   end
 
-  def set_deadline?
-    record.trip.host == user
+  def show?
+    true
   end
+
+  def vote?
+    true
+  end
+
 end

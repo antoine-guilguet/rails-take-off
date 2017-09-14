@@ -13,8 +13,12 @@ class TripPolicy < ApplicationPolicy
     end
   end
 
+  def new
+    true
+  end
+
   def create?
-    return true
+    true
   end
 
   def show?
@@ -41,7 +45,4 @@ class TripPolicy < ApplicationPolicy
     record.host == user
   end
 
-  def create_auto?
-    return true
-  end
 end
