@@ -8,7 +8,7 @@
   <% @participants.each do |participant| %>
       <ul>
         <li>
-          <%= participant.compute_user_balance(@trip, @total) %>
+          <%= participant.get_user_full_name %> <%= participant.compute_user_balance(@trip, @total) %>
         </li>
       </ul>
   <% end %>
@@ -16,7 +16,11 @@
   <% @expenses.each do |key, value| %>
       <ul>
         <li>
-          <%= key %> owes <%= value %>
+          <%= key.get_user_full_name %> owes
+          <% value.each do |bail| %>
+            <%= bail.first.get_user_full_name %>
+            <%= bail.last %>
+          <% end %>
         </li>
       </ul>
   <% end %>

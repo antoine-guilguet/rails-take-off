@@ -136,23 +136,24 @@ class TripsController < ApplicationController
       hash_debt[user] = user.compute_user_balance(t, total)
     end
 
-    hash_debt = hash_debt.select { |k, v| v < 0 }.sort_by { |key, value| value }.to_h
     hash_positive = hash_debt.select { |k, v| v >= 0 }.sort_by { |key, value| - value }.to_h
+    hash_debt = hash_debt.select { |k, v| v < 0 }.sort_by { |key, value| value }.to_h
+
 
     hash_debt.each do |ower, balance|
       debt = balance.abs
 
       until debt == 0
 
+        hash_result[ower] = []
         hash_positive.each do |receiver, value|
-
           if debt > value
             debt -= value
             hash_positive[receiver] = 0
-            hash_result[ower] = [receiver, value]
+            hash_result[ower] << [receiver, value]
           else
             hash_positive[receiver] -= debt
-            hash_result[ower] = [receiver, debt]
+            hash_result[ower] << [receiver, debt]
             debt = 0
           end
 
