@@ -37,6 +37,7 @@
 
   <div class="card-dates">
     <% if !trip.start_date.nil? %>
+
         <i class="material-icons" style="margin-right: 5px;">date_range</i>
         <%= l(trip.start_date, format: :short) %> - <%= l(trip.end_date, format: :short) %>
     <% elsif trip.survey %>

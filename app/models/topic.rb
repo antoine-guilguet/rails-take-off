@@ -1,7 +1,7 @@
 class Topic < ActiveRecord::Base
   belongs_to :trip
   has_many :suggestions, dependent: :destroy
-  has_one :suggestion
+  has_one :suggestion, dependent: :destroy
 
   def sort_suggestions_by_vote
     self.suggestions.sort_by { |suggestion| suggestion.votes_for.size }.reverse!

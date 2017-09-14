@@ -1,6 +1,6 @@
 puts "Destroying DB"
 
-
+Topic.destroy_all
 Trip.destroy_all
 Survey.destroy_all
 User.destroy_all
