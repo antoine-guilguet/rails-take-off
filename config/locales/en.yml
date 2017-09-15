@@ -1,4 +1,5 @@
 en:
+  currency: "$"
   time:
     formats:
       default: "%m/%d/%Y"
