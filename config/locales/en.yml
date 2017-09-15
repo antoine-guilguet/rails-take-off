@@ -133,3 +133,5 @@ en:
   paid_by: "Paid by"
   you: "You"
   validate: "Validate"
+  total_expense: "Total Expense"
+  to_owe: "owes"

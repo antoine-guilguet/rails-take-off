@@ -1,20 +1,20 @@
 <div class="container">
-  <div class="row">
+  <div class="row" style="margin-bottom: 5px;">
     <div class="col s12 trip-expense-user">
       <div class="trip-expense-user-name">
         <%= participant.get_user_full_name %>
       </div>
       <div class="trip-expense-user-balance progress">
-        <% length = participant.compute_user_balance(@trip, @total) / @total %>
+        <% length = (participant.compute_user_balance(@trip, @total) / @total) * 100 %>
         <% if length >= 0 %>
-          <div class="determinate success-progress-bar" style="width: <%= length %>;">
-            <%= participant.compute_user_balance(@trip, @total) %>
+          <div class="determinate success-progress-bar" style="width: <%= length.round %>%;">
+            <%= participant.compute_user_balance(@trip, @total).round(1) %>
           </div>
         <% else %>
-          <div class="determinate error-progress-bar" style="width: <%= length %>;">
-            <%= participant.compute_user_balance(@trip, @total) %>
+          <div class="determinate error-progress-bar" style="width: <%= ( - length ).round %>%;">
+            <%= participant.compute_user_balance(@trip, @total).round(1) %>
           </div>
-        <% end %>
+      <% end %>
       </div>
     </div>
   </div>

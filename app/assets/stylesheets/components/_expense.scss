@@ -24,6 +24,7 @@
 
 .progress {
   margin-top: 10px;
+  background-color: transparent !important;
 }
 
 .success-progress-bar {
@@ -36,4 +37,11 @@
   background-color: $error-color !important;
   width: 100%;
   height: 100%;
+}
+
+.trip-balance-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
 }
