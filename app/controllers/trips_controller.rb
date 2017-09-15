@@ -143,7 +143,7 @@ class TripsController < ApplicationController
     hash_debt.each do |ower, balance|
       debt = balance.abs
 
-      until debt == 0
+      until debt < 0.1
 
         hash_result[ower] = []
         hash_positive.each do |receiver, value|
