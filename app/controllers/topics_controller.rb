@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
     @topic.trip = @trip
     @topic.status = "Pending"
     if @topic.save
-      redirect_to trip_path(@trip)
+      redirect_to trip_path(@trip, anchor: "organization")
     else
       render :new
     end
@@ -25,7 +25,7 @@ class TopicsController < ApplicationController
 
   def update
     if @topic.update(topic_params)
-      redirect_to trip_path(@topic.trip)
+      redirect_to trip_path(@topic.trip, anchor: "organization")
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic.destroy
-    redirect_to trip_path(@topic.trip)
+    redirect_to trip_path(@topic.trip, anchor: "organization")
   end
 
   def confirm
