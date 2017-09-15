@@ -15,6 +15,7 @@ fr:
       long: "%h %d %Y"
     start_date: "Départ"
     end_date: "Retour"
+    select_dates: "Sélectionner vos dates"
   activerecord:
     attributes:
       invite:

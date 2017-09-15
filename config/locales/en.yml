@@ -12,6 +12,7 @@ en:
       long: "%h %e %Y"
     start_date: "Start Date"
     end_date: "End Date"
+    select_dates: "Select your Dates"
   activerecord:
     attributes:
       email: "Mail address"

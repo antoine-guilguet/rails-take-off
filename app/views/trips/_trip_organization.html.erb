@@ -19,7 +19,7 @@
         <% if @trip.survey %>
           <div class="topic-card">
             <div class="topic-card-title">
-              <h6><%= t('date') %></h6>
+              <%= link_to t('date'), edit_topic_path(@survey), style: "margin-left: 15px;" %>
             </div>
             <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
           </div>
