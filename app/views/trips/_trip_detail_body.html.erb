@@ -1,19 +1,68 @@
 <div class="row">
   <div class="col s12 m6">
-    <div class="trip-dates-container">
+    <div class="trip-to-do">
 
       <div class="trip-summary">
-        <% if @trip.start_date %>
-          <div class="trip-date">
-            <i class="material-icons">flight_takeoff</i>
-            <%= l(@trip.start_date, format: :long) %>
-          </div>
+        <div class="container">
+          <div class="row">
+            <div class="col s12 l6 trip-summary-colum">
+              <h6 class="trip-topic-title">TO-DO</h6>
+              <% if @trip.start_date.nil? %>
+                  <div class="trip-topic-done">
+                    <i class="material-icons">date_range</i>
+                    <div class="trip-topic-description">
+                      <%= t('date.select_dates') %>
+                    </div>
+                  </div>
+              <% end %>
+              <% if !@pending_topics.nil? %>
+                <% @pending_topics.each do |topic| %>
+                    <div class="trip-topic-done">
+                      <% if topic.title == "Housing" %>
+                          <i class="material-icons">hotel</i>
+                      <% elsif topic.title == "Transport" %>
+                          <i class="material-icons">flight_takeoff</i>
+                      <% else %>
+                          <i class="material-icons">check_box_outline_blank</i>
+                      <% end %>
+                      <div class="trip-topic-description">
+                        <%= topic.title %>
+                      </div>
+                    </div>
+                <% end %>
+              <% end %>
 
-          <div class="trip-date">
-            <i class="material-icons">flight_land</i>
-            <%= l(@trip.end_date, format: :long) %>
+            </div>
+            <div class="col s12 l6">
+              <h6 class="trip-topic-title">DONE</h6>
+              <% if @trip.start_date %>
+                  <div class="trip-topic-done">
+                    <i class="material-icons">date_range</i>
+                    <div class="trip-topic-description">
+                      <%= l(@trip.start_date, format: :short) %> - <%= l(@trip.end_date, format: :short) %>
+                    </div>
+                  </div>
+              <% end %>
+              <% if !@closed_topics.nil? %>
+                  <% @closed_topics.each do |topic| %>
+                      <div class="trip-topic-done">
+                        <% if topic.title == "Housing" %>
+                            <i class="material-icons">hotel</i>
+                        <% elsif topic.title == "Transport" %>
+                            <i class="material-icons">flight_takeoff</i>
+                        <% else %>
+                            <i class="material-icons">check_box_outline_blank</i>
+                        <% end %>
+                        <div class="trip-topic-description">
+                          <%= topic.title %>
+                        </div>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
           </div>
-        <% end %>
+        </div>
+
 
         <% if !@closed_topics.nil? %>
             <ul>

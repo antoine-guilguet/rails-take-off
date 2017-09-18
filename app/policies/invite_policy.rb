@@ -14,11 +14,11 @@ class InvitePolicy < ApplicationPolicy
   end
 
   def decline?
-    record.recipient_id == User.find_by(email: record.email).id
+    record.email == user.email
   end
 
   def confirm?
-    record.recipient_id == User.find_by(email: record.email).id
+    record.email == user.email
   end
 
 end

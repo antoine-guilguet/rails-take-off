@@ -1,19 +1,21 @@
 fr:
+  currency: "€"
   defaults:
     month_names:
       ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
   time:
     formats:
       default: "%d/%m/%Y"
-      short: "%d %B"
-      long: "%B %d %Y"
+      short: "%d %h"
+      long: "%h %d %Y"
   date:
     formats:
       default: "%d/%m/%Y"
-      short: "%B %d"
-      long: "%B %d %Y"
+      short: "%h %d"
+      long: "%h %d %Y"
     start_date: "Départ"
     end_date: "Retour"
+    select_dates: "Sélectionner vos dates"
   activerecord:
     attributes:
       invite:
@@ -138,3 +140,5 @@ fr:
   paid_by: "Payé par:"
   you: "Toi"
   validate: "Valider"
+  total_expense: "Dépense totale"
+  to_owe: "doit"

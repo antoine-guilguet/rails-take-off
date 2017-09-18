@@ -1,0 +1,47 @@
+#trip-expense-total {
+  border: 1px solid $primary-color;
+  padding-right: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 6px;
+}
+
+.trip-expense-user {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.trip-expense-user-name {
+  width: 30%;
+}
+
+.trip-expense-user-balance {
+  width: 70%;
+  height: 22px;
+}
+
+.progress {
+  margin-top: 10px;
+  background-color: transparent !important;
+}
+
+.success-progress-bar {
+  background-color: $success-color !important;
+  width: 100%;
+  height: 100%;
+}
+
+.error-progress-bar {
+  background-color: $error-color !important;
+  width: 100%;
+  height: 100%;
+}
+
+.trip-balance-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}

@@ -14,27 +14,26 @@ class SuggestionsController < ApplicationController
     @suggestion.topic = @topic
     @suggestion.user = current_user
     if @suggestion.save
-      redirect_to trip_path(@topic.trip)
+      redirect_to trip_path(@topic.trip, anchor: "organization")
     else
       render :new
     end
   end
 
   def edit
-    raise
   end
 
   def update
     if params[:suggestion][:confirmation] == "true"
       if @suggestion.update(set_suggestion)
         validate_suggestion_topic
-        redirect_to trip_path(@suggestion.topic.trip)
+        redirect_to trip_path(@suggestion.topic.trip, anchor: "organization")
       else
         render 'topics/confirm'
       end
     else
       if @suggestion.update(set_suggestion)
-        redirect_to trip_path(@suggestion.topic.trip)
+        redirect_to trip_path(@suggestion.topic.trip, anchor: "organization")
       else
         render "suggestions/edit"
       end
@@ -91,5 +90,4 @@ class SuggestionsController < ApplicationController
     @topic.save
     Expense.create(amount: @suggestion.price, user_id: current_user.id, trip_id: @topic.trip.id, topic_id: @topic)
   end
-
 end

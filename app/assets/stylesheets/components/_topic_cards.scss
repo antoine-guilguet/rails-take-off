@@ -1,5 +1,5 @@
 .topic-card{
-  border: solid 1px indianred;
+  border: solid 1px $primary-color;
   border-radius: 4px;
   margin-bottom: 15px;
   padding-top: 10px;
@@ -14,10 +14,28 @@
 }
 
 .topic-card-title {
-  text-align: center;
-  text-decoration: underline;
   margin-bottom: 10px;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topic-card-title > a {
+  font-size: 17px;
+  margin-left: 5px;
+  color: $secondary-color;
+  transition: all ease 2s;
+  &:hover {
+    text-decoration: underline;
+    transition-property: text-decoration;
+    transition-property: 2s;
+  }
+}
+
+.topic-card-owner {
+  font-size: 12px;
+  font-style: italic;
 }
 
 .topic-line-header {

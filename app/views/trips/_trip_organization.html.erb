@@ -4,7 +4,7 @@
       <div class="trip-organization-title">
         <h5 class="trip-headline"><%= t('topics.topics') %></h5>
         <div class="fixed-action-btn horizontal">
-          <%= link_to new_trip_topic_path(@trip, @survey), class: "btn-floating btn-small indianred" do %>
+          <%= link_to new_trip_topic_path(@trip, @survey), class: "btn-floating btn-medium indianred" do %>
             <i class="material-icons">add</i>
           <% end %>
           <ul>
@@ -19,7 +19,7 @@
         <% if @trip.survey %>
           <div class="topic-card">
             <div class="topic-card-title">
-              <h6><%= t('date') %></h6>
+              <%= link_to t('date'), edit_topic_path(@survey), style: "margin-left: 15px;" %>
             </div>
             <%= render 'surveys/survey', survey: @survey, survey_dates: @survey_dates %>
           </div>
@@ -31,7 +31,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="col s12 m6">
     <div class="trip-organization-container">

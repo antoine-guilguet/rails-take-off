@@ -1,28 +1,25 @@
 <h5 class="trip-headline"><%= t('expenses') %></h5>
-
-<div>
-  Total: <%= @total %>
+<div class="container">
+  <div class="row">
+    <div class="col s12" id="trip-expense-total">
+      <h5><%= t('total_expense') %></h5>
+      <h5 style="margin-left: 10px;"><%= @total %> <%= t('currency') %></h5>
+    </div>
+  </div>
 </div>
 
-<div>
-  <% @participants.each do |participant| %>
-      <ul>
-        <li>
-          <%= participant.get_user_full_name %> <%= participant.compute_user_balance(@trip, @total) %>
-        </li>
-      </ul>
-  <% end %>
+<% if @total > 0 %>
+  <div>
+    <% @participants.each do |participant| %>
+        <%= render 'user_balance', participant: participant %>
+    <% end %>
 
-  <% @expenses.each do |key, value| %>
-      <ul>
-        <li>
-          <%= key.get_user_full_name %> owes
-          <% value.each do |bail| %>
-            <%= bail.first.get_user_full_name %>
-            <%= bail.last %>
-          <% end %>
-        </li>
-      </ul>
-  <% end %>
+    <% @expenses.each do |ower, debts| %>
+        <% debts.each do |debt| %>
+          <%= render 'balance_expense', ower: ower.get_user_full_name, recipient: debt.first.get_user_full_name, amount: debt.last.round(1) %>
+        <% end %>
+    <% end %>
+  </div>
+<% end %>
 
-</div>
+
