@@ -1,54 +1,125 @@
 <div class="container">
   <div class="row">
-    <div class="col l5 s12 ">
-      <div class="trip-container">
-        <% if @mytrips.empty? %>
-          <div class="no-trip-warning">
-            <i class="fa fa-frown-o" aria-hidden="true"></i>
-            <h5><%= t('trip.no_trip_information') %></h5>
-            <br>
-            <%= link_to t('create_trip'), new_trip_path, class: "waves-effect waves-light btn" %>
-          </div>
-        <% else %>
-          <h5 class="trip-headline"><%= t('my_trips') %></h5>
-          <% @mytrips.each do |trip| %>
-              <%= render 'trip_card', trip: trip %>
-          <% end %>
-      <% end %>
-      </div>
-    </div>
-
-    <div class="col l4 s12 ">
-      <div class="trip-container">
-        <% if @trips.empty? %>
-          <div class="no-trip-warning">
-            <h5><%= t('trip.no_trip_information') %></h5>
-            <br>
-          </div>
-
-        <% else %>
-          <h5 class="trip-headline"><%= t('my_invitation_trips') %></h5>
-          <% @trips.each do |trip| %>
-              <%= render 'trip_card', trip: trip %>
-          <% end %>
+    <% if @trips.empty? && @invitations.empty? %>
+      <div class="col l6 s12 offset-l3">
+        <div class="trip-container">
+          <% if @mytrips.empty? %>
+            <div class="no-trip-warning">
+              <i class="fa fa-frown-o" aria-hidden="true"></i>
+              <h5><%= t('trip.no_trip_information') %></h5>
+              <br>
+              <%= link_to t('create_trip'), new_trip_path, class: "waves-effect waves-light btn" %>
+            </div>
+          <% else %>
+            <h5 class="trip-headline"><%= t('my_trips') %></h5>
+            <% @mytrips.each do |trip| %>
+                <%= render 'trip_card', trip: trip %>
+            <% end %>
         <% end %>
+        </div>
       </div>
-    </div>
-
-    <div class="col l3 s12 ">
-      <div class="trip-container">
-        <% if @invitations.empty? %>
-          <div class="no-trip-warning">
-            <h5><%= t('no_invitation') %></h5>
-            <br>
+    <% elsif @invitations.empty? && !@trips.empty? %>
+        <div class="col l5 s12 offset-l1">
+          <div class="trip-container">
+            <% if @mytrips.empty? %>
+                <div class="no-trip-warning">
+                  <i class="fa fa-frown-o" aria-hidden="true"></i>
+                  <h5><%= t('trip.no_trip_information') %></h5>
+                  <br>
+                  <%= link_to t('create_trip'), new_trip_path, class: "waves-effect waves-light btn" %>
+                </div>
+            <% else %>
+                <h5 class="trip-headline"><%= t('my_trips') %></h5>
+                <% @mytrips.each do |trip| %>
+                    <%= render 'trip_card', trip: trip %>
+                <% end %>
+            <% end %>
           </div>
-        <% else %>
-          <h5 class="trip-headline"><%= t('my_invitations') %></h5>
-          <% @invitations.each do |invitation| %>
-            <%= render 'invitation_card', invitation: invitation %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+        </div>
+
+        <div class="col l5 s12 offset-l1">
+          <div class="trip-container">
+            <% if @trips.empty? %>
+                <div class="no-trip-warning">
+                  <h5><%= t('trip.no_trip_information') %></h5>
+                  <br>
+                </div>
+
+            <% else %>
+                <h5 class="trip-headline"><%= t('my_invitation_trips') %></h5>
+                <% @trips.each do |trip| %>
+                    <%= render 'trip_card', trip: trip %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+
+    <% elsif !@invitations.empty? && @trips.empty? %>
+
+        <div class="col l5 s12 offset-l1">
+          <div class="trip-container">
+            <% if @mytrips.empty? %>
+                <div class="no-trip-warning">
+                  <i class="fa fa-frown-o" aria-hidden="true"></i>
+                  <h5><%= t('trip.no_trip_information') %></h5>
+                  <br>
+                  <%= link_to t('create_trip'), new_trip_path, class: "waves-effect waves-light btn" %>
+                </div>
+            <% else %>
+                <h5 class="trip-headline"><%= t('my_trips') %></h5>
+                <% @mytrips.each do |trip| %>
+                    <%= render 'trip_card', trip: trip %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col l5 s12 offset-l1 ">
+          <div class="trip-container">
+            <h5 class="trip-headline"><%= t('my_invitations') %></h5>
+            <% @invitations.each do |invitation| %>
+                <%= render 'invitation_card', invitation: invitation %>
+            <% end %>
+          </div>
+        </div>
+
+    <% else %>
+        <div class="col l5 s12">
+          <div class="trip-container">
+            <% if @mytrips.empty? %>
+                <div class="no-trip-warning">
+                  <i class="fa fa-frown-o" aria-hidden="true"></i>
+                  <h5><%= t('trip.no_trip_information') %></h5>
+                  <br>
+                  <%= link_to t('create_trip'), new_trip_path, class: "waves-effect waves-light btn" %>
+                </div>
+            <% else %>
+                <h5 class="trip-headline"><%= t('my_trips') %></h5>
+                <% @mytrips.each do |trip| %>
+                    <%= render 'trip_card', trip: trip %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col l4 s12 ">
+          <div class="trip-container">
+            <h5 class="trip-headline"><%= t('my_invitation_trips') %></h5>
+            <% @trips.each do |trip| %>
+                <%= render 'trip_card', trip: trip %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col l3 s12 ">
+          <div class="trip-container">
+            <h5 class="trip-headline"><%= t('my_invitations') %></h5>
+            <% @invitations.each do |invitation| %>
+                <%= render 'invitation_card', invitation: invitation %>
+            <% end %>
+          </div>
+        </div>
+
+    <% end %>
   </div>
 </div>
